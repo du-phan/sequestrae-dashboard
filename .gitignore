@@ -4,6 +4,11 @@
 /.pnp
 .pnp.js
 
+next-env.d.ts
+dist/
+/out
+/.turbo
+
 # Testing
 /coverage
 
