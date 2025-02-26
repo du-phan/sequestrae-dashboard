@@ -14,8 +14,8 @@ interface TopNavBarProps {
 // The href is appended to the base project path to form complete URLs
 const navItems = [
   { name: "Overview", href: "" }, // Empty href means root project page
-  { name: "Carbon Accounting & Integrity", href: "carbon" },
-  { name: "Delivery Risk", href: "risk" },
+  { name: "Carbon Accounting & Integrity", href: "integrity" },
+  { name: "Delivery Risk", href: "delivery" },
   { name: "Environmental Factor", href: "environment" },
   { name: "Policy", href: "policy" },
   { name: "Social Impact", href: "social" },
