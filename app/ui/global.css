@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base styles */
+:root {
+  --primary-color: #0070f3;
+  --secondary-color: #0070f3;
+  --background-color: #ffffff;
+  --text-color: #333333;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  color: var(--text-color);
+  background-color: var(--background-color);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Fix: Only apply dark mode styling when the HTML has data-theme="dark" */
+html[data-theme="dark"] {
+  --background-color: #121212;
+  --text-color: #ffffff;
+}
+
+/* Ensure paragraphs and other text elements have the right color by default */
+p,
+span,
+li,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--text-color);
+}
+
+/* Remove the automatic dark mode based on system preference to prevent unexpected colors */
+/*
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-color: #121212;
+    --text-color: #ffffff;
+  }
+}
+*/
