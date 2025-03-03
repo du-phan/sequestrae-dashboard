@@ -22,7 +22,6 @@ export default async function ProjectPage({
           <h1 className="text-2xl font-bold text-gray-900">Project Details</h1>
           <p>Project ID: {projectId}</p>
           {/* Additional content */}
-          <div>Project Name: Sequestrae</div>
         </div>
       </main>
     </div>

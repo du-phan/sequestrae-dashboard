@@ -8,6 +8,20 @@
   --secondary-color: #0070f3;
   --background-color: #ffffff;
   --text-color: #333333;
+  --heading-color: #1a202c;
+  --summary-bg-color: #ebf5ff;
+  --summary-text-color: #1e429f;
+
+  /* Typography scale */
+  --text-xs: 0.75rem; /* 12px */
+  --text-sm: 0.875rem; /* 14px */
+  --text-base: 1rem; /* 16px */
+  --text-lg: 1.125rem; /* 18px */
+  --text-xl: 1.25rem; /* 20px */
+  --text-2xl: 1.5rem; /* 24px */
+  --text-3xl: 1.875rem; /* 30px */
+  --text-4xl: 2.25rem; /* 36px */
+  --text-5xl: 3rem; /* 48px */
 }
 
 * {
@@ -24,6 +38,7 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   color: var(--text-color);
   background-color: var(--background-color);
+  line-height: 1.6;
 }
 
 a {
@@ -31,10 +46,68 @@ a {
   text-decoration: none;
 }
 
-/* Fix: Only apply dark mode styling when the HTML has data-theme="dark" */
-html[data-theme="dark"] {
-  --background-color: #121212;
-  --text-color: #ffffff;
+/* Enhanced Typography hierarchy */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--heading-color);
+  line-height: 1.3;
+  font-weight: 600;
+  margin-bottom: 0.75em;
+}
+
+h1 {
+  font-size: var(--text-4xl);
+  letter-spacing: -0.025em;
+}
+
+h2 {
+  font-size: var(--text-2xl);
+  letter-spacing: -0.015em;
+}
+
+h3 {
+  font-size: var(--text-xl);
+}
+
+h4 {
+  font-size: var(--text-lg);
+}
+
+/* Standardized paragraph styling */
+p {
+  font-size: var(--text-base);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+/* Standard text classes for consistency */
+.text-body {
+  font-size: var(--text-base);
+  line-height: 1.6;
+}
+
+.text-body-lg {
+  font-size: var(--text-lg);
+  line-height: 1.6;
+}
+
+.text-body-sm {
+  font-size: var(--text-sm);
+  line-height: 1.5;
+}
+
+/* Standard width constraints for consistent paragraph widths */
+.standard-prose-width {
+  width: 100%;
+  max-width: 65ch; /* About 65 characters per line - optimal reading width */
+}
+
+.full-width {
+  width: 100%;
 }
 
 /* Ensure paragraphs and other text elements have the right color by default */
@@ -49,6 +122,22 @@ h6 {
   color: var(--text-color);
 }
 
+/* Visual hierarchy helpers */
+.section-divider {
+  height: 1px;
+  background-color: #e5e7eb;
+  margin: 2.5rem 0;
+}
+
+/* Fix: Only apply dark mode styling when the HTML has data-theme="dark" */
+html[data-theme="dark"] {
+  --background-color: #121212;
+  --text-color: #ffffff;
+  --heading-color: #e2e8f0;
+  --summary-bg-color: #1e3a8a;
+  --summary-text-color: #e2e8f0;
+}
+
 /* Remove the automatic dark mode based on system preference to prevent unexpected colors */
 /*
 @media (prefers-color-scheme: dark) {
@@ -58,3 +147,45 @@ h6 {
   }
 }
 */
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  h1 {
+    font-size: var(--text-3xl);
+  }
+  h2 {
+    font-size: var(--text-xl);
+  }
+  h3 {
+    font-size: var(--text-lg);
+  }
+
+  .text-body-lg {
+    font-size: var(--text-base);
+  }
+
+  .text-body {
+    font-size: var(--text-base);
+  }
+
+  .content-container,
+  .content-container-wide {
+    max-width: 100%;
+  }
+}
+
+/* Reading width consistency helper */
+.max-w-prose {
+  max-width: 65ch; /* Approximately 65 characters per line - optimal reading width */
+}
+
+/* Standardized content widths for consistent layout */
+.content-container {
+  width: 100%;
+  max-width: 65ch;
+}
+
+.content-container-wide {
+  width: 100%;
+  max-width: 75ch;
+}

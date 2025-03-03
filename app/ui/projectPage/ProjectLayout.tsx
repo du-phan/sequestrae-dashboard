@@ -18,7 +18,7 @@ export default function ProjectLayout({
   children,
 }: ProjectLayoutProps) {
   // Get the current URL path to determine active navigation
-  const pathname = usePathname();
+  const pathname = usePathname() ?? "";
 
   // Extract the current topic from the URL path
   // Format is expected to be /project/{projectId}/{topic}

@@ -72,27 +72,13 @@ const subtopicsMap: Record<string, SubTopic[]> = {
     },
   ],
 
-  // Delivery Risk subtopics
+  // Delivery Risk subtopics - Updated to only have the two required subtopics
   delivery: [
+    { id: "supply-chain", name: "Supply Chain", href: "#supply-chain" },
     {
-      id: "operational-risks",
-      name: "Operational Risks",
-      href: "#operational-risks",
-    },
-    {
-      id: "financial-viability",
-      name: "Financial Viability",
-      href: "#financial-viability",
-    },
-    {
-      id: "implementation-timeline",
-      name: "Implementation Timeline",
-      href: "#implementation-timeline",
-    },
-    {
-      id: "regulatory-compliance",
-      name: "Regulatory Compliance",
-      href: "#regulatory-compliance",
+      id: "equipment-machinery",
+      name: "Equipment & Machinery",
+      href: "#equipment-machinery",
     },
   ],
 
@@ -430,283 +416,203 @@ export function getTopicData(topic: string): TopicData {
     delivery: {
       title: "Delivery Risk",
       description:
-        "This section evaluates the operational, financial, and regulatory risks that could affect project implementation and carbon credit delivery.",
+        "This section evaluates supply chain and equipment factors that could affect project implementation and carbon credit delivery.",
       summaryData: {
         strengths: [
           {
             id: "s1",
-            text: "Strong operational risk management protocols in place",
+            text: "Strong supplier network with redundancy for critical components",
           },
           {
             id: "s2",
-            text: "Diversified revenue streams reduce financial exposure",
+            text: "Equipment maintenance protocols exceed industry standards",
           },
         ],
         considerations: [
           {
             id: "c1",
-            text: "Market volatility presents ongoing challenges for pricing stability",
+            text: "Global supply chain disruptions may impact specialized equipment delivery",
+          },
+          {
+            id: "c2",
+            text: "Local technical expertise for advanced equipment maintenance is limited",
           },
         ],
         recommendedActions: [
-          { id: "a1", text: "Implement quarterly compliance review process" },
+          {
+            id: "a1",
+            text: "Develop secondary supplier relationships for critical items",
+          },
           {
             id: "a2",
-            text: "Develop contingency plans for key operational risks",
+            text: "Implement comprehensive equipment training program for local technicians",
           },
         ],
       },
       subtopics: [
         {
-          id: "operational-risks",
-          title: "Operational Risks",
+          id: "supply-chain",
+          title: "Supply Chain",
           summary:
-            "Analysis of the project's operational challenges including implementation difficulties.",
+            "Analysis of supply chain risks, dependencies, and resilience strategies.",
           riskFactors: [
             {
-              id: "op-risk-1",
-              title: "Project Implementation Challenges",
+              id: "sc-risk-1",
+              title: "Supplier Dependencies",
               main_idea:
-                "The project faces moderate implementation challenges related to technical complexity.",
+                "Critical components sourced from limited suppliers present moderate risk.",
               explanation:
-                "Implementation requires specialized expertise and equipment with technological challenges.",
+                "The project relies on specialized components with limited supplier options, creating potential vulnerabilities in the implementation timeline.",
               strengths: [
                 {
-                  id: "ops-s1",
-                  text: "Team includes technical experts with relevant experience",
+                  id: "sc-s1",
+                  text: "Alternative suppliers identified for 85% of components",
                 },
                 {
-                  id: "ops-s2",
-                  text: "Pilot phase successfully demonstrated core technologies",
-                },
-              ],
-              considerations: [
-                {
-                  id: "ops-c1",
-                  text: "Limited availability of specialized equipment in the region",
-                },
-                {
-                  id: "ops-c2",
-                  text: "Technical training needs for field staff",
-                },
-              ],
-              recommended_actions: [
-                {
-                  id: "ops-a1",
-                  text: "Secure equipment procurement contracts early",
-                },
-                {
-                  id: "ops-a2",
-                  text: "Develop comprehensive staff training program",
-                },
-              ],
-            },
-            {
-              id: "op-risk-2",
-              title: "Supply Chain Dependencies",
-              main_idea:
-                "Supply chain vulnerabilities may impact project timelines.",
-              explanation:
-                "The project relies on several key components with limited suppliers, creating potential bottlenecks in the implementation timeline.",
-              strengths: [
-                {
-                  id: "ops-s3",
-                  text: "Alternative suppliers identified for most components",
-                },
-                {
-                  id: "ops-s4",
+                  id: "sc-s2",
                   text: "Buffer stock strategy implemented for critical items",
                 },
               ],
               considerations: [
                 {
-                  id: "ops-c3",
+                  id: "sc-c1",
                   text: "Global supply chain disruptions continue to affect lead times",
                 },
                 {
-                  id: "ops-c4",
+                  id: "sc-c2",
                   text: "Quality consistency varies between suppliers",
                 },
               ],
               recommended_actions: [
                 {
-                  id: "ops-a3",
+                  id: "sc-a1",
                   text: "Establish contracts with multiple suppliers for critical components",
                 },
                 {
-                  id: "ops-a4",
+                  id: "sc-a2",
                   text: "Develop quality control protocols for all incoming materials",
                 },
               ],
             },
+            {
+              id: "sc-risk-2",
+              title: "Logistics Challenges",
+              main_idea:
+                "Remote project location creates logistical challenges for material delivery.",
+              explanation:
+                "The project's remote location presents challenges for consistent and timely delivery of materials and components, particularly during adverse weather conditions.",
+              strengths: [
+                {
+                  id: "sc-s3",
+                  text: "Multiple transportation routes identified and tested",
+                },
+                {
+                  id: "sc-s4",
+                  text: "Local storage facilities established to maintain inventory",
+                },
+              ],
+              considerations: [
+                {
+                  id: "sc-c3",
+                  text: "Seasonal weather impacts primary transportation routes",
+                },
+                {
+                  id: "sc-c4",
+                  text: "Fuel price volatility affects transportation costs",
+                },
+              ],
+              recommended_actions: [
+                {
+                  id: "sc-a3",
+                  text: "Develop seasonal delivery schedule accounting for weather patterns",
+                },
+                {
+                  id: "sc-a4",
+                  text: "Establish secondary warehousing in regional hub",
+                },
+              ],
+            },
           ],
         },
         {
-          id: "financial-viability",
-          title: "Financial Viability",
+          id: "equipment-machinery",
+          title: "Equipment & Machinery",
           summary:
-            "Assessment of the project's financial sustainability and cost management.",
+            "Evaluation of equipment reliability, maintenance requirements, and operational risks.",
           riskFactors: [
             {
-              id: "fin-risk-1",
-              title: "Operating Cost Management",
+              id: "eq-risk-1",
+              title: "Equipment Reliability",
               main_idea:
-                "Project operating costs are well-structured but face inflation pressures.",
+                "Specialized equipment requires careful maintenance in remote conditions.",
               explanation:
-                "The project has established operating cost projections based on pilot phase data. While the basic structure is sound, regional inflation rates are currently higher than anticipated in initial projections, potentially affecting long-term financial sustainability.",
+                "The project utilizes several specialized equipment types that require regular maintenance and have specific operational requirements that can be challenging in remote field conditions.",
               strengths: [
                 {
-                  id: "fin-s1",
-                  text: "Detailed cost tracking system implemented",
+                  id: "eq-s1",
+                  text: "Preventative maintenance program implemented for all critical equipment",
                 },
                 {
-                  id: "fin-s2",
-                  text: "Cost contingency buffer included in financial model",
+                  id: "eq-s2",
+                  text: "Spare parts inventory maintained on-site for common repairs",
                 },
               ],
               considerations: [
-                { id: "fin-c1", text: "Inflation rates exceed 7% annually" },
                 {
-                  id: "fin-c2",
-                  text: "Energy costs showing significant volatility",
+                  id: "eq-c1",
+                  text: "Harsh environmental conditions accelerate equipment wear",
+                },
+                {
+                  id: "eq-c2",
+                  text: "Technical expertise for advanced repairs limited in remote areas",
                 },
               ],
               recommended_actions: [
                 {
-                  id: "fin-a1",
-                  text: "Implement quarterly cost review process",
+                  id: "eq-a1",
+                  text: "Expand technical training program for local maintenance staff",
                 },
                 {
-                  id: "fin-a2",
-                  text: "Explore renewable energy options to mitigate energy cost risks",
+                  id: "eq-a2",
+                  text: "Implement remote diagnostic capabilities where possible",
                 },
               ],
             },
             {
-              id: "fin-risk-2",
-              title: "Revenue Stream Stability",
+              id: "eq-risk-2",
+              title: "Technology Adaptation",
               main_idea:
-                "Multiple revenue streams provide stability but carbon price volatility poses risks.",
+                "New technology implementation requires testing and staff training.",
               explanation:
-                "The project has successfully diversified revenue beyond carbon credits, including ecosystem services payments and sustainable product sales. However, carbon market price volatility remains a significant factor in financial projections.",
+                "The project is implementing several new technologies that, while proven in other contexts, require adaptation to local conditions and comprehensive training for operational staff.",
               strengths: [
                 {
-                  id: "fin-s3",
-                  text: "Multiple revenue streams reduce dependency on carbon markets",
+                  id: "eq-s3",
+                  text: "Pilot testing completed for core technologies",
                 },
                 {
-                  id: "fin-s4",
-                  text: "Long-term offtake agreements secure minimum revenue floor",
+                  id: "eq-s4",
+                  text: "Technical support agreements in place with equipment vendors",
                 },
               ],
               considerations: [
                 {
-                  id: "fin-c3",
-                  text: "Carbon price volatility affects 40% of projected revenue",
+                  id: "eq-c3",
+                  text: "Staff adaptation to new technologies varies considerably",
                 },
                 {
-                  id: "fin-c4",
-                  text: "Ecosystem service payment mechanisms still maturing",
-                },
-              ],
-              recommended_actions: [
-                {
-                  id: "fin-a3",
-                  text: "Explore forward contracts to lock in carbon prices",
-                },
-                {
-                  id: "fin-a4",
-                  text: "Develop scenario-based financial models for different market conditions",
-                },
-              ],
-            },
-          ],
-        },
-        {
-          id: "implementation-timeline",
-          title: "Implementation Timeline",
-          summary:
-            "Evaluation of the project timeline and milestone feasibility.",
-          riskFactors: [
-            {
-              id: "time-risk-1",
-              title: "Critical Path Management",
-              main_idea: "Timeline has limited buffer for key milestones.",
-              explanation:
-                "The project implementation timeline includes several interdependent activities with limited flexibility. Delays in critical path activities could cascade throughout the project schedule.",
-              strengths: [
-                {
-                  id: "time-s1",
-                  text: "Detailed Gantt chart with dependencies clearly mapped",
-                },
-                {
-                  id: "time-s2",
-                  text: "Weekly progress tracking against milestones",
-                },
-              ],
-              considerations: [
-                {
-                  id: "time-c1",
-                  text: "Regulatory approvals on critical path with uncertain timelines",
-                },
-                {
-                  id: "time-c2",
-                  text: "Weather-dependent activities during rainy season",
+                  id: "eq-c4",
+                  text: "Local power supply fluctuations may affect sensitive equipment",
                 },
               ],
               recommended_actions: [
                 {
-                  id: "time-a1",
-                  text: "Develop specific contingency plans for high-risk timeline segments",
+                  id: "eq-a3",
+                  text: "Develop comprehensive training materials with practical exercises",
                 },
                 {
-                  id: "time-a2",
-                  text: "Engage regulatory authorities early and maintain regular communication",
-                },
-              ],
-            },
-          ],
-        },
-        {
-          id: "regulatory-compliance",
-          title: "Regulatory Compliance",
-          summary: "Analysis of regulatory requirements and compliance risks.",
-          riskFactors: [
-            {
-              id: "reg-risk-1",
-              title: "Evolving Regulatory Framework",
-              main_idea:
-                "Changing carbon market regulations may impact project requirements.",
-              explanation:
-                "The regulatory framework for carbon projects is evolving in the project region, with potential new requirements expected within the next 2-3 years.",
-              strengths: [
-                {
-                  id: "reg-s1",
-                  text: "Project designed to exceed current regulatory requirements",
-                },
-                {
-                  id: "reg-s2",
-                  text: "Active engagement with regulatory bodies",
-                },
-              ],
-              considerations: [
-                {
-                  id: "reg-c1",
-                  text: "Draft regulations indicate more stringent MRV requirements",
-                },
-                {
-                  id: "reg-c2",
-                  text: "Unclear timeline for new regulation implementation",
-                },
-              ],
-              recommended_actions: [
-                {
-                  id: "reg-a1",
-                  text: "Participate in public consultation for new regulations",
-                },
-                {
-                  id: "reg-a2",
-                  text: "Develop adaptable MRV systems that can be upgraded",
+                  id: "eq-a4",
+                  text: "Install power conditioning systems for sensitive equipment",
                 },
               ],
             },

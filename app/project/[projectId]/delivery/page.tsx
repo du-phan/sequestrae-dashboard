@@ -1,13 +1,13 @@
 import React from "react";
 import StandardTopicPage from "@/app/ui/projectPage/StandardTopicPage";
 
-// Next.js 15 page component with params type
-export default function DeliveryRiskPage({
-  params,
-}: {
-  params: { projectId: string };
-}) {
-  const { projectId } = params;
+interface PageProps {
+  params: {
+    projectId: string;
+  };
+}
 
+export default async function DeliveryRiskPage({ params }: PageProps) {
+  const projectId = params.projectId;
   return <StandardTopicPage projectId={projectId} topicId="delivery" />;
 }

@@ -2,27 +2,43 @@ import React from "react";
 
 interface TopicIntroProps {
   /**
-   * The title of the topic to be displayed as H2
+   * Main topic title
    */
   title: string;
 
   /**
-   * A brief description or introduction text for the topic
+   * Topic description or introduction text
    */
   description: string;
+
+  /**
+   * Optional CSS class name for additional styling
+   */
+  className?: string;
 }
 
 /**
- * TopicIntro component - Displays a topic title and brief introduction
- * Used at the top of each topic page in the project dashboard
+ * TopicIntro component - Displays the title and description for a topic page
+ * Redesigned with absolute positioning for perfect indicator alignment
  */
-const TopicIntro: React.FC<TopicIntroProps> = ({ title, description }) => {
+export default function TopicIntro({
+  title,
+  description,
+  className = "",
+}: TopicIntroProps) {
   return (
-    <div className="mt-8 mb-6">
-      <h2 className="text-2xl font-semibold mb-6 text-gray-800">{title}</h2>
-      <p className="text-gray-600">{description}</p>
+    <div className={`${className}`}>
+      <div className="relative">
+        <div className="absolute left-0 top-1.5 h-8 w-1 bg-blue-600 rounded-full"></div>
+        <h1 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-3 pl-6">
+          {title}
+        </h1>
+      </div>
+      <div className="pl-6 border-l border-gray-200 mt-2 ml-0.5">
+        <p className="text-sm md:text-base leading-relaxed text-gray-600 max-w-prose">
+          {description}
+        </p>
+      </div>
     </div>
   );
-};
-
-export default TopicIntro;
+}
