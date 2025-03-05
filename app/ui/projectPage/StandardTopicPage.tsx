@@ -6,7 +6,7 @@ import { mapProjectToTopicData } from "@/lib/project/mappers";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorDisplay from "@/app/ui/common/ErrorDisplay";
 import LoadingState from "@/app/ui/common/LoadingState";
-import { TopicData } from "../../../types/project";
+import { TopicData } from "../../../types/ui";
 
 interface StandardTopicPageProps {
   projectId: string;
@@ -23,7 +23,6 @@ async function TopicContent({ projectId, topicId }: StandardTopicPageProps) {
 
   // Map the project data to the format expected by UI components
   const topicData = mapProjectToTopicData(projectData, topicId);
-  console.log("topicData", topicData);
   return (
     <MainContentArea
       topicTitle={topicData.topicTitle}

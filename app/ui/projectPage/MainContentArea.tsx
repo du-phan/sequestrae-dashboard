@@ -2,40 +2,10 @@ import React from "react";
 import TopicIntro from "./TopicIntro";
 import TopicSummaryCard from "./TopicSummaryCard";
 import SubtopicSection from "./SubtopicSection";
-import { SubtopicData } from "../../../types/project";
+import { SubtopicData, TopicData } from "../../../types/ui";
 
 // Updated Props interface for the MainContentArea component
-interface MainContentAreaProps {
-  /**
-   * Title of the topic
-   */
-  topicTitle: string;
-
-  /**
-   * Description text for the topic
-   */
-  topicDescription: string;
-
-  /**
-   * Data for subtopics sections
-   */
-  subtopics: SubtopicData[];
-
-  /**
-   * Summary text content
-   */
-  topicSummary: string;
-
-  /**
-   * Optional custom title for the summary card
-   */
-  summaryTitle?: string;
-
-  /**
-   * Project ID
-   */
-  projectId?: string | number;
-
+interface MainContentAreaProps extends TopicData {
   /**
    * Optional className for additional styling
    */

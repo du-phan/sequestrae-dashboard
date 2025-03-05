@@ -1,6 +1,7 @@
 import { supabase } from "../supabaseClient";
-import { Project } from "../../types/project";
-import { mapProjectToTopicData } from "./mappers";
+import { Project } from "../../types/api";
+import { TopicData } from "../../types/ui";
+import { mapTopicToUI } from "../mappers";
 
 /**
  * Fetches a complete project from the project_aggregated table
@@ -56,14 +57,18 @@ export async function fetchProjects() {
  * @param topicId The topic identifier to retrieve
  * @returns Formatted topic data ready for UI components
  */
-export async function fetchTopicData(projectId: string, topicId: string) {
+export async function fetchTopicData(
+  projectId: string,
+  topicId: string
+): Promise<TopicData | null> {
   const project = await fetchProject(projectId);
 
   if (!project) {
-    throw new Error(`Project not found with ID: ${projectId}`);
+    console.error(`Project not found with ID: ${projectId}`);
+    return null;
   }
 
-  return mapProjectToTopicData(project, topicId);
+  return mapTopicToUI(project, topicId);
 }
 
 /**
