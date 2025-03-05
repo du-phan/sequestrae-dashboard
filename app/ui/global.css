@@ -33,12 +33,14 @@
 html,
 body {
   max-width: 100vw;
-  overflow-x: hidden;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   color: var(--text-color);
   background-color: var(--background-color);
   line-height: 1.6;
+  height: 100%;
+  overflow-x: hidden; /* Keep this to prevent horizontal scrolling */
+  overflow-y: visible; /* Allow vertical scrolling */
 }
 
 a {
@@ -188,4 +190,27 @@ html[data-theme="dark"] {
 .content-container-wide {
   width: 100%;
   max-width: 75ch;
+}
+
+/* Ensure proper sticky behavior */
+#__next,
+#root {
+  height: auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Ensure main content area is scrollable */
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* Add this class to make the page scrollable while keeping nav sticky */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  height: auto;
 }

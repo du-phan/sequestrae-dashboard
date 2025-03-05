@@ -62,7 +62,20 @@ export const textPresets = {
   riskFactorContent: `text-base text-gray-700`,
 };
 
+/**
+ * Z-index scale for consistent layering across the application
+ * Higher values appear on top of lower values
+ */
+export const zIndex = {
+  base: 0,
+  content: 10,
+  navigation: 30,
+  modal: 40,
+  tooltip: 50,
+};
+
 export default {
   typography,
   textPresets,
+  zIndex,
 };
