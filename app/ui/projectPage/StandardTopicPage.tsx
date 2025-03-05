@@ -6,11 +6,20 @@ import { mapProjectToTopicData } from "@/lib/project/mappers";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorDisplay from "@/app/ui/common/ErrorDisplay";
 import LoadingState from "@/app/ui/common/LoadingState";
-import { TopicData } from "../../../types/ui";
+import { TopicData, SubTopic } from "../../../types/ui";
 
 interface StandardTopicPageProps {
   projectId: string;
   topicId: string;
+}
+
+// Convert subtopics to sidebar-friendly format
+function mapSubtopicsToSidebar(topicData: TopicData): SubTopic[] {
+  return topicData.subtopics.map((subtopic) => ({
+    id: String(subtopic.id),
+    name: subtopic.title,
+    href: `#${subtopic.id}`, // Create anchor links
+  }));
 }
 
 async function TopicContent({ projectId, topicId }: StandardTopicPageProps) {
@@ -23,6 +32,7 @@ async function TopicContent({ projectId, topicId }: StandardTopicPageProps) {
 
   // Map the project data to the format expected by UI components
   const topicData = mapProjectToTopicData(projectData, topicId);
+
   return (
     <MainContentArea
       topicTitle={topicData.topicTitle}
@@ -39,12 +49,29 @@ async function TopicContent({ projectId, topicId }: StandardTopicPageProps) {
  * StandardTopicPage provides a consistent pattern for creating topic pages
  * by integrating ProjectLayout and MainContentArea with topic-specific data
  */
-export default function StandardTopicPage({
+export default async function StandardTopicPage({
   projectId,
   topicId,
 }: StandardTopicPageProps) {
+  // Pre-fetch data for both main content and sidebar
+  const projectData = await getProjectAggregated(projectId);
+
+  if (!projectData) {
+    throw new Error("Project data not found");
+  }
+
+  // Map project data to topic format
+  const topicData = mapProjectToTopicData(projectData, topicId);
+
+  // Map subtopics to sidebar format
+  const sidebarSubtopics = mapSubtopicsToSidebar(topicData);
+
   return (
-    <ProjectLayout projectId={projectId}>
+    <ProjectLayout
+      projectId={projectId}
+      subtopics={sidebarSubtopics}
+      currentTopic={topicId}
+    >
       <ErrorBoundary
         fallback={<ErrorDisplay message={`Failed to load ${topicId} data`} />}
       >
