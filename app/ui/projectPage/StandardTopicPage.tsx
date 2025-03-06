@@ -79,9 +79,13 @@ export default async function StandardTopicPage({
   // Map subtopics and factors to sidebar format
   const sidebarSubtopics = mapSubtopicsToSidebar(topicData);
 
+  // Use project_name from the Project interface instead of name
+  const projectName = projectData.project_name;
+
   return (
     <ProjectLayout
       projectId={projectId}
+      projectName={projectName}
       subtopics={sidebarSubtopics}
       currentTopic={topicId}
     >

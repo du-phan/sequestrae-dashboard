@@ -254,3 +254,13 @@ html[data-theme="dark"] {
   hyphens: auto;
   transition: background-color 0.2s ease, color 0.2s ease; /* Add transition for smoother highlighting */
 }
+
+/* Hide scrollbar but allow scrolling for tab navigation */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}

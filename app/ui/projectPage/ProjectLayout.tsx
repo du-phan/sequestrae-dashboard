@@ -8,6 +8,7 @@ import { SubTopic } from "../../../types/ui"; // Import the SubTopic type
 interface ProjectLayoutProps {
   children: React.ReactNode;
   projectId?: string;
+  projectName: string; // Changed to required prop (removed ? mark)
   subtopics: SubTopic[]; // Use the SubTopic type instead of any[]
   currentTopic: string;
   currentPath?: string; // Make currentPath optional
@@ -16,13 +17,14 @@ interface ProjectLayoutProps {
 export default function ProjectLayout({
   children,
   projectId,
+  projectName, // Removed default value since it's now required
   subtopics,
   currentTopic,
   currentPath = "",
 }: ProjectLayoutProps) {
   return (
     <div className="flex flex-col min-h-screen">
-      <TopNavBar projectId={projectId} />
+      <TopNavBar projectId={projectId} projectName={projectName} />
 
       <div className="flex flex-1">
         <div className="w-64 flex-shrink-0">
