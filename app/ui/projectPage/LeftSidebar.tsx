@@ -86,8 +86,25 @@ export default function LeftSidebar({
   };
 
   // Handle click on a risk factor
-  const handleRiskFactorClick = (id: string) => {
+  const handleRiskFactorClick = (
+    id: string,
+    href: string,
+    e: React.MouseEvent
+  ) => {
+    e.preventDefault();
     setActiveItem(id);
+
+    // Find the element and scroll to it with proper offset
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    } else {
+      // Fallback to default href navigation
+      window.location.hash = href.substring(1);
+    }
   };
 
   // Check if link is active
@@ -165,8 +182,12 @@ export default function LeftSidebar({
                           <li key={riskFactor.id}>
                             <a
                               href={riskFactor.href}
-                              onClick={() =>
-                                handleRiskFactorClick(riskFactor.id)
+                              onClick={(e) =>
+                                handleRiskFactorClick(
+                                  riskFactor.id,
+                                  riskFactor.href,
+                                  e
+                                )
                               }
                               className={`block px-3 py-1.5 text-xs rounded-md transition-colors leading-snug sidebar-item-text
                               ${

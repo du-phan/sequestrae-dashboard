@@ -237,7 +237,7 @@ export default function RiskFactorCard({
   return (
     <div
       id={id} // Add id attribute for navigation
-      className={`border rounded-lg p-5 bg-white border-gray-200 shadow-sm ${className}`}
+      className={`border rounded-lg p-5 bg-white border-gray-200 shadow-sm ${className} scroll-mt-24`}
     >
       {/* Header with risk factor name */}
       <h3 className="text-gray-800 font-medium mb-4">{name}</h3>

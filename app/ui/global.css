@@ -41,11 +41,8 @@ body {
   height: 100%;
   overflow-x: hidden; /* Keep this to prevent horizontal scrolling */
   overflow-y: visible; /* Allow vertical scrolling */
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
+  scroll-padding-top: 6rem; /* Add scroll padding for anchor navigation */
+  scroll-behavior: smooth; /* Enable smooth scrolling */
 }
 
 /* Enhanced Typography hierarchy */
