@@ -28,11 +28,16 @@ interface SubtopicSectionProps {
    * Optional className for additional styling
    */
   className?: string;
+
+  /**
+   * Whether this is the first subtopic (to control divider display)
+   */
+  isFirst?: boolean;
 }
 
 /**
  * SubtopicSection component - Displays a subtopic with its summary and risk factors
- * Redesigned with subtle separator and improved spacing
+ * Redesigned with elegant divider and improved spacing
  */
 export default function SubtopicSection({
   id,
@@ -40,15 +45,24 @@ export default function SubtopicSection({
   summary,
   riskFactors,
   className = "",
+  isFirst = false,
 }: SubtopicSectionProps) {
   return (
     <div id={id} data-subtopic-id={id} className={`w-full ${className}`}>
-      {/* Subtle separator line */}
-      <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent mb-6"></div>
+      {/* Elegant divider with improved spacing */}
+      {!isFirst && (
+        <div className="mt-10 mb-10">
+          <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent"></div>
+        </div>
+      )}
 
-      {/* Heading with proper spacing */}
-      <h3 className={`${textPresets.h4} text-gray-800 mb-4`}>{title}</h3>
-      <p className={`${textPresets.paragraphSmall} mb-6`}>{summary}</p>
+      {/* Subtopic heading and summary */}
+      <h3 className={`${textPresets.h4} text-gray-700 mb-3 font-medium`}>
+        {title}
+      </h3>
+      <p className={`${textPresets.paragraphSmall} mb-6 text-gray-600`}>
+        {summary}
+      </p>
 
       <div className="space-y-6">
         {riskFactors.map((riskFactor) => (

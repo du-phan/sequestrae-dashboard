@@ -35,18 +35,18 @@ export default function MainContentArea({
 
       {/* Summary card section with fixed vertical alignment */}
       <div className="bg-white rounded-lg shadow-sm p-8 mb-8">
-        {/* Heading with fixed vertical alignment */}
-        <div className="flex">
+        {/* Heading with fixed vertical alignment - updated to h3 for consistency */}
+        <div className="flex mb-8">
           {/* Blue vertical line fixed at exact height */}
           <div className="flex-shrink-0 w-1 bg-blue-600 rounded-full self-stretch"></div>
 
-          {/* Heading with proper padding and no bottom margin */}
-          <h2 className={`${textPresets.h4} text-gray-800 ml-4 py-0 mb-0`}>
+          {/* Heading with proper padding and no bottom margin - updated to h3 */}
+          <h2 className={`${textPresets.h3} text-gray-800 ml-4 py-0 mb-0`}>
             {summaryTitle || `What You Need To Know`}
           </h2>
         </div>
 
-        {/* Card with proper spacing */}
+        {/* Card with proper spacing - consistent ml-5 */}
         <div className="ml-5 mt-4">
           <TopicSummaryCard
             summaryText={topicSummary}
@@ -55,22 +55,22 @@ export default function MainContentArea({
         </div>
       </div>
 
-      {/* Detailed analysis section with fixed vertical alignment */}
+      {/* Detailed analysis section with simplified visual hierarchy */}
       <div className="bg-white rounded-lg shadow-sm p-8 mb-8">
-        {/* Heading with fixed vertical alignment */}
-        <div className="flex">
+        {/* Simplified heading with just size difference */}
+        <div className="flex mb-8">
           {/* Blue vertical line fixed at exact height */}
           <div className="flex-shrink-0 w-1 bg-blue-600 rounded-full self-stretch"></div>
 
-          {/* Heading with proper padding and no bottom margin */}
-          <h2 className={`${textPresets.h4} text-gray-800 ml-4 py-0 mb-0`}>
+          {/* Upgraded heading size for better hierarchy */}
+          <h2 className={`${textPresets.h3} text-gray-800 ml-4 py-0 mb-0`}>
             Detailed Analysis
           </h2>
         </div>
 
-        {/* Content with proper spacing */}
-        <div className="ml-5 space-y-12 mt-6">
-          {subtopics.map((subtopic) => (
+        {/* Content with proper spacing - Adding consistent ml-5 to match other sections */}
+        <div className="ml-5">
+          {subtopics.map((subtopic, index) => (
             <SubtopicSection
               key={subtopic.id}
               id={String(subtopic.id)}
@@ -78,6 +78,7 @@ export default function MainContentArea({
               summary={subtopic.summary}
               riskFactors={subtopic.riskFactors}
               className="rounded-lg"
+              isFirst={index === 0}
             />
           ))}
 
