@@ -50,6 +50,36 @@ export default function RiskFactorCard({
   // State for active tab in expanded view
   const [activeTab, setActiveTab] = useState<TabType>("strengths");
 
+  // Helper function to find the first non-empty tab
+  const findFirstNonEmptyTab = (): TabType => {
+    // Check each tab type in priority order
+    const tabPriority: TabType[] = ["strengths", "considerations", "actions"];
+
+    for (const tab of tabPriority) {
+      const tabType = tab === "actions" ? "recommended_actions" : tab;
+      const hasContent = points.some((p) => p.type === tabType);
+
+      if (hasContent) {
+        return tab;
+      }
+    }
+
+    // Default to strengths if all tabs are empty
+    return "strengths";
+  };
+
+  // Handle expanding the card and selecting the appropriate tab
+  const handleExpand = () => {
+    // Find the first tab with content
+    const firstNonEmptyTab = findFirstNonEmptyTab();
+
+    // Set the active tab to the first non-empty one
+    setActiveTab(firstNonEmptyTab);
+
+    // Expand the card
+    setIsExpanded(true);
+  };
+
   // Helper function to get the appropriate badge styling based on point type
   const getColorByPointType = (pointType: string) => {
     switch (pointType) {
@@ -276,10 +306,10 @@ export default function RiskFactorCard({
             )}
           </div>
 
-          {/* Expand button */}
+          {/* Expand button - updated to use the new handler */}
           <button
             className="text-blue-600 hover:text-blue-700 text-sm font-medium flex items-center"
-            onClick={() => setIsExpanded(true)}
+            onClick={handleExpand}
           >
             View Details
             <svg
