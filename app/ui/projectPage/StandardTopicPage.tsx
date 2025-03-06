@@ -6,20 +6,33 @@ import { mapProjectToTopicData } from "@/lib/project/mappers";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorDisplay from "@/app/ui/common/ErrorDisplay";
 import LoadingState from "@/app/ui/common/LoadingState";
-import { TopicData, SubTopic } from "../../../types/ui";
+import { TopicData, SubTopic, RiskFactor } from "../../../types/ui"; // Updated import
 
 interface StandardTopicPageProps {
   projectId: string;
   topicId: string;
 }
 
-// Convert subtopics to sidebar-friendly format
+// Convert subtopics and risk factors to sidebar-friendly format
 function mapSubtopicsToSidebar(topicData: TopicData): SubTopic[] {
-  return topicData.subtopics.map((subtopic) => ({
-    id: String(subtopic.id),
-    name: subtopic.title,
-    href: `#${subtopic.id}`, // Create anchor links
-  }));
+  return topicData.subtopics.map((subtopic) => {
+    // Create sidebar risk factors from component risk factors
+    const sidebarRiskFactors: RiskFactor[] = subtopic.riskFactors.map(
+      (factor) => ({
+        id: String(factor.id),
+        name: factor.name,
+        href: `#${factor.id}`, // Create anchor links for risk factors
+      })
+    );
+
+    return {
+      id: String(subtopic.id),
+      name: subtopic.title,
+      href: `#${subtopic.id}`, // Create anchor links for subtopics
+      riskFactors:
+        sidebarRiskFactors.length > 0 ? sidebarRiskFactors : undefined,
+    };
+  });
 }
 
 async function TopicContent({ projectId, topicId }: StandardTopicPageProps) {
@@ -63,7 +76,7 @@ export default async function StandardTopicPage({
   // Map project data to topic format
   const topicData = mapProjectToTopicData(projectData, topicId);
 
-  // Map subtopics to sidebar format
+  // Map subtopics and factors to sidebar format
   const sidebarSubtopics = mapSubtopicsToSidebar(topicData);
 
   return (

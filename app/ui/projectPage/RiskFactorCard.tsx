@@ -8,6 +8,11 @@ type TabType = "strengths" | "considerations" | "actions";
 
 interface RiskFactorCardProps {
   /**
+   * Unique identifier for the risk factor
+   */
+  id: string; // Add id prop
+
+  /**
    * Name/title of the risk factor
    */
   name: string;
@@ -33,6 +38,7 @@ interface RiskFactorCardProps {
  * Features collapsed view with point type counts and expanded view with tabs
  */
 export default function RiskFactorCard({
+  id, // Include id in props
   name,
   type,
   points,
@@ -230,6 +236,7 @@ export default function RiskFactorCard({
 
   return (
     <div
+      id={id} // Add id attribute for navigation
       className={`border rounded-lg p-5 bg-white border-gray-200 shadow-sm ${className}`}
     >
       {/* Header with risk factor name */}

@@ -48,6 +48,7 @@ export default function SubtopicSection({
         {riskFactors.map((riskFactor) => (
           <RiskFactorCard
             key={riskFactor.id}
+            id={String(riskFactor.id)} // Ensure we pass the id
             name={riskFactor.name}
             type={riskFactor.type}
             points={riskFactor.points}

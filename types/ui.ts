@@ -42,3 +42,18 @@ export interface TopicData {
   summaryTitle?: string;
   projectId?: string | number;
 }
+
+// Sidebar navigation subtopic interface
+export interface SubTopic {
+  id: string;
+  name: string;
+  href: string;
+  riskFactors?: RiskFactor[]; // Renamed from factors to riskFactors for consistency
+}
+
+// Renamed from Factor to RiskFactor for consistency
+export interface RiskFactor {
+  id: string;
+  name: string;
+  href: string;
+}

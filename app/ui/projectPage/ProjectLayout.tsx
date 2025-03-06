@@ -3,11 +3,12 @@
 import React from "react";
 import TopNavBar from "./TopNavBar";
 import LeftSidebar from "./LeftSidebar";
+import { SubTopic } from "../../../types/ui"; // Import the SubTopic type
 
 interface ProjectLayoutProps {
   children: React.ReactNode;
   projectId?: string;
-  subtopics: any[];
+  subtopics: SubTopic[]; // Use the SubTopic type instead of any[]
   currentTopic: string;
   currentPath?: string; // Make currentPath optional
 }
