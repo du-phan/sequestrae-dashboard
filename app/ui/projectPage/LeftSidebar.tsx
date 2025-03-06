@@ -24,6 +24,11 @@ export default function LeftSidebar({
   const observerRef = useRef<IntersectionObserver | null>(null);
   const isInitializedRef = useRef(false);
 
+  // Add a ref to track manual scrolling state
+  const isManualScrollingRef = useRef(false);
+  // Add a timeout ref to clear any pending scroll lock timeouts
+  const scrollLockTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
   // Replace direct ref with ref callback function
   const setActiveItemRef = (element: HTMLElement | null) => {
     if (element && sidebarRef.current) {
@@ -46,6 +51,9 @@ export default function LeftSidebar({
   // Function to expand a subtopic that contains a specific risk factor
   const expandSubtopicContainingRiskFactor = useCallback(
     (riskFactorId: string) => {
+      // Skip expanding subtopics during manual scrolling
+      if (isManualScrollingRef.current) return;
+
       subtopics.forEach((subtopic) => {
         if (subtopic.riskFactors?.some((rf) => rf.id === riskFactorId)) {
           setExpandedSubtopics((prev) => {
@@ -75,6 +83,9 @@ export default function LeftSidebar({
     // Create a single observer for all elements
     observerRef.current = new IntersectionObserver(
       (observedEntries) => {
+        // Skip processing if manual scrolling is in progress
+        if (isManualScrollingRef.current) return;
+
         // Process all observed entries
         observedEntries.forEach((entry) => {
           const id = entry.target.id;
@@ -197,6 +208,24 @@ export default function LeftSidebar({
     }
   }, [pathname, subtopics]);
 
+  // Set up scroll lock mechanism
+  const enableScrollLock = useCallback(() => {
+    // Clear any existing timeout to prevent race conditions
+    if (scrollLockTimeoutRef.current) {
+      clearTimeout(scrollLockTimeoutRef.current);
+    }
+
+    // Enable scroll lock
+    isManualScrollingRef.current = true;
+
+    // Set a timeout to disable the lock after scrolling should be complete
+    // Using a reasonable time that allows scrolling to complete even for long distances
+    scrollLockTimeoutRef.current = setTimeout(() => {
+      isManualScrollingRef.current = false;
+      scrollLockTimeoutRef.current = null;
+    }, 1000); // 1 second should be enough for most scroll animations to complete
+  }, []);
+
   // Toggle subtopic expansion
   const toggleSubtopic = (subtopicId: string, e: React.MouseEvent) => {
     e.preventDefault(); // Prevent navigation when clicking
@@ -206,18 +235,24 @@ export default function LeftSidebar({
     }));
   };
 
-  // Handle click on a risk factor
+  // Handle click on a risk factor - improved with scroll lock
   const handleRiskFactorClick = (
     id: string,
     href: string,
     e: React.MouseEvent
   ) => {
     e.preventDefault();
+
+    // Set active item immediately for UI feedback
     setActiveItem(id);
+
+    // Enable scroll lock before scrolling
+    enableScrollLock();
 
     // Find the element and scroll to it with proper offset
     const element = document.getElementById(id);
     if (element) {
+      // Use scrollIntoView with start alignment for consistent behavior
       element.scrollIntoView({
         behavior: "smooth",
         block: "start",
@@ -228,14 +263,20 @@ export default function LeftSidebar({
     }
   };
 
-  // Handle click on "Jump to Section" link
+  // Handle click on "Jump to Section" link - improved with scroll lock
   const handleSectionJump = (subtopicId: string, e: React.MouseEvent) => {
     e.preventDefault();
+
+    // Set active item immediately for UI feedback
     setActiveItem(subtopicId);
+
+    // Enable scroll lock before scrolling
+    enableScrollLock();
 
     // Find the element and scroll to it with proper offset
     const element = document.getElementById(subtopicId);
     if (element) {
+      // Use scrollIntoView with start alignment for consistent behavior
       element.scrollIntoView({
         behavior: "smooth",
         block: "start",
