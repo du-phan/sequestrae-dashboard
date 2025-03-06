@@ -40,10 +40,7 @@ const getCurrentTopicName = (
   return matchedNavItem?.name || "Overview";
 };
 
-const TopNavBar = ({
-  projectId,
-  projectName, // Removed default value since it's now required
-}: TopNavBarProps) => {
+const TopNavBar = ({ projectId, projectName }: TopNavBarProps) => {
   const pathname = usePathname();
   const basePath = projectId ? `/project/${projectId}` : "/project";
   const currentTopicName = getCurrentTopicName(pathname, basePath);
@@ -51,7 +48,7 @@ const TopNavBar = ({
   return (
     <nav className="sticky top-0 z-40 bg-white border-b border-gray-200 h-16 shadow-sm">
       <div className="h-full px-4 flex items-center justify-between">
-        {/* Breadcrumb navigation - now with fixed width and text truncation */}
+        {/* Simplified Breadcrumb navigation - removed redundant topic name */}
         <div className="flex items-center text-sm text-gray-600 min-w-0 max-w-[50%]">
           <Link
             href="/dashboard"
@@ -65,22 +62,11 @@ const TopNavBar = ({
           />
           <Link
             href={basePath}
-            className="hover:text-blue-600 transition-colors truncate max-w-[40%] flex-shrink-1"
+            className="hover:text-blue-600 transition-colors truncate max-w-[70%] flex-shrink-1 font-medium text-gray-800"
             title={projectName} // Add title for tooltip on hover
           >
             {projectName}
           </Link>
-          <ChevronRightIcon
-            className="h-4 w-4 mx-1 flex-shrink-0 text-gray-400"
-            aria-hidden="true"
-          />
-          <span
-            className="font-medium text-gray-800 truncate max-w-[40%] flex-shrink-1"
-            aria-current="page"
-            title={currentTopicName} // Add title for tooltip on hover
-          >
-            {currentTopicName}
-          </span>
         </div>
 
         {/* Tabs navigation - contained properly to prevent overflow */}
