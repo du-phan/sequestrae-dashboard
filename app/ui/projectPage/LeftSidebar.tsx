@@ -21,7 +21,26 @@ export default function LeftSidebar({
   >({});
   const [activeItem, setActiveItem] = useState<string>("");
   const sidebarRef = useRef<HTMLDivElement>(null);
-  const activeItemRef = useRef<HTMLAnchorElement>(null);
+
+  // Replace direct ref with ref callback function
+  const setActiveItemRef = (element: HTMLElement | null) => {
+    // When an element is identified as active and mounted, scroll it into view
+    if (element && sidebarRef.current) {
+      const sidebarRect = sidebarRef.current.getBoundingClientRect();
+      const itemRect = element.getBoundingClientRect();
+
+      // Check if item is outside visible area
+      if (
+        itemRect.top < sidebarRect.top ||
+        itemRect.bottom > sidebarRect.bottom
+      ) {
+        element.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      }
+    }
+  };
 
   // Initialize expanded state for subtopics that contain the active item
   useEffect(() => {
@@ -55,25 +74,7 @@ export default function LeftSidebar({
     }
   }, [pathname, subtopics]);
 
-  // Scroll to active item when it changes
-  useEffect(() => {
-    if (activeItemRef.current && sidebarRef.current) {
-      // Get positions
-      const sidebarRect = sidebarRef.current.getBoundingClientRect();
-      const itemRect = activeItemRef.current.getBoundingClientRect();
-
-      // Check if item is outside visible area
-      if (
-        itemRect.top < sidebarRect.top ||
-        itemRect.bottom > sidebarRect.bottom
-      ) {
-        activeItemRef.current.scrollIntoView({
-          behavior: "smooth",
-          block: "center",
-        });
-      }
-    }
-  }, [activeItem, expandedSubtopics]);
+  // Remove the useEffect for scrolling since we're now using callback ref
 
   // Toggle subtopic expansion
   const toggleSubtopic = (subtopicId: string, e: React.MouseEvent) => {
@@ -122,7 +123,7 @@ export default function LeftSidebar({
                           ? "bg-blue-50 text-blue-700"
                           : "text-gray-600 hover:bg-gray-50 hover:text-blue-600"
                       }`}
-                    ref={isActive(subtopic.id) ? activeItemRef : undefined}
+                    ref={isActive(subtopic.id) ? setActiveItemRef : null}
                   >
                     {/* Subtopic name */}
                     <span className="flex-1 font-medium overflow-hidden text-ellipsis">
@@ -175,8 +176,8 @@ export default function LeftSidebar({
                               }`}
                               ref={
                                 isActive(riskFactor.id)
-                                  ? activeItemRef
-                                  : undefined
+                                  ? setActiveItemRef
+                                  : null
                               }
                             >
                               {riskFactor.name}
