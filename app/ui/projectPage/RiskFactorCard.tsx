@@ -236,7 +236,8 @@ export default function RiskFactorCard({
 
   return (
     <div
-      id={id} // Add id attribute for navigation
+      id={id} // Ensure id is properly set for IntersectionObserver
+      data-risk-factor-id={id} // Add data attribute for easier selection
       className={`border rounded-lg p-5 bg-white border-gray-200 shadow-sm ${className} scroll-mt-24`}
     >
       {/* Header with risk factor name */}

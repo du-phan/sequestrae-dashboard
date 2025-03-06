@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
-import { SubTopic, RiskFactor } from "../../../types/ui"; // Updated import
+import React, { useState, useEffect, useRef, useCallback } from "react";
+import { SubTopic, RiskFactor } from "../../../types/ui";
 import { usePathname } from "next/navigation";
 
 interface LeftSidebarProps {
@@ -21,10 +21,11 @@ export default function LeftSidebar({
   >({});
   const [activeItem, setActiveItem] = useState<string>("");
   const sidebarRef = useRef<HTMLDivElement>(null);
+  const observerRef = useRef<IntersectionObserver | null>(null);
+  const isInitializedRef = useRef(false);
 
   // Replace direct ref with ref callback function
   const setActiveItemRef = (element: HTMLElement | null) => {
-    // When an element is identified as active and mounted, scroll it into view
     if (element && sidebarRef.current) {
       const sidebarRect = sidebarRef.current.getBoundingClientRect();
       const itemRect = element.getBoundingClientRect();
@@ -41,6 +42,118 @@ export default function LeftSidebar({
       }
     }
   };
+
+  // Function to expand a subtopic that contains a specific risk factor
+  const expandSubtopicContainingRiskFactor = useCallback(
+    (riskFactorId: string) => {
+      subtopics.forEach((subtopic) => {
+        if (subtopic.riskFactors?.some((rf) => rf.id === riskFactorId)) {
+          setExpandedSubtopics((prev) => {
+            // Only update if not already expanded
+            if (!prev[subtopic.id]) {
+              return { ...prev, [subtopic.id]: true };
+            }
+            return prev;
+          });
+        }
+      });
+    },
+    [subtopics]
+  );
+
+  // Setup intersection observer for all risk factors
+  const setupIntersectionObserver = useCallback(() => {
+    // Clean up existing observer if any
+    if (observerRef.current) {
+      observerRef.current.disconnect();
+      observerRef.current = null;
+    }
+
+    // Create entries map to store intersection ratios
+    const entries: Map<string, { ratio: number; element: Element }> = new Map();
+
+    // Create a single observer for all elements
+    observerRef.current = new IntersectionObserver(
+      (observedEntries) => {
+        // Process all observed entries
+        observedEntries.forEach((entry) => {
+          const id = entry.target.id;
+
+          if (entry.isIntersecting) {
+            entries.set(id, {
+              ratio: entry.intersectionRatio,
+              element: entry.target,
+            });
+          } else {
+            entries.delete(id);
+          }
+        });
+
+        // Find the element with highest intersection ratio
+        let highestRatio = 0;
+        let topElementId = "";
+
+        entries.forEach(({ ratio }, id) => {
+          if (ratio > highestRatio) {
+            highestRatio = ratio;
+            topElementId = id;
+          }
+        });
+
+        // Set active item if a visible element was found
+        if (topElementId && topElementId !== activeItem) {
+          setActiveItem(topElementId);
+          expandSubtopicContainingRiskFactor(topElementId);
+        }
+      },
+      {
+        // Configure rootMargin to prioritize elements in the center of viewport
+        rootMargin: "-20% 0px -40% 0px",
+        threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
+      }
+    );
+
+    // Collect all risk factor elements and observe them
+    const riskFactorElements = document.querySelectorAll(
+      "[data-risk-factor-id]"
+    );
+
+    if (riskFactorElements.length === 0) {
+      // If elements aren't found yet, try again after a short delay
+      setTimeout(() => {
+        if (!isInitializedRef.current) setupIntersectionObserver();
+      }, 500);
+      return;
+    }
+
+    // Mark as initialized once we've found elements to observe
+    isInitializedRef.current = true;
+
+    // Observe all risk factor elements
+    riskFactorElements.forEach((element) => {
+      if (observerRef.current) observerRef.current.observe(element);
+    });
+
+    console.log(`Observing ${riskFactorElements.length} risk factor elements`);
+  }, [activeItem, expandSubtopicContainingRiskFactor]);
+
+  // Initialize intersection observer when the component mounts
+  useEffect(() => {
+    // Reset initialization flag when subtopics change
+    isInitializedRef.current = false;
+
+    // Short delay to ensure DOM is fully rendered
+    const timer = setTimeout(() => {
+      setupIntersectionObserver();
+    }, 200);
+
+    return () => {
+      clearTimeout(timer);
+      if (observerRef.current) {
+        observerRef.current.disconnect();
+      }
+    };
+  }, [subtopics, setupIntersectionObserver]);
 
   // Initialize expanded state for subtopics that contain the active item
   useEffect(() => {
@@ -73,8 +186,6 @@ export default function LeftSidebar({
       }
     }
   }, [pathname, subtopics]);
-
-  // Remove the useEffect for scrolling since we're now using callback ref
 
   // Toggle subtopic expansion
   const toggleSubtopic = (subtopicId: string, e: React.MouseEvent) => {

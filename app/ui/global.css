@@ -252,4 +252,5 @@ html[data-theme="dark"] {
 .sidebar-item-text {
   word-break: break-word;
   hyphens: auto;
+  transition: background-color 0.2s ease, color 0.2s ease; /* Add transition for smoother highlighting */
 }
