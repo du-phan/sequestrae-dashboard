@@ -45,7 +45,6 @@ async function TopicContent({ projectId, topicId }: StandardTopicPageProps) {
 
   // Map the project data to the format expected by UI components
   const topicData = mapProjectToTopicData(projectData, topicId);
-  console.log("topicData", projectData);
   return (
     <MainContentArea
       topicTitle={topicData.topicTitle}

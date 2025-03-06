@@ -175,7 +175,7 @@ export function mapProjectToEnvironmentData(project: Project): UITopicData {
 export function mapProjectToPolicyData(project: Project): UITopicData {
   // Default structure for when data is missing
   const defaultData: UITopicData = {
-    topicTitle: "Policy & Regulatory Factors",
+    topicTitle: "Policy & Regulatory Landscape",
     topicDescription:
       "This section covers the policy landscape, regulatory considerations, and governance factors that may impact this carbon project.",
     topicSummary: "",
@@ -184,12 +184,7 @@ export function mapProjectToPolicyData(project: Project): UITopicData {
     projectId: project.project_id,
   };
 
-  return mapProjectToGenericTopicData(
-    project,
-    "policy & regulatory factors",
-    "policy",
-    defaultData
-  );
+  return mapProjectToGenericTopicData(project, "policy", "policy", defaultData);
 }
 
 /**
