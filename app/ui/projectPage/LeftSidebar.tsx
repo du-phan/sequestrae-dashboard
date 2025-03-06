@@ -118,7 +118,10 @@ export default function LeftSidebar({
       "[data-risk-factor-id]"
     );
 
-    if (riskFactorElements.length === 0) {
+    // Also observe subtopic sections
+    const subtopicElements = document.querySelectorAll("[data-subtopic-id]");
+
+    if (riskFactorElements.length === 0 && subtopicElements.length === 0) {
       // If elements aren't found yet, try again after a short delay
       setTimeout(() => {
         if (!isInitializedRef.current) setupIntersectionObserver();
@@ -134,7 +137,14 @@ export default function LeftSidebar({
       if (observerRef.current) observerRef.current.observe(element);
     });
 
-    console.log(`Observing ${riskFactorElements.length} risk factor elements`);
+    // Observe all subtopic elements
+    subtopicElements.forEach((element) => {
+      if (observerRef.current) observerRef.current.observe(element);
+    });
+
+    console.log(
+      `Observing ${riskFactorElements.length} risk factor elements and ${subtopicElements.length} subtopic elements`
+    );
   }, [activeItem, expandSubtopicContainingRiskFactor]);
 
   // Initialize intersection observer when the component mounts
@@ -218,6 +228,24 @@ export default function LeftSidebar({
     }
   };
 
+  // Handle click on "Jump to Section" link
+  const handleSectionJump = (subtopicId: string, e: React.MouseEvent) => {
+    e.preventDefault();
+    setActiveItem(subtopicId);
+
+    // Find the element and scroll to it with proper offset
+    const element = document.getElementById(subtopicId);
+    if (element) {
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    } else {
+      // Fallback to default href navigation
+      window.location.hash = subtopicId;
+    }
+  };
+
   // Check if link is active
   const isActive = (id: string) => {
     return activeItem === id;
@@ -285,11 +313,43 @@ export default function LeftSidebar({
                   </button>
 
                   {/* Risk factors list - conditionally rendered when subtopic is expanded */}
-                  {expandedSubtopics[subtopic.id] &&
-                    subtopic.riskFactors &&
-                    subtopic.riskFactors.length > 0 && (
-                      <ul className="ml-4 mt-1 space-y-1 border-l border-gray-200 pl-2">
-                        {subtopic.riskFactors.map((riskFactor) => (
+                  {expandedSubtopics[subtopic.id] && (
+                    <ul className="ml-4 mt-1 space-y-1 border-l border-gray-200 pl-2">
+                      {/* Jump to Section link - always appears first */}
+                      <li>
+                        <a
+                          href={`#${subtopic.id}`}
+                          onClick={(e) => handleSectionJump(subtopic.id, e)}
+                          className={`block px-3 py-1.5 text-xs font-medium rounded-md transition-colors leading-snug sidebar-item-text flex items-center
+                          ${
+                            isActive(subtopic.id)
+                              ? "bg-blue-100 text-blue-800"
+                              : "bg-gray-100 text-gray-700 hover:bg-blue-50 hover:text-blue-700"
+                          }`}
+                          ref={isActive(subtopic.id) ? setActiveItemRef : null}
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-3 w-3 mr-1"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth={2}
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M5 10l7-7m0 0l7 7m-7-7v18"
+                            />
+                          </svg>
+                          Jump to section
+                        </a>
+                      </li>
+
+                      {/* Risk factors - render only if there are any */}
+                      {subtopic.riskFactors &&
+                        subtopic.riskFactors.length > 0 &&
+                        subtopic.riskFactors.map((riskFactor) => (
                           <li key={riskFactor.id}>
                             <a
                               href={riskFactor.href}
@@ -316,8 +376,16 @@ export default function LeftSidebar({
                             </a>
                           </li>
                         ))}
-                      </ul>
-                    )}
+
+                      {/* Show message if no risk factors available */}
+                      {(!subtopic.riskFactors ||
+                        subtopic.riskFactors.length === 0) && (
+                        <li className="px-3 py-1.5 text-xs text-gray-400 italic">
+                          No risk factors in this section
+                        </li>
+                      )}
+                    </ul>
+                  )}
                 </div>
               </li>
             ))}

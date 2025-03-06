@@ -40,7 +40,7 @@ export default function SubtopicSection({
   className = "",
 }: SubtopicSectionProps) {
   return (
-    <div id={id} className={`w-full ${className}`}>
+    <div id={id} data-subtopic-id={id} className={`w-full ${className}`}>
       <h3 className="text-lg font-medium text-gray-800 mb-3">{title}</h3>
       <p className="text-gray-600 mb-6 text-sm leading-relaxed">{summary}</p>
 
