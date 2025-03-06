@@ -61,6 +61,7 @@ async function TopicContent({ projectId, topicId }: StandardTopicPageProps) {
 /**
  * StandardTopicPage provides a consistent pattern for creating topic pages
  * by integrating ProjectLayout and MainContentArea with topic-specific data
+ * Updated with improved error handling patterns
  */
 export default async function StandardTopicPage({
   projectId,

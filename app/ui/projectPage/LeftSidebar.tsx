@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { SubTopic, RiskFactor } from "../../../types/ui";
 import { usePathname } from "next/navigation";
+import { textPresets } from "../theme";
 
 interface LeftSidebarProps {
   subtopics: SubTopic[];
@@ -298,7 +299,9 @@ export default function LeftSidebar({
         ref={sidebarRef}
         className="flex-1 overflow-y-auto p-6 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent"
       >
-        <h3 className="text-xs uppercase tracking-wider text-gray-500 font-semibold mb-4">
+        <h3
+          className={`uppercase tracking-wider text-gray-500 font-semibold mb-4 ${textPresets.caption}`}
+        >
           {currentTopic === "overview"
             ? "Project Overview"
             : `${
@@ -309,12 +312,13 @@ export default function LeftSidebar({
         {subtopics.length > 0 ? (
           <ul className="space-y-2">
             {subtopics.map((subtopic) => (
-              <li key={subtopic.id} className="mb-1">
+              <li key={subtopic.id} className="mb-2">
                 <div className="flex flex-col">
-                  {/* Subtopic header - entire area now triggers expand/collapse */}
+                  {/* Subtopic header - consistent padding and typography */}
                   <button
                     onClick={(e) => toggleSubtopic(subtopic.id, e)}
-                    className={`flex items-center justify-between px-3 py-2 text-sm rounded-md w-full text-left transition-colors
+                    className={`flex items-center justify-between px-3 py-2 rounded-md w-full text-left transition-colors
+                      ${textPresets.label}
                       ${
                         isActive(subtopic.id)
                           ? "bg-blue-50 text-blue-700"
@@ -323,7 +327,7 @@ export default function LeftSidebar({
                     ref={isActive(subtopic.id) ? setActiveItemRef : null}
                   >
                     {/* Subtopic name */}
-                    <span className="flex-1 font-medium overflow-hidden text-ellipsis">
+                    <span className="flex-1 overflow-hidden text-ellipsis">
                       {subtopic.name}
                     </span>
 
@@ -353,15 +357,16 @@ export default function LeftSidebar({
                       )}
                   </button>
 
-                  {/* Risk factors list - conditionally rendered when subtopic is expanded */}
+                  {/* Risk factors list - standardized spacing */}
                   {expandedSubtopics[subtopic.id] && (
-                    <ul className="ml-4 mt-1 space-y-1 border-l border-gray-200 pl-2">
-                      {/* Jump to Section link - always appears first */}
+                    <ul className="ml-4 mt-2 space-y-2 border-l border-gray-200 pl-2">
+                      {/* Jump to Section link - consistent styling */}
                       <li>
                         <a
                           href={`#${subtopic.id}`}
                           onClick={(e) => handleSectionJump(subtopic.id, e)}
-                          className={`block px-3 py-1.5 text-xs font-medium rounded-md transition-colors leading-snug sidebar-item-text flex items-center
+                          className={`block px-3 py-2 rounded-md transition-colors sidebar-item-text flex items-center
+                          ${textPresets.caption}
                           ${
                             isActive(subtopic.id)
                               ? "bg-blue-100 text-blue-800"
@@ -387,7 +392,7 @@ export default function LeftSidebar({
                         </a>
                       </li>
 
-                      {/* Risk factors - render only if there are any */}
+                      {/* Risk factors - consistent typography and spacing */}
                       {subtopic.riskFactors &&
                         subtopic.riskFactors.length > 0 &&
                         subtopic.riskFactors.map((riskFactor) => (
@@ -401,7 +406,8 @@ export default function LeftSidebar({
                                   e
                                 )
                               }
-                              className={`block px-3 py-1.5 text-xs rounded-md transition-colors leading-snug sidebar-item-text
+                              className={`block px-3 py-2 rounded-md transition-colors sidebar-item-text
+                              ${textPresets.caption}
                               ${
                                 isActive(riskFactor.id)
                                   ? "bg-blue-50 text-blue-700"
@@ -421,7 +427,9 @@ export default function LeftSidebar({
                       {/* Show message if no risk factors available */}
                       {(!subtopic.riskFactors ||
                         subtopic.riskFactors.length === 0) && (
-                        <li className="px-3 py-1.5 text-xs text-gray-400 italic">
+                        <li
+                          className={`px-3 py-2 italic text-gray-400 ${textPresets.caption}`}
+                        >
                           No risk factors in this section
                         </li>
                       )}
@@ -432,13 +440,15 @@ export default function LeftSidebar({
             ))}
           </ul>
         ) : (
-          <p className="text-sm text-gray-500 italic">No sections available</p>
+          <p className={`italic text-gray-500 ${textPresets.paragraphSmall}`}>
+            No sections available
+          </p>
         )}
       </div>
 
-      {/* Optional footer area - can be used for additional controls */}
+      {/* Footer area - consistent padding and typography */}
       <div className="p-4 border-t border-gray-200 bg-gray-50">
-        <p className="text-xs text-gray-500 text-center">
+        <p className={`text-center text-gray-500 ${textPresets.caption}`}>
           {subtopics.length} section{subtopics.length !== 1 ? "s" : ""}{" "}
           available
         </p>

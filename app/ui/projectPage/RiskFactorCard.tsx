@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { RiskFactorPoint } from "../../../types/ui";
+import { textPresets } from "../theme";
 
 // Tab options for the expanded card view
 type TabType = "strengths" | "considerations" | "actions";
@@ -246,12 +247,16 @@ export default function RiskFactorCard({
 
     return (
       <button
-        className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+        className={`px-4 py-2 ${
+          textPresets.label
+        } rounded-md transition-colors ${
           activeTab === tab
             ? `${style.bgColor} ${style.textColor}` // Active state styling with matching colors
             : "text-gray-600 hover:text-blue-600 hover:bg-gray-50" // Inactive state styling
         }`}
         onClick={() => onClick(tab)}
+        aria-selected={activeTab === tab}
+        role="tab"
       >
         {/* Removed the icon from tab title */}
         {label}
@@ -268,10 +273,10 @@ export default function RiskFactorCard({
     <div
       id={id} // Ensure id is properly set for IntersectionObserver
       data-risk-factor-id={id} // Add data attribute for easier selection
-      className={`border rounded-lg p-5 bg-white border-gray-200 shadow-sm ${className} scroll-mt-24`}
+      className={`border rounded-lg p-6 bg-white border-gray-200 shadow-sm ${className} scroll-mt-24`}
     >
       {/* Header with risk factor name */}
-      <h3 className="text-gray-800 font-medium mb-4">{name}</h3>
+      <h3 className={`${textPresets.h4} text-gray-800 mb-4`}>{name}</h3>
 
       {/* Collapsed view shows count badges */}
       {!isExpanded ? (
@@ -280,7 +285,7 @@ export default function RiskFactorCard({
           <div className="flex flex-wrap gap-2 mb-4">
             {strengthsCount > 0 && (
               <span
-                className={`px-2 py-1 text-xs ${strengthsStyle.bgColor} text-gray-800 border ${strengthsStyle.borderColor} rounded-full flex items-center`}
+                className={`px-3 py-1 ${textPresets.caption} ${strengthsStyle.bgColor} text-gray-800 border ${strengthsStyle.borderColor} rounded-full flex items-center`}
               >
                 {/* Using consistent black text for both number and label */}
                 {strengthsCount}{" "}
@@ -289,7 +294,7 @@ export default function RiskFactorCard({
             )}
             {considerationsCount > 0 && (
               <span
-                className={`px-2 py-1 text-xs ${considerationsStyle.bgColor} text-gray-800 border ${considerationsStyle.borderColor} rounded-full flex items-center`}
+                className={`px-3 py-1 ${textPresets.caption} ${considerationsStyle.bgColor} text-gray-800 border ${considerationsStyle.borderColor} rounded-full flex items-center`}
               >
                 {/* Using consistent black text for both number and label */}
                 {considerationsCount}{" "}
@@ -298,7 +303,7 @@ export default function RiskFactorCard({
             )}
             {actionsCount > 0 && (
               <span
-                className={`px-2 py-1 text-xs ${actionsStyle.bgColor} text-gray-800 border ${actionsStyle.borderColor} rounded-full flex items-center`}
+                className={`px-3 py-1 ${textPresets.caption} ${actionsStyle.bgColor} text-gray-800 border ${actionsStyle.borderColor} rounded-full flex items-center`}
               >
                 {/* Using consistent black text for both number and label */}
                 {actionsCount} {actionsCount === 1 ? "Action" : "Actions"}
@@ -308,15 +313,17 @@ export default function RiskFactorCard({
 
           {/* Expand button - updated to use the new handler */}
           <button
-            className="text-blue-600 hover:text-blue-700 text-sm font-medium flex items-center"
+            className={`text-blue-600 hover:text-blue-700 ${textPresets.label} flex items-center`}
             onClick={handleExpand}
+            aria-expanded="false"
           >
             View Details
             <svg
-              className="ml-1 h-4 w-4"
+              className="ml-2 h-4 w-4"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
+              aria-hidden="true"
             >
               <path
                 fillRule="evenodd"
@@ -329,7 +336,10 @@ export default function RiskFactorCard({
       ) : (
         <div>
           {/* Tab navigation - removed icons from tabs */}
-          <div className="flex space-x-2 mb-6 border-b border-gray-100 pb-2">
+          <div
+            className="flex space-x-2 mb-6 border-b border-gray-100 pb-2"
+            role="tablist"
+          >
             <TabButton
               tab="strengths"
               label="Strengths"
@@ -354,19 +364,27 @@ export default function RiskFactorCard({
           </div>
 
           {/* Tab content area */}
-          <div className="mb-6">{renderTabContent()}</div>
+          <div
+            className="mb-6"
+            role="tabpanel"
+            aria-label={`${activeTab} panel`}
+          >
+            {renderTabContent()}
+          </div>
 
           {/* Collapse button */}
           <button
-            className="text-blue-600 hover:text-blue-700 text-sm font-medium flex items-center"
+            className={`text-blue-600 hover:text-blue-700 ${textPresets.label} flex items-center`}
             onClick={() => setIsExpanded(false)}
+            aria-expanded="true"
           >
             Collapse
             <svg
-              className="ml-1 h-4 w-4"
+              className="ml-2 h-4 w-4"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
+              aria-hidden="true"
             >
               <path
                 fillRule="evenodd"

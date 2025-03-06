@@ -1,6 +1,7 @@
 import React from "react";
 import { ComponentRiskFactor } from "../../../types/ui";
 import RiskFactorCard from "./RiskFactorCard";
+import { textPresets } from "../theme";
 
 interface SubtopicSectionProps {
   /**
@@ -31,6 +32,7 @@ interface SubtopicSectionProps {
 
 /**
  * SubtopicSection component - Displays a subtopic with its summary and risk factors
+ * Redesigned with subtle separator and improved spacing
  */
 export default function SubtopicSection({
   id,
@@ -41,14 +43,18 @@ export default function SubtopicSection({
 }: SubtopicSectionProps) {
   return (
     <div id={id} data-subtopic-id={id} className={`w-full ${className}`}>
-      <h3 className="text-lg font-medium text-gray-800 mb-3">{title}</h3>
-      <p className="text-gray-600 mb-6 text-sm leading-relaxed">{summary}</p>
+      {/* Subtle separator line */}
+      <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent mb-6"></div>
 
-      <div className="space-y-5">
+      {/* Heading with proper spacing */}
+      <h3 className={`${textPresets.h4} text-gray-800 mb-4`}>{title}</h3>
+      <p className={`${textPresets.paragraphSmall} mb-6`}>{summary}</p>
+
+      <div className="space-y-6">
         {riskFactors.map((riskFactor) => (
           <RiskFactorCard
             key={riskFactor.id}
-            id={String(riskFactor.id)} // Ensure we pass the id
+            id={String(riskFactor.id)}
             name={riskFactor.name}
             type={riskFactor.type}
             points={riskFactor.points}
@@ -56,7 +62,7 @@ export default function SubtopicSection({
         ))}
 
         {riskFactors.length === 0 && (
-          <p className="text-sm text-gray-500 italic">
+          <p className={`${textPresets.paragraphSmall} italic text-gray-500`}>
             No risk factors available for this subtopic.
           </p>
         )}

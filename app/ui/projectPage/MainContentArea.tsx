@@ -3,6 +3,7 @@ import TopicIntro from "./TopicIntro";
 import TopicSummaryCard from "./TopicSummaryCard";
 import SubtopicSection from "./SubtopicSection";
 import { SubtopicData, TopicData } from "../../../types/ui";
+import { textPresets } from "../theme";
 
 // Updated Props interface for the MainContentArea component
 interface MainContentAreaProps extends TopicData {
@@ -14,7 +15,7 @@ interface MainContentAreaProps extends TopicData {
 
 /**
  * MainContentArea component - Provides a consistent layout structure for topic pages
- * Fixed padding inconsistencies across all containers
+ * Simplified with basic flexbox centering for perfect alignment
  */
 export default function MainContentArea({
   topicTitle,
@@ -27,26 +28,26 @@ export default function MainContentArea({
 }: MainContentAreaProps) {
   return (
     <div className={`max-w-4xl mx-auto ${className}`}>
-      {/* Topic introduction section - standardized padding */}
-      <div className="bg-white rounded-lg shadow-sm p-8 mb-8 border-b border-gray-200">
-        <div className="relative pl-6">
-          <div className="absolute left-0 top-1.5 h-6 w-1 bg-blue-600 rounded-full"></div>
-          <h1 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-3">
-            {topicTitle}
-          </h1>
-          <p className="text-sm md:text-base leading-relaxed text-gray-600 max-w-prose mt-2">
-            {topicDescription}
-          </p>
-        </div>
+      {/* Topic introduction section */}
+      <div className="bg-white rounded-lg shadow-sm p-8 mb-8">
+        <TopicIntro title={topicTitle} description={topicDescription} />
       </div>
 
-      {/* Summary card section - aligned padding */}
+      {/* Summary card section with fixed vertical alignment */}
       <div className="bg-white rounded-lg shadow-sm p-8 mb-8">
-        <div className="relative pl-6">
-          <div className="absolute left-0 top-1.5 h-6 w-1 bg-blue-600 rounded-full"></div>
-          <h2 className="text-lg md:text-xl font-semibold text-gray-800 mb-4">
+        {/* Heading with fixed vertical alignment */}
+        <div className="flex">
+          {/* Blue vertical line fixed at exact height */}
+          <div className="flex-shrink-0 w-1 bg-blue-600 rounded-full self-stretch"></div>
+
+          {/* Heading with proper padding and no bottom margin */}
+          <h2 className={`${textPresets.h4} text-gray-800 ml-4 py-0 mb-0`}>
             {summaryTitle || `What You Need To Know`}
           </h2>
+        </div>
+
+        {/* Card with proper spacing */}
+        <div className="ml-5 mt-4">
           <TopicSummaryCard
             summaryText={topicSummary}
             className="border-blue-100 bg-blue-50"
@@ -54,35 +55,40 @@ export default function MainContentArea({
         </div>
       </div>
 
-      {/* Subtopics section - aligned padding */}
+      {/* Detailed analysis section with fixed vertical alignment */}
       <div className="bg-white rounded-lg shadow-sm p-8 mb-8">
-        <div className="relative pl-6">
-          <div className="absolute left-0 top-1.5 h-6 w-1 bg-blue-500 rounded-full"></div>
-          <h2 className="text-lg md:text-xl font-semibold text-gray-800 mb-6">
+        {/* Heading with fixed vertical alignment */}
+        <div className="flex">
+          {/* Blue vertical line fixed at exact height */}
+          <div className="flex-shrink-0 w-1 bg-blue-600 rounded-full self-stretch"></div>
+
+          {/* Heading with proper padding and no bottom margin */}
+          <h2 className={`${textPresets.h4} text-gray-800 ml-4 py-0 mb-0`}>
             Detailed Analysis
           </h2>
+        </div>
 
-          <div className="space-y-16">
-            {subtopics.map((subtopic) => (
-              <SubtopicSection
-                key={subtopic.id}
-                id={String(subtopic.id)}
-                title={subtopic.title}
-                summary={subtopic.summary}
-                riskFactors={subtopic.riskFactors}
-                className="rounded-lg p-0 border-t-4 border-gray-200"
-              />
-            ))}
+        {/* Content with proper spacing */}
+        <div className="ml-5 space-y-12 mt-6">
+          {subtopics.map((subtopic) => (
+            <SubtopicSection
+              key={subtopic.id}
+              id={String(subtopic.id)}
+              title={subtopic.title}
+              summary={subtopic.summary}
+              riskFactors={subtopic.riskFactors}
+              className="rounded-lg"
+            />
+          ))}
 
-            {/* Display a message if no subtopics are provided */}
-            {subtopics.length === 0 && (
-              <div className="py-10 text-center rounded-lg w-full">
-                <p className="text-sm text-gray-500">
-                  No subtopic data available for this topic.
-                </p>
-              </div>
-            )}
-          </div>
+          {/* Display a message if no subtopics are provided */}
+          {subtopics.length === 0 && (
+            <div className="py-8 text-center rounded-lg w-full">
+              <p className={`${textPresets.paragraphSmall}`}>
+                No subtopic data available for this topic.
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </div>

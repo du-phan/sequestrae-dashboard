@@ -8,16 +8,20 @@ import { SubTopic } from "../../../types/ui"; // Import the SubTopic type
 interface ProjectLayoutProps {
   children: React.ReactNode;
   projectId?: string;
-  projectName: string; // Changed to required prop (removed ? mark)
-  subtopics: SubTopic[]; // Use the SubTopic type instead of any[]
+  projectName: string;
+  subtopics: SubTopic[];
   currentTopic: string;
-  currentPath?: string; // Make currentPath optional
+  currentPath?: string;
 }
 
+/**
+ * ProjectLayout component - Provides the main application layout structure
+ * Updated with consistent spacing following 8pt grid system
+ */
 export default function ProjectLayout({
   children,
   projectId,
-  projectName, // Removed default value since it's now required
+  projectName,
   subtopics,
   currentTopic,
   currentPath = "",
@@ -27,6 +31,7 @@ export default function ProjectLayout({
       <TopNavBar projectId={projectId} projectName={projectName} />
 
       <div className="flex flex-1">
+        {/* Fixed sidebar width for consistency */}
         <div className="w-64 flex-shrink-0">
           <LeftSidebar
             subtopics={subtopics}
@@ -35,7 +40,8 @@ export default function ProjectLayout({
           />
         </div>
 
-        <main className="flex-1 bg-gray-50 p-6">{children}</main>
+        {/* Main content with consistent padding on all screen sizes */}
+        <main className="flex-1 bg-gray-50 p-4 md:p-6 lg:p-8">{children}</main>
       </div>
     </div>
   );
