@@ -57,3 +57,12 @@ export interface RiskFactor {
   name: string;
   href: string;
 }
+
+// Project interface for dashboard listing
+export interface Project {
+  project_id: string;
+  project_name: string;
+  registry: string;
+  country: string;
+  feedstock_type: string;
+}

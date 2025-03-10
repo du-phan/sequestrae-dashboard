@@ -114,3 +114,82 @@ export async function getProjectAggregated(
     return null;
   }
 }
+
+/**
+ * Fetches projects list from Supabase with pagination and search
+ * @param query Optional search term for project name
+ * @param page Current page number (starts at 1)
+ * @param limit Number of items per page
+ * @returns Object containing projects array, total pages and total project count
+ */
+export async function getProjects({
+  query = "",
+  page = 1,
+  limit = 10,
+}: {
+  query?: string;
+  page?: number;
+  limit?: number;
+}) {
+  try {
+    // Calculate pagination range
+    const from = (page - 1) * limit;
+    const to = from + limit - 1;
+
+    // Build the query with pagination
+    let projectQuery = supabase
+      .from("projects")
+      .select(
+        `
+        project_id, 
+        project_name, 
+        registry
+      `
+      )
+      .range(from, to);
+
+    // Add text search if query parameter is provided
+    if (query) {
+      projectQuery = projectQuery.ilike("project_name", `%${query}%`);
+    }
+
+    // Execute the query
+    const { data: projectsRaw, error } = await projectQuery;
+
+    if (error) {
+      console.error("Error fetching projects:", error);
+      return { projects: [], totalPages: 0, totalProjects: 0 };
+    }
+
+    // Add the default values for missing fields
+    const projects =
+      projectsRaw?.map((project) => ({
+        ...project,
+        country: "France",
+        feedstock_type: "Wood chip",
+      })) || [];
+
+    // Get total count for pagination
+    const { count, error: countError } = await supabase
+      .from("projects")
+      .select("project_id", { count: "exact" })
+      .ilike("project_name", query ? `%${query}%` : "%");
+
+    if (countError) {
+      console.error("Error fetching project count:", countError);
+      return { projects, totalPages: 1, totalProjects: projects.length };
+    }
+
+    const totalProjects = count || 0;
+    const totalPages = Math.ceil(totalProjects / limit);
+
+    return {
+      projects,
+      totalPages,
+      totalProjects,
+    };
+  } catch (error) {
+    console.error("Failed to fetch projects:", error);
+    return { projects: [], totalPages: 0, totalProjects: 0 };
+  }
+}
