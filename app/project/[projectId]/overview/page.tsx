@@ -1,13 +1,10 @@
 import React from "react";
 import { Metadata } from "next";
 import ProjectLayout from "@/app/ui/projectPage/ProjectLayout";
-import ProjectBackgroundSection, {
-  ProjectBackgroundData,
-} from "@/app/ui/projectPage/ProjectBackgroundSection";
-import ProjectInsightsSection, {
-  ProjectInsightsData,
-} from "@/app/ui/projectPage/ProjectInsightsSection";
+import ProjectBackgroundSection from "@/app/ui/projectPage/ProjectBackgroundSection";
+import ProjectInsightsSection from "@/app/ui/projectPage/ProjectInsightsSection";
 import TopicNavigationGuideSection from "@/app/ui/projectPage/TopicNavigationGuideSection";
+import SimplePageSidebar from "@/app/ui/projectPage/SimplePageSidebar";
 import { getProjectAggregated } from "@/lib/project/api";
 
 export const metadata: Metadata = {
@@ -87,6 +84,25 @@ const getMockProjectInsights = (): ProjectInsightsData => {
   };
 };
 
+// Define section info for easier navigation and IDs
+const overviewSections = [
+  {
+    id: "background",
+    name: "Project Background",
+    anchor: "background",
+  },
+  {
+    id: "insights",
+    name: "Project Insights",
+    anchor: "insights",
+  },
+  {
+    id: "navigation",
+    name: "How to Navigate",
+    anchor: "navigation",
+  },
+];
+
 export default async function OverviewPage({
   params,
 }: {
@@ -112,13 +128,27 @@ export default async function OverviewPage({
     <ProjectLayout
       projectId={projectId}
       projectName={projectName}
-      subtopics={[]} // Overview page doesn't have subtopics in sidebar
+      customSidebar={
+        <SimplePageSidebar
+          sections={overviewSections}
+          title="Project Overview"
+        />
+      }
       currentTopic="overview"
     >
       <div className="max-w-4xl mx-auto space-y-8">
-        <ProjectBackgroundSection data={projectBackground} />
-        <ProjectInsightsSection data={projectInsights} />
-        <TopicNavigationGuideSection projectId={projectId} />
+        {/* Add IDs to each section for linking from the sidebar */}
+        <div id="background">
+          <ProjectBackgroundSection data={projectBackground} />
+        </div>
+
+        <div id="insights">
+          <ProjectInsightsSection data={projectInsights} />
+        </div>
+
+        <div id="navigation">
+          <TopicNavigationGuideSection projectId={projectId} />
+        </div>
       </div>
     </ProjectLayout>
   );

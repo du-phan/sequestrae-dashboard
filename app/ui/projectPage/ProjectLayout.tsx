@@ -12,6 +12,11 @@ interface ProjectLayoutProps {
   subtopics: SubTopic[];
   currentTopic: string;
   currentPath?: string;
+
+  /**
+   * Optional custom sidebar content - used when the standard subtopics sidebar isn't appropriate
+   */
+  customSidebar?: React.ReactNode;
 }
 
 /**
@@ -25,6 +30,7 @@ export default function ProjectLayout({
   subtopics,
   currentTopic,
   currentPath = "",
+  customSidebar,
 }: ProjectLayoutProps) {
   return (
     <div className="flex flex-col min-h-screen">
@@ -33,11 +39,17 @@ export default function ProjectLayout({
       <div className="flex flex-1">
         {/* Fixed sidebar width for consistency */}
         <div className="w-64 flex-shrink-0">
-          <LeftSidebar
-            subtopics={subtopics}
-            currentTopic={currentTopic}
-            currentPath={currentPath}
-          />
+          {customSidebar ? (
+            // Render custom sidebar if provided
+            customSidebar
+          ) : (
+            // Otherwise render the standard subtopics sidebar
+            <LeftSidebar
+              subtopics={subtopics}
+              currentTopic={currentTopic}
+              currentPath={currentPath}
+            />
+          )}
         </div>
 
         {/* Main content with consistent padding on all screen sizes */}
