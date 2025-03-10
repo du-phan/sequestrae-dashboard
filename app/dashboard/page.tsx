@@ -36,13 +36,13 @@ export default async function DashboardPage({
   return (
     <div className="max-w-7xl mx-auto">
       <DashboardHeader />
-      <div className="bg-white shadow-sm rounded-lg p-6 mb-8">
+      <div className="bg-white shadow-sm rounded-lg p-6 mb-6">
         <ProjectFilters />
       </div>
-      <div className="bg-white shadow-sm rounded-lg p-6 mb-8">
+      <div className="bg-white shadow-sm rounded-lg p-6 mb-6">
         <ProjectsTable projects={projects} />
       </div>
-      <div className="mt-8 flex justify-between items-center">
+      <div className="mt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
         <p className="text-sm text-gray-600">
           {projects.length === 0
             ? "No projects found"
