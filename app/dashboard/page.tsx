@@ -34,35 +34,22 @@ export default async function DashboardPage({
   const endItem = Math.min(currentPage * 10, startItem + projects.length - 1);
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Top navigation would go here in a full implementation */}
-
-      <main className="px-4 sm:px-6 lg:px-8 py-8">
-        <div className="max-w-4xl mx-auto">
-          {/* Dashboard Header */}
-          <DashboardHeader />
-
-          {/* Search and filters */}
-          <div className="bg-white shadow-sm rounded-lg p-6 mb-8">
-            <ProjectFilters />
-          </div>
-
-          {/* Projects Table */}
-          <div className="bg-white shadow-sm rounded-lg p-6 mb-8">
-            <ProjectsTable projects={projects} />
-          </div>
-
-          {/* Pagination */}
-          <div className="mt-8 flex justify-between items-center">
-            <p className="text-sm text-gray-600">
-              {projects.length === 0
-                ? "No projects found"
-                : `Showing projects ${startItem}-${endItem} of ${totalProjects}`}
-            </p>
-            <Pagination totalPages={totalPages} currentPage={currentPage} />
-          </div>
-        </div>
-      </main>
+    <div className="max-w-7xl mx-auto">
+      <DashboardHeader />
+      <div className="bg-white shadow-sm rounded-lg p-6 mb-8">
+        <ProjectFilters />
+      </div>
+      <div className="bg-white shadow-sm rounded-lg p-6 mb-8">
+        <ProjectsTable projects={projects} />
+      </div>
+      <div className="mt-8 flex justify-between items-center">
+        <p className="text-sm text-gray-600">
+          {projects.length === 0
+            ? "No projects found"
+            : `Showing projects ${startItem}-${endItem} of ${totalProjects}`}
+        </p>
+        <Pagination totalPages={totalPages} currentPage={currentPage} />
+      </div>
     </div>
   );
 }
