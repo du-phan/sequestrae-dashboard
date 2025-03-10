@@ -1,4 +1,5 @@
-import React from "react";
+import React, { Suspense } from "react";
+import ProjectLoadingSkeleton from "./[projectId]/loading";
 
 export default function ProjectLayout({
   children,
@@ -7,8 +8,7 @@ export default function ProjectLayout({
 }) {
   return (
     <div>
-      {/* Project Sidebar will go here */}
-      {children}
+      <Suspense fallback={<ProjectLoadingSkeleton />}>{children}</Suspense>
     </div>
   );
 }
