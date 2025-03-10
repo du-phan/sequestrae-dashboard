@@ -18,7 +18,9 @@ export default function ProjectFilters() {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const params = new URLSearchParams(searchParams);
+    // Create a new URLSearchParams instance with null check
+    const params = new URLSearchParams(searchParams?.toString() || "");
+
     if (searchQuery) {
       params.set("query", searchQuery);
     } else {

@@ -17,19 +17,16 @@ export default async function DashboardPage({
   searchParams?: {
     query?: string;
     page?: string;
-    status?: string;
   };
 }) {
   // Get current page from search params or default to 1
   const currentPage = Number(searchParams?.page) || 1;
   const query = searchParams?.query || "";
-  const status = searchParams?.status || "all";
 
   // Fetch projects - now destructuring totalProjects as well
   const { projects, totalPages, totalProjects } = await getProjects({
     query,
     page: currentPage,
-    status,
   });
 
   // Calculate pagination display numbers

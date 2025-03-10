@@ -20,7 +20,13 @@ export default function Pagination({
 
   // Create page navigation handler
   const createPageURL = (pageNumber: number | string) => {
-    const params = new URLSearchParams(searchParams);
+    // Create a new URLSearchParams instance with current params
+    const params = new URLSearchParams();
+    // Copy all existing parameters
+    searchParams.forEach((value, key) => {
+      params.set(key, value);
+    });
+
     params.set("page", pageNumber.toString());
     return `${pathname}?${params.toString()}`;
   };
