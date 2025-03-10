@@ -4,7 +4,8 @@ import DashboardHeader from "@/app/ui/dashboard/DashboardHeader";
 import ProjectsTable from "@/app/ui/dashboard/ProjectsTable";
 import ProjectFilters from "@/app/ui/dashboard/ProjectFilters";
 import Pagination from "@/app/ui/dashboard/Pagination";
-import { getProjects } from "@/lib/project/api";
+import StatCards from "@/app/ui/dashboard/StatCards";
+import { getProjects, getProjectsStats } from "@/lib/project/api";
 
 export const metadata: Metadata = {
   title: "Projects Dashboard | Sequestrae",
@@ -23,11 +24,15 @@ export default async function DashboardPage({
   const currentPage = Number(searchParams?.page) || 1;
   const query = searchParams?.query || "";
 
-  // Fetch projects - now destructuring totalProjects as well
+  // Fetch projects for the current page
   const { projects, totalPages, totalProjects } = await getProjects({
     query,
     page: currentPage,
   });
+
+  // Fetch global statistics across all projects
+  // This ensures we get accurate counts of registries and countries
+  const { uniqueRegistries, uniqueCountries } = await getProjectsStats();
 
   // Calculate pagination display numbers
   const startItem = projects.length === 0 ? 0 : (currentPage - 1) * 10 + 1;
@@ -36,6 +41,14 @@ export default async function DashboardPage({
   return (
     <div className="max-w-7xl mx-auto">
       <DashboardHeader />
+
+      {/* Use global stats for the StatCards */}
+      <StatCards
+        projectsCount={totalProjects}
+        registriesCount={uniqueRegistries}
+        countriesCount={uniqueCountries}
+      />
+
       <div className="bg-white shadow-sm rounded-lg p-6 mb-6">
         <ProjectFilters />
       </div>

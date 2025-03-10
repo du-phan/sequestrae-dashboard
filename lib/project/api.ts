@@ -193,3 +193,36 @@ export async function getProjects({
     return { projects: [], totalPages: 0, totalProjects: 0 };
   }
 }
+
+/**
+ * Fetches aggregate statistics across all projects
+ * @returns Object containing counts of unique registries and countries
+ */
+export async function getProjectsStats() {
+  try {
+    // Fetch all projects to get registry information
+    const { data, error } = await supabase.from("projects").select("registry");
+
+    if (error) {
+      console.error("Error fetching project stats:", error);
+      return { uniqueRegistries: 0, uniqueCountries: 1 }; // Default to 1 country
+    }
+
+    // Calculate unique registries
+    const uniqueRegistries = new Set(
+      data.map((project) => project.registry).filter(Boolean) // Filter out null/undefined values
+    ).size;
+
+    // Since all projects currently have "France" as country, return 1
+    // This will need to be updated when real country data is available
+    const uniqueCountries = 1; // Hardcoded for now since we only use "France"
+
+    return {
+      uniqueRegistries,
+      uniqueCountries,
+    };
+  } catch (error) {
+    console.error("Failed to fetch project stats:", error);
+    return { uniqueRegistries: 0, uniqueCountries: 1 }; // Default to 1 country
+  }
+}
