@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image"; // Add Next.js Image component
 import { usePathname } from "next/navigation";
 import { ChevronRightIcon } from "@heroicons/react/20/solid";
 
@@ -48,8 +49,33 @@ const TopNavBar = ({ projectId, projectName }: TopNavBarProps) => {
   return (
     <nav className="sticky top-0 z-40 bg-white border-b border-gray-200 h-16 shadow-sm">
       <div className="h-full px-4 flex items-center justify-between">
-        {/* Simplified Breadcrumb navigation - removed redundant topic name */}
-        <div className="flex items-center text-sm text-gray-600 min-w-0 max-w-[50%]">
+        {/* Logo and App Name */}
+        <div className="flex-shrink-0 flex items-center mr-6">
+          <a
+            href="https://www.sequestrae.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center group"
+            aria-label="Sequestrae homepage"
+          >
+            <div className="relative h-8 w-8 mr-2">
+              <Image
+                src="/logo.png"
+                alt="Sequestrae Logo"
+                fill
+                sizes="32px"
+                className="object-contain"
+                priority
+              />
+            </div>
+            <span className="text-gray-900 font-medium text-lg group-hover:text-blue-600 transition-colors">
+              Sequestrae
+            </span>
+          </a>
+        </div>
+
+        {/* Breadcrumb navigation - now comes after logo */}
+        <div className="flex items-center text-sm text-gray-600 min-w-0 max-w-[40%]">
           <Link
             href="/dashboard"
             className="hover:text-blue-600 transition-colors whitespace-nowrap flex-shrink-0"
