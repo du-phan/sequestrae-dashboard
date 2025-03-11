@@ -12,7 +12,6 @@ export const metadata: Metadata = {
   description: "Browse and manage carbon projects in your portfolio",
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default async function DashboardPage({
   params,
   searchParams,
