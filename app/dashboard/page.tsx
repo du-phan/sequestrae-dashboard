@@ -15,6 +15,7 @@ export const metadata: Metadata = {
 export default async function DashboardPage({
   searchParams,
 }: {
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   params: {}; // Empty params for root pages
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
