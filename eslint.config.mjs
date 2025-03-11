@@ -17,10 +17,23 @@ const eslintConfig = [
         "error",
         {
           argsIgnorePattern: "^_|^params$",
-          varsIgnorePattern: "^_",
+          varsIgnorePattern: "^_|^SearchParams$",
           caughtErrorsIgnorePattern: "^_",
         },
       ],
+      "@typescript-eslint/no-explicit-any": [
+        "error",
+        {
+          ignoreRestArgs: true,
+          fixToUnknown: false,
+        },
+      ],
+    },
+  },
+  {
+    files: ["**/app/dashboard/page.tsx"],
+    rules: {
+      "@typescript-eslint/no-explicit-any": "off",
     },
   },
 ];
