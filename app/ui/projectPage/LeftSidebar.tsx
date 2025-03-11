@@ -5,6 +5,19 @@ import { SubTopic, RiskFactor } from "../../../types/ui";
 import { usePathname } from "next/navigation";
 import { textPresets } from "../theme";
 
+// Add debounce utility function
+function debounce<T extends (...args: any[]) => void>(
+  func: T,
+  wait: number
+): (...args: Parameters<T>) => void {
+  let timeout: NodeJS.Timeout | null = null;
+
+  return (...args: Parameters<T>) => {
+    if (timeout) clearTimeout(timeout);
+    timeout = setTimeout(() => func(...args), wait);
+  };
+}
+
 interface LeftSidebarProps {
   subtopics: SubTopic[];
   currentTopic: string;
@@ -25,14 +38,20 @@ export default function LeftSidebar({
   const observerRef = useRef<IntersectionObserver | null>(null);
   const isInitializedRef = useRef(false);
 
-  // Add a ref to track manual scrolling state
-  const isManualScrollingRef = useRef(false);
-  // Add a timeout ref to clear any pending scroll lock timeouts
-  const scrollLockTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  // Track when user clicks sidebar items - critical for fixing the issue
+  const userClickedInSidebarRef = useRef<boolean>(false);
+  const userClickLockTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Replace direct ref with ref callback function
-  const setActiveItemRef = (element: HTMLElement | null) => {
-    if (element && sidebarRef.current) {
+  // Scroll lock mechanism
+  const isManualScrollingRef = useRef(false);
+  const scrollLockTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const visibleElementsRef = useRef<Map<string, number>>(new Map());
+
+  // Replace direct ref with ref callback function - keep minimal
+  const setActiveItemRef = useCallback((element: HTMLElement | null) => {
+    // Don't auto-scroll sidebar if user just clicked a sidebar item
+    // This is key to preventing the sidebar from jumping back after a click
+    if (element && sidebarRef.current && !userClickedInSidebarRef.current) {
       const sidebarRect = sidebarRef.current.getBoundingClientRect();
       const itemRect = element.getBoundingClientRect();
 
@@ -47,7 +66,7 @@ export default function LeftSidebar({
         });
       }
     }
-  };
+  }, []);
 
   // Function to expand a subtopic that contains a specific risk factor
   const expandSubtopicContainingRiskFactor = useCallback(
@@ -70,99 +89,147 @@ export default function LeftSidebar({
     [subtopics]
   );
 
-  // Setup intersection observer for all risk factors
+  // Improved scroll lock with longer duration
+  const enableScrollLock = useCallback(() => {
+    // Clear any existing timeout
+    if (scrollLockTimeoutRef.current) {
+      clearTimeout(scrollLockTimeoutRef.current);
+    }
+
+    // Enable scroll lock
+    isManualScrollingRef.current = true;
+
+    // Set a longer timeout to disable the lock after scrolling completes
+    scrollLockTimeoutRef.current = setTimeout(() => {
+      isManualScrollingRef.current = false;
+      scrollLockTimeoutRef.current = null;
+    }, 1000);
+  }, []);
+
+  // Mark that user has clicked in sidebar - crucial for fix
+  const markUserClickedSidebar = useCallback(() => {
+    // Clear any existing timeout
+    if (userClickLockTimeoutRef.current) {
+      clearTimeout(userClickLockTimeoutRef.current);
+    }
+
+    // Mark that user clicked in sidebar
+    userClickedInSidebarRef.current = true;
+
+    // Set a timeout to reset the flag after scroll animation is done
+    userClickLockTimeoutRef.current = setTimeout(() => {
+      userClickedInSidebarRef.current = false;
+      userClickLockTimeoutRef.current = null;
+    }, 2000); // Longer timeout to ensure scroll animation completes
+  }, []);
+
+  // Use a debounced version of setActiveItem to prevent rapid changes
+  const debouncedSetActiveItem = useCallback(
+    debounce((itemId: string) => {
+      // Don't update active item if:
+      // 1. We're in manual scrolling mode OR
+      // 2. User just clicked a sidebar item (THIS IS KEY)
+      if (isManualScrollingRef.current || userClickedInSidebarRef.current) {
+        return;
+      }
+
+      setActiveItem(itemId);
+      expandSubtopicContainingRiskFactor(itemId);
+    }, 150), // 150ms debounce to smooth out scrolling
+    [expandSubtopicContainingRiskFactor]
+  );
+
+  // Setup intersection observer with improved handling
   const setupIntersectionObserver = useCallback(() => {
-    // Clean up existing observer if any
+    // Clean up existing observer
     if (observerRef.current) {
       observerRef.current.disconnect();
       observerRef.current = null;
     }
 
-    // Create entries map to store intersection ratios
-    const entries: Map<string, { ratio: number; element: Element }> = new Map();
-
-    // Create a single observer for all elements
+    // Create a new observer with reduced sensitivity
     observerRef.current = new IntersectionObserver(
       (observedEntries) => {
         // Skip processing if manual scrolling is in progress
-        if (isManualScrollingRef.current) return;
+        // or if user just clicked a sidebar item
+        if (isManualScrollingRef.current || userClickedInSidebarRef.current)
+          return;
 
         // Process all observed entries
         observedEntries.forEach((entry) => {
           const id = entry.target.id;
+          if (!id) return; // Skip elements without IDs
 
           if (entry.isIntersecting) {
-            entries.set(id, {
-              ratio: entry.intersectionRatio,
-              element: entry.target,
-            });
+            visibleElementsRef.current.set(id, entry.intersectionRatio);
           } else {
-            entries.delete(id);
+            visibleElementsRef.current.delete(id);
           }
         });
 
-        // Find the element with highest intersection ratio
-        let highestRatio = 0;
-        let topElementId = "";
+        // If we have visible elements, find the most visible one
+        if (visibleElementsRef.current.size > 0) {
+          let highestRatio = 0;
+          let topElementId = "";
 
-        entries.forEach(({ ratio }, id) => {
-          if (ratio > highestRatio) {
-            highestRatio = ratio;
-            topElementId = id;
+          visibleElementsRef.current.forEach((ratio, id) => {
+            if (ratio > highestRatio) {
+              highestRatio = ratio;
+              topElementId = id;
+            }
+          });
+
+          // Only update if we found an element with good visibility
+          // and it's not the same as current active item
+          if (
+            topElementId &&
+            highestRatio > 0.3 &&
+            topElementId !== activeItem
+          ) {
+            debouncedSetActiveItem(topElementId);
           }
-        });
-
-        // Set active item if a visible element was found
-        if (topElementId && topElementId !== activeItem) {
-          setActiveItem(topElementId);
-          expandSubtopicContainingRiskFactor(topElementId);
         }
       },
       {
-        // Configure rootMargin to prioritize elements in the center of viewport
-        rootMargin: "-20% 0px -40% 0px",
-        threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
+        // Reduced sensitivity - only consider elements more fully in view
+        rootMargin: "-10% 0px -30% 0px",
+        // Fewer thresholds for better performance
+        threshold: [0, 0.3, 0.6, 1.0],
       }
     );
 
-    // Collect all risk factor elements and observe them
+    // Collect all elements to observe
     const riskFactorElements = document.querySelectorAll(
       "[data-risk-factor-id]"
     );
-
-    // Also observe subtopic sections
     const subtopicElements = document.querySelectorAll("[data-subtopic-id]");
 
+    // If no elements found, try again after a delay
     if (riskFactorElements.length === 0 && subtopicElements.length === 0) {
-      // If elements aren't found yet, try again after a short delay
       setTimeout(() => {
         if (!isInitializedRef.current) setupIntersectionObserver();
       }, 500);
       return;
     }
 
-    // Mark as initialized once we've found elements to observe
+    // Mark as initialized
     isInitializedRef.current = true;
 
-    // Observe all risk factor elements
+    // Observe all elements
     riskFactorElements.forEach((element) => {
       if (observerRef.current) observerRef.current.observe(element);
     });
 
-    // Observe all subtopic elements
     subtopicElements.forEach((element) => {
       if (observerRef.current) observerRef.current.observe(element);
     });
-
-    console.log(
-      `Observing ${riskFactorElements.length} risk factor elements and ${subtopicElements.length} subtopic elements`
-    );
-  }, [activeItem, expandSubtopicContainingRiskFactor]);
+  }, [activeItem, debouncedSetActiveItem]);
 
   // Initialize intersection observer when the component mounts
   useEffect(() => {
     // Reset initialization flag when subtopics change
     isInitializedRef.current = false;
+    visibleElementsRef.current = new Map();
 
     // Short delay to ensure DOM is fully rendered
     const timer = setTimeout(() => {
@@ -205,38 +272,27 @@ export default function LeftSidebar({
         });
 
         setExpandedSubtopics(newExpandedState);
+
+        // Enable scroll lock to prevent intersection observer from interfering
+        enableScrollLock();
       }
     }
-  }, [pathname, subtopics]);
-
-  // Set up scroll lock mechanism
-  const enableScrollLock = useCallback(() => {
-    // Clear any existing timeout to prevent race conditions
-    if (scrollLockTimeoutRef.current) {
-      clearTimeout(scrollLockTimeoutRef.current);
-    }
-
-    // Enable scroll lock
-    isManualScrollingRef.current = true;
-
-    // Set a timeout to disable the lock after scrolling should be complete
-    // Using a reasonable time that allows scrolling to complete even for long distances
-    scrollLockTimeoutRef.current = setTimeout(() => {
-      isManualScrollingRef.current = false;
-      scrollLockTimeoutRef.current = null;
-    }, 1000); // 1 second should be enough for most scroll animations to complete
-  }, []);
+  }, [pathname, subtopics, enableScrollLock]);
 
   // Toggle subtopic expansion
   const toggleSubtopic = (subtopicId: string, e: React.MouseEvent) => {
     e.preventDefault(); // Prevent navigation when clicking
+
+    // Mark user interaction with sidebar
+    markUserClickedSidebar();
+
     setExpandedSubtopics((prev) => ({
       ...prev,
       [subtopicId]: !prev[subtopicId],
     }));
   };
 
-  // Handle click on a risk factor - improved with scroll lock
+  // Improved risk factor click handler - with user sidebar click tracking
   const handleRiskFactorClick = (
     id: string,
     href: string,
@@ -244,29 +300,36 @@ export default function LeftSidebar({
   ) => {
     e.preventDefault();
 
+    // Mark that user clicked in sidebar - THIS IS KEY TO FIX
+    markUserClickedSidebar();
+
     // Set active item immediately for UI feedback
     setActiveItem(id);
 
-    // Enable scroll lock before scrolling
+    // Enable scroll lock before scrolling content
     enableScrollLock();
 
     // Find the element and scroll to it with proper offset
     const element = document.getElementById(id);
     if (element) {
-      // Use scrollIntoView with start alignment for consistent behavior
-      element.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
+      setTimeout(() => {
+        element.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }, 10);
     } else {
       // Fallback to default href navigation
       window.location.hash = href.substring(1);
     }
   };
 
-  // Handle click on "Jump to Section" link - improved with scroll lock
+  // Improved section jump handler - with user sidebar click tracking
   const handleSectionJump = (subtopicId: string, e: React.MouseEvent) => {
     e.preventDefault();
+
+    // Mark that user clicked in sidebar - THIS IS KEY TO FIX
+    markUserClickedSidebar();
 
     // Set active item immediately for UI feedback
     setActiveItem(subtopicId);
@@ -277,13 +340,14 @@ export default function LeftSidebar({
     // Find the element and scroll to it with proper offset
     const element = document.getElementById(subtopicId);
     if (element) {
-      // Use scrollIntoView with start alignment for consistent behavior
-      element.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
+      setTimeout(() => {
+        element.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }, 10);
     } else {
-      // Fallback to default href navigation
+      // Fallback to default hash navigation
       window.location.hash = subtopicId;
     }
   };
@@ -292,6 +356,24 @@ export default function LeftSidebar({
   const isActive = (id: string) => {
     return activeItem === id;
   };
+
+  // Add global scroll handler to detect user scrolling
+  useEffect(() => {
+    const handleUserScroll = () => {
+      // If this isn't a programmatic scroll (not locked), then it's a user scroll
+      if (!isManualScrollingRef.current) {
+        // Do nothing special here, just detect user scrolling
+      }
+    };
+
+    // Add event listener with passive: true for better performance
+    window.addEventListener("scroll", handleUserScroll, { passive: true });
+
+    // Clean up
+    return () => {
+      window.removeEventListener("scroll", handleUserScroll);
+    };
+  }, []);
 
   return (
     <aside className="sticky top-16 h-[calc(100vh-4rem)] bg-white border-r border-gray-200 flex flex-col">
@@ -310,9 +392,10 @@ export default function LeftSidebar({
             {subtopics.map((subtopic) => (
               <li key={subtopic.id} className="mb-2">
                 <div className="flex flex-col">
-                  {/* Subtopic header - consistent padding and typography */}
+                  {/* Subtopic header */}
                   <button
                     onClick={(e) => toggleSubtopic(subtopic.id, e)}
+                    data-item-id={subtopic.id}
                     className={`flex items-center justify-between px-3 py-2 rounded-md w-full text-left transition-colors
                       ${textPresets.label}
                       ${
@@ -353,10 +436,10 @@ export default function LeftSidebar({
                       )}
                   </button>
 
-                  {/* Risk factors list - standardized spacing */}
+                  {/* Risk factors list */}
                   {expandedSubtopics[subtopic.id] && (
                     <ul className="ml-4 mt-2 space-y-2 border-l border-gray-200 pl-2">
-                      {/* Jump to Section link - consistent styling */}
+                      {/* Jump to Section link */}
                       <li>
                         <a
                           href={`#${subtopic.id}`}
@@ -388,7 +471,7 @@ export default function LeftSidebar({
                         </a>
                       </li>
 
-                      {/* Risk factors - consistent typography and spacing */}
+                      {/* Risk factors */}
                       {subtopic.riskFactors &&
                         subtopic.riskFactors.length > 0 &&
                         subtopic.riskFactors.map((riskFactor) => (
@@ -442,7 +525,7 @@ export default function LeftSidebar({
         )}
       </div>
 
-      {/* Footer area - consistent padding and typography */}
+      {/* Footer area */}
       <div className="p-4 border-t border-gray-200 bg-gray-50">
         <p className={`text-center text-gray-500 ${textPresets.caption}`}>
           {subtopics.length} section{subtopics.length !== 1 ? "s" : ""}{" "}
