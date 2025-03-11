@@ -1,9 +1,14 @@
 import React from "react";
 import StandardTopicPage from "@/app/ui/projectPage/StandardTopicPage";
 
-// Using any type to bypass TypeScript errors with Next.js PageProps constraints
-export default async function DeliveryRiskPage({ params }: any) {
-  // Don't await params, it's not a Promise in this context
+interface DeliveryPageParams {
+  params: {
+    projectId: string;
+  };
+}
+
+// Using a properly typed interface for Next.js page props
+export default async function DeliveryRiskPage({ params }: DeliveryPageParams) {
   const { projectId } = params;
   return <StandardTopicPage projectId={projectId} topicId="delivery" />;
 }
