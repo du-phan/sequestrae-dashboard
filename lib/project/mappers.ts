@@ -256,3 +256,48 @@ export function mapProjectToBackgroundData(project: Project) {
       : ["No stakeholders specified"],
   };
 }
+
+/**
+ * Maps project main insights to the format required for the ProjectInsightsSection component
+ * @param project The complete project data from the API
+ * @returns Formatted insights data ready for UI components
+ */
+export function mapProjectToInsightsData(project: Project): {
+  strengths: { id: string; text: string; topic?: string }[];
+  considerations: { id: string; text: string; topic?: string }[];
+  recommendedActions: { id: string; text: string; topic?: string }[];
+} {
+  // Initialize empty arrays for each category
+  const strengths: { id: string; text: string; topic?: string }[] = [];
+  const considerations: { id: string; text: string; topic?: string }[] = [];
+  const recommendedActions: { id: string; text: string; topic?: string }[] = [];
+
+  // If project has no insights, return empty arrays
+  if (!project.main_insights || project.main_insights.length === 0) {
+    return { strengths, considerations, recommendedActions };
+  }
+
+  // Map each insight to the appropriate category
+  project.main_insights.forEach((insight) => {
+    const insightItem = {
+      id: String(insight.project_main_insight_id),
+      text: insight.main_idea,
+      topic: capitalizeFirstLetter(insight.topic),
+    };
+
+    // Sort insights by their type
+    switch (insight.insight_type) {
+      case "main_strengths":
+        strengths.push(insightItem);
+        break;
+      case "main_considerations":
+        considerations.push(insightItem);
+        break;
+      case "main_recommended_actions":
+        recommendedActions.push(insightItem);
+        break;
+    }
+  });
+
+  return { strengths, considerations, recommendedActions };
+}

@@ -53,6 +53,18 @@ export interface DetailedAnswer {
   subtopic: string;
 }
 
+// Project Main Insight representing key strengths, considerations, and recommended actions
+export interface ProjectMainInsight {
+  project_main_insight_id: number;
+  insight_type:
+    | "main_strengths"
+    | "main_considerations"
+    | "main_recommended_actions";
+  topic: string;
+  main_idea: string;
+  created_at: string;
+}
+
 // The complete Project structure matching the project_aggregated table
 export interface Project {
   project_id: string;
@@ -70,6 +82,7 @@ export interface Project {
   detailed_answers: DetailedAnswer[];
   topic_summaries: TopicSummary[];
   subtopics: Subtopic[];
+  main_insights: ProjectMainInsight[];
 
   // Other project metadata fields
   location?: string;
