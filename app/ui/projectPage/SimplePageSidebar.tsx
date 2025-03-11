@@ -174,7 +174,9 @@ export default function SimplePageSidebar({
   };
 
   return (
-    <aside className="sticky top-16 h-[calc(100vh-4rem)] bg-white border-r border-gray-200 flex flex-col">
+    <aside
+      className={`sticky top-16 h-[calc(100vh-4rem)] bg-white border-r border-gray-200 flex flex-col ${className}`}
+    >
       <div
         ref={sidebarRef}
         className="flex-1 overflow-y-auto p-6 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent"
