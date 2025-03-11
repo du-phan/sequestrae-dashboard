@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Check if there are any custom configurations here
-  // particularly related to path resolving
-}
+  // Next.js automatically uses the path aliases defined in tsconfig.json
+  // No additional configuration needed for path resolution
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

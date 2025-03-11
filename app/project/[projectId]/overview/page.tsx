@@ -27,6 +27,7 @@ const getMockProjectBackground = (
       "This carbon sequestration project aims to restore degraded forestland through reforestation and improved forest management practices. The project follows methodology standards to ensure accurate measurement of carbon sequestration benefits.",
     location: "Sumatra, Indonesia",
     startDate: "January 2022",
+    feedstockType: "Forestry & Reforestation",
     stakeholders: [
       "EcoRestore International",
       "Sumatra Conservation Trust",

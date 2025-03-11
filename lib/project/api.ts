@@ -143,7 +143,9 @@ export async function getProjects({
         `
         project_id, 
         project_name, 
-        registry
+        registry,
+        country,
+        feedstock_type
       `
       )
       .range(from, to);
@@ -154,20 +156,12 @@ export async function getProjects({
     }
 
     // Execute the query
-    const { data: projectsRaw, error } = await projectQuery;
+    const { data: projects, error } = await projectQuery;
 
     if (error) {
       console.error("Error fetching projects:", error);
       return { projects: [], totalPages: 0, totalProjects: 0 };
     }
-
-    // Add the default values for missing fields
-    const projects =
-      projectsRaw?.map((project) => ({
-        ...project,
-        country: "France",
-        feedstock_type: "Wood chip",
-      })) || [];
 
     // Get total count for pagination
     const { count, error: countError } = await supabase
@@ -177,14 +171,18 @@ export async function getProjects({
 
     if (countError) {
       console.error("Error fetching project count:", countError);
-      return { projects, totalPages: 1, totalProjects: projects.length };
+      return {
+        projects: projects || [],
+        totalPages: 1,
+        totalProjects: projects?.length || 0,
+      };
     }
 
     const totalProjects = count || 0;
     const totalPages = Math.ceil(totalProjects / limit);
 
     return {
-      projects,
+      projects: projects || [],
       totalPages,
       totalProjects,
     };
@@ -200,12 +198,14 @@ export async function getProjects({
  */
 export async function getProjectsStats() {
   try {
-    // Fetch all projects to get registry information
-    const { data, error } = await supabase.from("projects").select("registry");
+    // Fetch all projects to get registry and country information
+    const { data, error } = await supabase
+      .from("projects")
+      .select("registry, country");
 
     if (error) {
       console.error("Error fetching project stats:", error);
-      return { uniqueRegistries: 0, uniqueCountries: 1 }; // Default to 1 country
+      return { uniqueRegistries: 0, uniqueCountries: 0 };
     }
 
     // Calculate unique registries
@@ -213,9 +213,10 @@ export async function getProjectsStats() {
       data.map((project) => project.registry).filter(Boolean) // Filter out null/undefined values
     ).size;
 
-    // Since all projects currently have "France" as country, return 1
-    // This will need to be updated when real country data is available
-    const uniqueCountries = 1; // Hardcoded for now since we only use "France"
+    // Calculate unique countries
+    const uniqueCountries = new Set(
+      data.map((project) => project.country).filter(Boolean) // Filter out null/undefined values
+    ).size;
 
     return {
       uniqueRegistries,
@@ -223,6 +224,6 @@ export async function getProjectsStats() {
     };
   } catch (error) {
     console.error("Failed to fetch project stats:", error);
-    return { uniqueRegistries: 0, uniqueCountries: 1 }; // Default to 1 country
+    return { uniqueRegistries: 0, uniqueCountries: 0 };
   }
 }

@@ -5,6 +5,7 @@ import {
   MapPinIcon,
   UserGroupIcon,
   DocumentTextIcon,
+  BeakerIcon,
 } from "@heroicons/react/24/outline";
 
 // Interface for project background data
@@ -33,6 +34,11 @@ export interface ProjectBackgroundData {
    * Organizations or entities responsible for the project
    */
   stakeholders?: string[];
+
+  /**
+   * Type of feedstock used in the project
+   */
+  feedstockType?: string;
 }
 
 interface ProjectBackgroundSectionProps {
@@ -125,6 +131,13 @@ export default function ProjectBackgroundSection({
               icon={<MapPinIcon />}
               label="Location"
               value={data.location}
+              className="col-span-1"
+            />
+
+            <DetailItem
+              icon={<BeakerIcon />}
+              label="Feedstock Type"
+              value={data.feedstockType}
               className="col-span-1"
             />
 
