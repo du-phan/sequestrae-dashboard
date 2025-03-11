@@ -11,7 +11,7 @@ interface ProjectsTableProps {
 export default function ProjectsTable({ projects }: ProjectsTableProps) {
   return (
     <div>
-      <h2 className={`${textPresets.h4} text-gray-800 mb-4`}>Your Projects</h2>
+      <h2 className={`${textPresets.h4} text-gray-800 mb-4`}>All Projects</h2>
 
       {projects.length === 0 ? (
         <div className="text-center py-10">

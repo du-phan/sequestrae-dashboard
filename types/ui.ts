@@ -64,8 +64,8 @@ export interface Project {
   project_name: string;
   registry: string;
   country: string | null;
-  project_start_period: string | null;
+  project_start_period?: string | null;
   feedstock_type: string[];
-  project_description: string | null;
-  key_stakeholders: string[];
+  project_description?: string | null;
+  key_stakeholders?: string[];
 }

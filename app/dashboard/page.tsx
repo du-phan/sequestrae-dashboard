@@ -45,8 +45,8 @@ export default async function DashboardPage({
       {/* Use global stats for the StatCards */}
       <StatCards
         projectsCount={totalProjects}
-        registriesCount={uniqueRegistries}
         countriesCount={uniqueCountries}
+        registriesCount={uniqueRegistries}
       />
 
       <div className="bg-white shadow-sm rounded-lg p-6 mb-6">

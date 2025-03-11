@@ -223,3 +223,28 @@ function mapStringArrayToSummaryItems(
     text,
   }));
 }
+
+/**
+ * Maps project data to the format required for the project background section
+ * @param project The complete project data from the API
+ * @returns Formatted project background data ready for UI components
+ */
+export function mapProjectToBackgroundData(project: Project) {
+  return {
+    name: project.project_name || "Untitled Project",
+    description: project.project_description || "No description available.",
+    location: project.location || project.country || "Location not specified",
+    startDate:
+      project.start_date ||
+      project.project_start_period ||
+      "Date not specified",
+    feedstockType: Array.isArray(project.feedstock_type)
+      ? project.feedstock_type.join(", ")
+      : project.feedstock_type || "Not specified",
+    stakeholders: Array.isArray(project.key_stakeholders)
+      ? project.key_stakeholders
+      : project.key_stakeholders
+      ? [project.key_stakeholders]
+      : ["No stakeholders specified"],
+  };
+}

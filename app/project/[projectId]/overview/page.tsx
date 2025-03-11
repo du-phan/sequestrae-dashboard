@@ -10,29 +10,25 @@ import ProjectInsightsSection, {
 import TopicNavigationGuideSection from "@/app/ui/projectPage/TopicNavigationGuideSection";
 import SimplePageSidebar from "@/app/ui/projectPage/SimplePageSidebar";
 import { getProjectAggregated } from "@/lib/project/api";
+import { mapProjectToBackgroundData } from "@/lib/project/mappers";
 
 export const metadata: Metadata = {
   title: "Project Overview | Project Dashboard",
   description: "Overview and key information about the project",
 };
 
-// Mock data for project background
-// This will be replaced with actual data from Supabase later
-const getMockProjectBackground = (
+// Fallback data for project background when actual data is incomplete
+const getDefaultProjectBackground = (
   projectName: string
 ): ProjectBackgroundData => {
   return {
     name: projectName,
     description:
       "This carbon sequestration project aims to restore degraded forestland through reforestation and improved forest management practices. The project follows methodology standards to ensure accurate measurement of carbon sequestration benefits.",
-    location: "Sumatra, Indonesia",
-    startDate: "January 2022",
-    feedstockType: "Forestry & Reforestation",
-    stakeholders: [
-      "EcoRestore International",
-      "Sumatra Conservation Trust",
-      "Local Community Cooperative",
-    ],
+    location: "Location not specified",
+    startDate: "Start date not specified",
+    feedstockType: "Not specified",
+    stakeholders: ["No stakeholders specified"],
   };
 };
 
@@ -125,8 +121,8 @@ export default async function OverviewPage({
   // Get project name from the project data
   const projectName = projectData.project_name;
 
-  // Get mock data - would be replaced with real data later
-  const projectBackground = getMockProjectBackground(projectName);
+  // Map project data to background format, with fallback to default if needed
+  const projectBackground = mapProjectToBackgroundData(projectData);
   const projectInsights = getMockProjectInsights();
 
   return (
