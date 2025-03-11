@@ -8,12 +8,10 @@ export const metadata: Metadata = {
     "Analysis of the project's social impact and community engagement",
 };
 
-export default async function SocialImpactPage({
-  params,
-}: {
-  params: { projectId: string };
-}) {
-  const { projectId } = await params;
+// Remove type annotations
+export default async function SocialImpactPage({ params }) {
+  // Don't await params, it's not a Promise
+  const { projectId } = params;
 
   // Use the StandardTopicPage component with the social topic ID
   return <StandardTopicPage projectId={projectId} topicId="social" />;
