@@ -2,7 +2,6 @@ import {
   RiskFactorPointDB,
   RiskFactor as ApiRiskFactor,
   Subtopic as ApiSubtopic,
-  TopicSummary as ApiTopicSummary,
   Project,
 } from "../../types/api";
 
@@ -140,4 +139,50 @@ export function determineRiskFactorType(points: RiskFactorPointDB[]): string {
   if (maxType === "recommended_actions") return "recommended_action";
 
   return maxType;
+}
+
+// Type mappers for API responses to UI types
+import {
+  ApiProject,
+  ApiRiskFactor,
+  ApiRiskFactorPoint,
+  ApiSubtopic,
+} from "../../types/api";
+import { ComponentRiskFactor, ComponentSubtopic } from "../../types/ui";
+
+// Function to map API subtopics to UI subtopics
+export function mapApiSubtopicsToComponentSubtopics(
+  apiSubtopics: ApiSubtopic[]
+): ComponentSubtopic[] {
+  return apiSubtopics.map((subtopic) => ({
+    id: subtopic.id,
+    title: subtopic.name,
+    summary: subtopic.summary || "",
+    riskFactors: mapApiRiskFactorsToComponentRiskFactors(
+      subtopic.risk_factors || []
+    ),
+  }));
+}
+
+// Function to map API risk factors to UI risk factors
+export function mapApiRiskFactorsToComponentRiskFactors(
+  apiRiskFactors: ApiRiskFactor[]
+): ComponentRiskFactor[] {
+  return apiRiskFactors.map((riskFactor) => ({
+    id: riskFactor.id,
+    name: riskFactor.name,
+    type: riskFactor.type || "standard",
+    points: mapApiRiskFactorPoints(riskFactor.points || []),
+  }));
+}
+
+// Function to map API risk factor points
+export function mapApiRiskFactorPoints(
+  apiPoints: ApiRiskFactorPoint[]
+): { id: string; type: string; text: string }[] {
+  return apiPoints.map((point) => ({
+    id: point.id,
+    type: point.type || "standard",
+    text: point.text || "",
+  }));
 }
