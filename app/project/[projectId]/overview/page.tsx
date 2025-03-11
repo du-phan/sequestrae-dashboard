@@ -40,7 +40,9 @@ export default async function OverviewPage({
 }: {
   params: { projectId: string };
 }) {
-  const { projectId } = params;
+  // Await params before accessing its properties
+  const resolvedParams = await params;
+  const projectId = resolvedParams.projectId;
 
   // Fetch project data - this is reused from the existing code
   const projectData = await getProjectAggregated(projectId);
