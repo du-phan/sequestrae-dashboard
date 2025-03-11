@@ -1,10 +1,12 @@
 import { redirect } from "next/navigation";
 
-// Using any type to bypass TypeScript errors with Next.js PageProps constraints
-export default async function ProjectPage({ params }: any) {
-  // Access projectId directly from params (no await)
+// Next.js 15 recommended typing for page components with dynamic routes
+export default async function ProjectPage({
+  params,
+}: {
+  params: { projectId: string };
+}) {
   const { projectId } = params;
-
-  // Redirect to the overview page - no code will execute after this
-  redirect(`/project/${projectId}/overview`);
+  // Redirect to overview page when accessing the project root
+  return redirect(`/project/${projectId}/overview`);
 }

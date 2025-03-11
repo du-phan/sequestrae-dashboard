@@ -1,4 +1,3 @@
-import React from "react";
 import { Metadata } from "next";
 import ProjectLayout from "@/app/ui/projectPage/ProjectLayout";
 import ProjectBackgroundSection from "@/app/ui/projectPage/ProjectBackgroundSection";
@@ -35,8 +34,16 @@ const overviewSections = [
   },
 ];
 
-// Using any type to bypass TypeScript errors with Next.js PageProps constraints
-export default async function OverviewPage({ params }: any) {
+interface OverviewPageParams {
+  params: {
+    projectId: string;
+  };
+}
+
+// Using a properly typed interface for Next.js page props
+export default async function ProjectOverviewPage({
+  params,
+}: OverviewPageParams) {
   const { projectId } = params;
 
   // Fetch project data - this is reused from the existing code

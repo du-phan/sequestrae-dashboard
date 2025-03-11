@@ -1,4 +1,3 @@
-import React from "react";
 import { Metadata } from "next";
 import DashboardHeader from "@/app/ui/dashboard/DashboardHeader";
 import ProjectsTable from "@/app/ui/dashboard/ProjectsTable";
@@ -12,15 +11,13 @@ export const metadata: Metadata = {
   description: "Browse and manage carbon projects in your portfolio",
 };
 
-// Define types internally for code clarity, but use any for the component props
-// to avoid TypeScript errors during Vercel deployment
-type SearchParams = {
-  page?: string;
-  query?: string;
-};
-
-// Using any type to bypass TypeScript errors with Next.js PageProps constraints
-export default async function DashboardPage({ searchParams }: any) {
+// Next.js 15 recommended typing for page components
+export default async function DashboardPage({
+  searchParams,
+}: {
+  params: {}; // Empty params for root pages
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
   // Get current page from search params or default to 1
   const currentPage = Number(
     typeof searchParams?.page === "string" ? searchParams.page : "1"

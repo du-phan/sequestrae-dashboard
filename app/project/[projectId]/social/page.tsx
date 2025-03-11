@@ -1,4 +1,3 @@
-import React from "react";
 import StandardTopicPage from "@/app/ui/projectPage/StandardTopicPage";
 import { Metadata } from "next";
 
@@ -8,10 +7,14 @@ export const metadata: Metadata = {
     "Analysis of the project's social impact and community engagement",
 };
 
-// Using any type to bypass TypeScript errors with Next.js PageProps constraints
-export default async function SocialImpactPage({ params }: any) {
-  const { projectId } = params;
+interface SocialPageParams {
+  params: {
+    projectId: string;
+  };
+}
 
-  // Use the StandardTopicPage component with the social topic ID
+// Using a properly typed interface for Next.js page props
+export default async function SocialRiskPage({ params }: SocialPageParams) {
+  const { projectId } = params;
   return <StandardTopicPage projectId={projectId} topicId="social" />;
 }

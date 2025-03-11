@@ -1,9 +1,15 @@
-import React from "react";
 import StandardTopicPage from "@/app/ui/projectPage/StandardTopicPage";
 
-// Using any type to bypass TypeScript errors with Next.js PageProps constraints
-export default async function CarbonIntegrityPage({ params }: any) {
-  const { projectId } = params;
+interface IntegrityPageParams {
+  params: {
+    projectId: string;
+  };
+}
 
+// Using a properly typed interface for Next.js page props
+export default async function IntegrityRiskPage({
+  params,
+}: IntegrityPageParams) {
+  const { projectId } = params;
   return <StandardTopicPage projectId={projectId} topicId="integrity" />;
 }

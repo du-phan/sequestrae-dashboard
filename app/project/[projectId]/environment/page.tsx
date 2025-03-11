@@ -1,9 +1,15 @@
-import React from "react";
 import StandardTopicPage from "@/app/ui/projectPage/StandardTopicPage";
 
-// Using any type to bypass TypeScript errors with Next.js PageProps constraints
-export default async function EnvironmentFactorPage({ params }: any) {
-  const { projectId } = params;
+interface EnvironmentPageParams {
+  params: {
+    projectId: string;
+  };
+}
 
+// Using a properly typed interface for Next.js page props
+export default async function EnvironmentRiskPage({
+  params,
+}: EnvironmentPageParams) {
+  const { projectId } = params;
   return <StandardTopicPage projectId={projectId} topicId="environment" />;
 }

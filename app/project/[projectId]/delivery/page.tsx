@@ -1,4 +1,3 @@
-import React from "react";
 import StandardTopicPage from "@/app/ui/projectPage/StandardTopicPage";
 
 interface DeliveryPageParams {
