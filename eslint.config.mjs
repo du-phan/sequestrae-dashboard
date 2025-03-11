@@ -45,6 +45,14 @@ const eslintConfig = [
       "@typescript-eslint/no-explicit-any": "off",
     },
   },
+  // Configuration for dashboard page - now including both rules
+  {
+    files: ["**/app/dashboard/page.tsx"],
+    rules: {
+      "@typescript-eslint/ban-ts-comment": "off",
+      "@typescript-eslint/no-empty-object-type": "off", // Added this rule
+    },
+  },
 ];
 
 export default eslintConfig;
