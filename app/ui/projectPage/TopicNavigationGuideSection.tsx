@@ -126,9 +126,8 @@ export default function TopicNavigationGuideSection({
               <span className="block">1</span>
             </div>
             <p className={`${textPresets.paragraph} text-gray-700 my-0`}>
-              <strong>Topics & Subtopics</strong>: Major areas of analysis are
-              divided into specific subtopics that examine key aspects of the
-              project.
+              <strong>Subtopics</strong>: Major areas of analysis are divided
+              into specific subtopics that examine key aspects of the project.
             </p>
           </div>
 
@@ -137,7 +136,7 @@ export default function TopicNavigationGuideSection({
               <span className="block">2</span>
             </div>
             <p className={`${textPresets.paragraph} text-gray-700 my-0`}>
-              <strong>Risk Factors</strong>: Within each subtopic, we identify
+              <strong>Factors</strong>: Within each subtopic, we identify
               specific factors that could impact project success.
             </p>
           </div>
@@ -147,15 +146,13 @@ export default function TopicNavigationGuideSection({
               <span className="block">3</span>
             </div>
             <div>
-              {/* Fixed conflicting margin classes */}
-              <p className={`${textPresets.paragraph} text-gray-700 my-0`}>
-                <strong>Assessment Framework</strong>: Each risk factor is
-                assessed using three categories:
+              <p className={`${textPresets.paragraph} text-gray-700 mb-2`}>
+                <strong>Assessment Framework</strong>: Each factor is assessed
+                using three categories:
               </p>
-              {/* Added consistent spacing from paragraph to list */}
-              <ul className="space-y-1 ml-1 mt-1">
-                <li className="flex">
-                  <div className="text-green-500 mr-2 flex-shrink-0 mt-0.5">
+              <ul className="space-y-2 ml-1">
+                <li className="flex items-start">
+                  <div className="text-green-500 mr-2 flex-shrink-0 mt-1">
                     <CheckCircleIcon className="h-4 w-4" />
                   </div>
                   <p
@@ -165,20 +162,24 @@ export default function TopicNavigationGuideSection({
                     project success
                   </p>
                 </li>
-                <li className="flex">
-                  <div className="text-amber-500 mr-2 flex-shrink-0 mt-0.5">
+                <li className="flex items-start">
+                  <div className="text-amber-500 mr-2 flex-shrink-0 mt-1">
                     <ExclamationCircleIcon className="h-4 w-4" />
                   </div>
-                  <p className={`${textPresets.paragraphSmall} text-gray-700`}>
+                  <p
+                    className={`${textPresets.paragraphSmall} text-gray-700 my-0`}
+                  >
                     <strong>Considerations</strong>: Areas that require
                     attention or may present challenges
                   </p>
                 </li>
-                <li className="flex">
-                  <div className="text-blue-500 mr-2 flex-shrink-0 mt-0.5">
+                <li className="flex items-start">
+                  <div className="text-blue-500 mr-2 flex-shrink-0 mt-1">
                     <ArrowRightCircleIcon className="h-4 w-4" />
                   </div>
-                  <p className={`${textPresets.paragraphSmall} text-gray-700`}>
+                  <p
+                    className={`${textPresets.paragraphSmall} text-gray-700 my-0`}
+                  >
                     <strong>Recommended Actions</strong>: Suggestions to address
                     considerations or enhance project outcomes
                   </p>

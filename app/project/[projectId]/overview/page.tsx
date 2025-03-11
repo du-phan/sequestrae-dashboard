@@ -1,8 +1,12 @@
 import React from "react";
 import { Metadata } from "next";
 import ProjectLayout from "@/app/ui/projectPage/ProjectLayout";
-import ProjectBackgroundSection from "@/app/ui/projectPage/ProjectBackgroundSection";
-import ProjectInsightsSection from "@/app/ui/projectPage/ProjectInsightsSection";
+import ProjectBackgroundSection, {
+  ProjectBackgroundData,
+} from "@/app/ui/projectPage/ProjectBackgroundSection";
+import ProjectInsightsSection, {
+  ProjectInsightsData,
+} from "@/app/ui/projectPage/ProjectInsightsSection";
 import TopicNavigationGuideSection from "@/app/ui/projectPage/TopicNavigationGuideSection";
 import SimplePageSidebar from "@/app/ui/projectPage/SimplePageSidebar";
 import { getProjectAggregated } from "@/lib/project/api";
