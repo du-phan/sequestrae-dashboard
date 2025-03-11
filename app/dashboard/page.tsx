@@ -17,11 +17,12 @@ type SearchParams = {
   query?: string;
 };
 
-export default async function DashboardPage({
-  searchParams,
-}: {
+type Props = {
+  params: { [key: string]: string | string[] };
   searchParams: SearchParams;
-}) {
+};
+
+export default async function DashboardPage({ searchParams }: Props) {
   // Get current page from search params or default to 1
   const currentPage = Number(
     typeof searchParams?.page === "string" ? searchParams.page : "1"
