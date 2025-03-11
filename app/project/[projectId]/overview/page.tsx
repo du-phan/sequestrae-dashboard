@@ -35,14 +35,8 @@ const overviewSections = [
   },
 ];
 
-export default async function OverviewPage({
-  params,
-}: {
-  params: { projectId: string };
-}) {
-  // Await params before accessing its properties
-  const resolvedParams = await params;
-  const projectId = resolvedParams.projectId;
+export default async function OverviewPage({ params }) {
+  const { projectId } = params;
 
   // Fetch project data - this is reused from the existing code
   const projectData = await getProjectAggregated(projectId);
