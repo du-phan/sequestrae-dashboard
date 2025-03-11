@@ -15,14 +15,14 @@ export const metadata: Metadata = {
 export default async function DashboardPage({
   searchParams,
 }: {
-  searchParams?: {
-    query?: string;
-    page?: string;
-  };
+  searchParams?: { [key: string]: string | string[] | undefined };
 }) {
   // Get current page from search params or default to 1
-  const currentPage = Number(searchParams?.page) || 1;
-  const query = searchParams?.query || "";
+  const currentPage = Number(
+    typeof searchParams?.page === "string" ? searchParams.page : "1"
+  );
+  const query =
+    typeof searchParams?.query === "string" ? searchParams.query : "";
 
   // Fetch projects for the current page
   const { projects, totalPages, totalProjects } = await getProjects({
