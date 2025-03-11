@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { textPresets } from "../theme";
 
 interface SimplePageSidebarProps {
@@ -37,55 +37,127 @@ export default function SimplePageSidebar({
     sections[0]?.id || ""
   );
 
-  // Track the active section based on scroll position
+  // References for tracking scroll state and observer
+  const observerRef = useRef<IntersectionObserver | null>(null);
+  const sidebarRef = useRef<HTMLDivElement>(null);
+  const userClickedRef = useRef<boolean>(false);
+  const userClickTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const visibleSectionsRef = useRef<Map<string, number>>(new Map());
+
+  // Track when user clicks a sidebar link to prevent jarring behavior
+  const markUserClicked = useCallback(() => {
+    // Clear any existing timeout
+    if (userClickTimeoutRef.current) {
+      clearTimeout(userClickTimeoutRef.current);
+    }
+
+    // Set the flag to indicate user interaction
+    userClickedRef.current = true;
+
+    // Reset the flag after a delay
+    userClickTimeoutRef.current = setTimeout(() => {
+      userClickedRef.current = false;
+      userClickTimeoutRef.current = null;
+    }, 1000); // 1 second is usually enough for the scroll animation
+  }, []);
+
+  // Set up the intersection observer for tracking sections in view
   useEffect(() => {
-    const handleScroll = () => {
-      // Find all section elements by their IDs
-      const sectionElements = sections
-        .map((section) => document.getElementById(section.id))
-        .filter(Boolean);
+    // Clean up previous observer if it exists
+    if (observerRef.current) {
+      observerRef.current.disconnect();
+      observerRef.current = null;
+    }
 
-      if (sectionElements.length === 0) return;
+    // Create a new observer
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        // Skip processing if user just clicked a navigation link
+        if (userClickedRef.current) return;
 
-      // Find the one that's currently most visible in the viewport
-      const viewportHeight = window.innerHeight;
-      let closestSection = null;
-      let closestDistance = Infinity;
+        // Process all observed entries
+        entries.forEach((entry) => {
+          const id = entry.target.id;
 
-      sectionElements.forEach((element) => {
-        if (!element) return;
-        const rect = element.getBoundingClientRect();
-        // Calculate distance from the element to 1/4 of the viewport height
-        // (gives preference to elements near the top but still in view)
-        const targetPosition = viewportHeight * 0.25;
-        const distance = Math.abs(rect.top - targetPosition);
+          if (entry.isIntersecting) {
+            // Store the intersection ratio for visible sections
+            visibleSectionsRef.current.set(id, entry.intersectionRatio);
+          } else {
+            // Remove sections that are no longer visible
+            visibleSectionsRef.current.delete(id);
+          }
+        });
 
-        if (distance < closestDistance) {
-          closestDistance = distance;
-          closestSection = element.id;
+        // Find the most visible section (highest intersection ratio)
+        if (visibleSectionsRef.current.size > 0) {
+          let highestRatio = 0;
+          let topSectionId = "";
+
+          visibleSectionsRef.current.forEach((ratio, id) => {
+            if (ratio > highestRatio) {
+              highestRatio = ratio;
+              topSectionId = id;
+            }
+          });
+
+          // Only update if we found a section with good visibility
+          if (topSectionId && highestRatio > 0.1) {
+            setActiveSection(topSectionId);
+          }
         }
-      });
+      },
+      {
+        // These settings work well for most page layouts
+        rootMargin: "-10% 0px -50% 0px",
+        threshold: [0, 0.1, 0.5, 1.0],
+      }
+    );
 
-      if (closestSection && closestSection !== activeSection) {
-        setActiveSection(closestSection);
+    // Observe all sections defined in props
+    sections.forEach((section) => {
+      const element = document.getElementById(section.id);
+      if (element && observerRef.current) {
+        observerRef.current.observe(element);
+      }
+    });
+
+    // Cleanup observer on unmount
+    return () => {
+      if (observerRef.current) {
+        observerRef.current.disconnect();
       }
     };
+  }, [sections]); // Re-initialize when sections change
 
-    // Add scroll listener
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    // Initial check
-    setTimeout(handleScroll, 100); // Small delay to ensure elements are rendered
+  // Reference callback for scrolling active items into view in the sidebar
+  const activeItemRef = useCallback((element: HTMLElement | null) => {
+    // Only scroll the sidebar if the element exists and not during user click
+    if (element && sidebarRef.current && !userClickedRef.current) {
+      const sidebarRect = sidebarRef.current.getBoundingClientRect();
+      const itemRect = element.getBoundingClientRect();
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [sections]); // Remove activeSection from dependencies to prevent conflicts
+      // Check if item is outside the visible sidebar area
+      if (
+        itemRect.top < sidebarRect.top ||
+        itemRect.bottom > sidebarRect.bottom
+      ) {
+        // Scroll the item into view
+        element.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      }
+    }
+  }, []);
 
   // Handle click on a sidebar link
   const handleClick = (e: React.MouseEvent, sectionId: string) => {
     e.preventDefault();
 
-    // Immediately set active section for responsive feedback
+    // Mark that user clicked to prevent observer updates
+    markUserClicked();
+
+    // Update active section immediately for better UX
     setActiveSection(sectionId);
 
     const element = document.getElementById(sectionId);
@@ -103,7 +175,10 @@ export default function SimplePageSidebar({
 
   return (
     <aside className="sticky top-16 h-[calc(100vh-4rem)] bg-white border-r border-gray-200 flex flex-col">
-      <div className="flex-1 overflow-y-auto p-6 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
+      <div
+        ref={sidebarRef}
+        className="flex-1 overflow-y-auto p-6 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent"
+      >
         {/* Title with same styling as main sidebar */}
         <h3
           className={`uppercase tracking-wider text-gray-500 font-semibold mb-4 ${textPresets.caption}`}
@@ -121,6 +196,7 @@ export default function SimplePageSidebar({
                 <a
                   href={`#${section.anchor}`}
                   onClick={(e) => handleClick(e, section.id)}
+                  ref={isActive ? activeItemRef : null}
                   className={`block px-3 py-2 rounded-md text-sm transition-colors 
                     ${
                       isActive

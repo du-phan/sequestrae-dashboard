@@ -102,7 +102,10 @@ export default function ProjectBackgroundSection({
   };
 
   return (
-    <div className={`bg-white rounded-lg shadow-sm ${className}`}>
+    <div
+      className={`bg-white rounded-lg shadow-sm ${className}`}
+      data-section-id="background"
+    >
       {/* Section header with standard styling */}
       <div className="p-8 pb-0">
         <div className="flex mb-8">

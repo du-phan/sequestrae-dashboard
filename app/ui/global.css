@@ -45,6 +45,12 @@ body {
   scroll-behavior: smooth; /* Enable smooth scrolling */
 }
 
+/* Improve scroll behavior for section navigation */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem; /* Adjust for fixed header, critical for anchor navigation */
+}
+
 /* Enhanced Typography hierarchy */
 h1,
 h2,
@@ -255,6 +261,11 @@ html[data-theme="dark"] {
   transition: background-color 0.2s ease, color 0.2s ease; /* Add transition for smoother highlighting */
 }
 
+/* Add smooth transition for sidebar active state highlights */
+.sidebar-item-active-transition {
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
 /* Hide scrollbar but allow scrolling for tab navigation */
 .no-scrollbar {
   -ms-overflow-style: none; /* IE and Edge */
@@ -263,4 +274,9 @@ html[data-theme="dark"] {
 
 .no-scrollbar::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
+}
+
+/* Ensure sections have proper spacing for visibility detection */
+[id] {
+  scroll-margin-top: 6rem; /* Match scroll-padding-top for consistent behavior */
 }
