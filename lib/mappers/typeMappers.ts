@@ -143,7 +143,6 @@ export function determineRiskFactorType(points: RiskFactorPointDB[]): string {
 
 // Type mappers for API responses to UI types
 import {
-  ApiProject,
   ApiRiskFactor,
   ApiRiskFactorPoint,
   ApiSubtopic,
