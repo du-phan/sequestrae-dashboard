@@ -12,11 +12,12 @@ export const metadata: Metadata = {
   description: "Browse and manage carbon projects in your portfolio",
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default async function DashboardPage({
-  _params,
+  params,
   searchParams,
 }: {
-  _params: { [key: string]: string };
+  params: { [key: string]: string };
   searchParams?: { [key: string]: string | string[] | undefined };
 }) {
   // Get current page from search params or default to 1
