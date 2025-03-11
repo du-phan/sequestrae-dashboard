@@ -1,12 +1,12 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { SubTopic, RiskFactor } from "../../../types/ui";
+import { SubTopic } from "../../../types/ui"; // Removed RiskFactor as it's not used
 import { usePathname } from "next/navigation";
 import { textPresets } from "../theme";
 
-// Add debounce utility function
-function debounce<T extends (...args: any[]) => void>(
+// Add debounce utility function with more specific types
+function debounce<T extends (...args: Parameters<T>) => ReturnType<T>>(
   func: T,
   wait: number
 ): (...args: Parameters<T>) => void {
@@ -21,13 +21,12 @@ function debounce<T extends (...args: any[]) => void>(
 interface LeftSidebarProps {
   subtopics: SubTopic[];
   currentTopic: string;
-  currentPath: string;
+  // Removing unused currentPath prop
 }
 
 export default function LeftSidebar({
   subtopics,
   currentTopic,
-  currentPath,
 }: LeftSidebarProps) {
   const pathname = usePathname();
   const [expandedSubtopics, setExpandedSubtopics] = useState<
@@ -277,7 +276,7 @@ export default function LeftSidebar({
         enableScrollLock();
       }
     }
-  }, [pathname, subtopics, enableScrollLock]);
+  }, [pathname, subtopics, enableScrollLock, expandedSubtopics]);
 
   // Toggle subtopic expansion
   const toggleSubtopic = (subtopicId: string, e: React.MouseEvent) => {
