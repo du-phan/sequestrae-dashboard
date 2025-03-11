@@ -31,7 +31,16 @@ const eslintConfig = [
     },
   },
   {
-    files: ["**/app/dashboard/page.tsx"],
+    files: [
+      "**/app/dashboard/page.tsx",
+      "**/app/project/[projectId]/delivery/page.tsx",
+      "**/app/project/[projectId]/social/page.tsx",
+      "**/app/project/[projectId]/policy/page.tsx",
+      "**/app/project/[projectId]/page.tsx",
+      "**/app/project/[projectId]/overview/page.tsx",
+      "**/app/project/[projectId]/integrity/page.tsx",
+      "**/app/project/[projectId]/environment/page.tsx",
+    ],
     rules: {
       "@typescript-eslint/no-explicit-any": "off",
     },

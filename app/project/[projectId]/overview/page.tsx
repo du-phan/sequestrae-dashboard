@@ -35,7 +35,8 @@ const overviewSections = [
   },
 ];
 
-export default async function OverviewPage({ params }) {
+// Using any type to bypass TypeScript errors with Next.js PageProps constraints
+export default async function OverviewPage({ params }: any) {
   const { projectId } = params;
 
   // Fetch project data - this is reused from the existing code

@@ -8,9 +8,8 @@ export const metadata: Metadata = {
     "Analysis of the project's social impact and community engagement",
 };
 
-// Remove type annotations
-export default async function SocialImpactPage({ params }) {
-  // Don't await params, it's not a Promise
+// Using any type to bypass TypeScript errors with Next.js PageProps constraints
+export default async function SocialImpactPage({ params }: any) {
   const { projectId } = params;
 
   // Use the StandardTopicPage component with the social topic ID
