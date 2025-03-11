@@ -41,7 +41,6 @@ interface RiskFactorCardProps {
 export default function RiskFactorCard({
   id, // Include id in props
   name,
-  type,
   points,
   className = "",
 }: RiskFactorCardProps) {
