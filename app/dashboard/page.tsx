@@ -12,11 +12,10 @@ export const metadata: Metadata = {
   description: "Browse and manage carbon projects in your portfolio",
 };
 
-// Remove custom Props type and use the parameters directly with their types
 export default async function DashboardPage({
-  searchParams = {},
+  searchParams,
 }: {
-  searchParams?: { [key: string]: string | string[] | undefined };
+  // Remove any custom typing and simply use the parameters as required
 }) {
   // Get current page from search params or default to 1
   const currentPage = Number(
