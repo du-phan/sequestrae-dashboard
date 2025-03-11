@@ -12,13 +12,12 @@ export const metadata: Metadata = {
   description: "Browse and manage carbon projects in your portfolio",
 };
 
-export default async function DashboardPage({
-  params,
-  searchParams,
-}: {
-  params: { [key: string]: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
-}) {
+type Props = {
+  params: Record<string, never>;
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
+export default async function DashboardPage({ searchParams = {} }: Props) {
   // Get current page from search params or default to 1
   const currentPage = Number(
     typeof searchParams?.page === "string" ? searchParams.page : "1"
