@@ -44,11 +44,13 @@ const getCurrentTopicName = (
 const TopNavBar = ({ projectId, projectName }: TopNavBarProps) => {
   const pathname = usePathname();
   const basePath = projectId ? `/project/${projectId}` : "/project";
-  // Removing the unused variable
-  // const currentTopicName = getCurrentTopicName(pathname, basePath);
+  const currentTopicName = getCurrentTopicName(pathname, basePath);
 
   return (
-    <nav className="sticky top-0 z-40 bg-white border-b border-gray-200 h-16 shadow-sm">
+    <nav
+      className="sticky top-0 z-40 bg-white border-b border-gray-200 h-16 shadow-sm"
+      aria-label={`${projectName} - ${currentTopicName}`}
+    >
       <div className="h-full px-4 flex items-center justify-between">
         {/* Logo and App Name */}
         <div className="flex-shrink-0 flex items-center mr-6">
