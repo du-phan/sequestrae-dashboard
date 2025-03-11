@@ -44,7 +44,8 @@ const getCurrentTopicName = (
 const TopNavBar = ({ projectId, projectName }: TopNavBarProps) => {
   const pathname = usePathname();
   const basePath = projectId ? `/project/${projectId}` : "/project";
-  const currentTopicName = getCurrentTopicName(pathname, basePath);
+  // Removing the unused variable
+  // const currentTopicName = getCurrentTopicName(pathname, basePath);
 
   return (
     <nav className="sticky top-0 z-40 bg-white border-b border-gray-200 h-16 shadow-sm">
