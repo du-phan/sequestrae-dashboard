@@ -1,9 +1,7 @@
 import React from "react";
 import { Metadata } from "next";
 import ProjectLayout from "@/app/ui/projectPage/ProjectLayout";
-import ProjectBackgroundSection, {
-  ProjectBackgroundData,
-} from "@/app/ui/projectPage/ProjectBackgroundSection";
+import ProjectBackgroundSection from "@/app/ui/projectPage/ProjectBackgroundSection";
 import ProjectInsightsSection, {
   ProjectInsightsData,
 } from "@/app/ui/projectPage/ProjectInsightsSection";
@@ -15,21 +13,6 @@ import { mapProjectToBackgroundData } from "@/lib/project/mappers";
 export const metadata: Metadata = {
   title: "Project Overview | Project Dashboard",
   description: "Overview and key information about the project",
-};
-
-// Fallback data for project background when actual data is incomplete
-const getDefaultProjectBackground = (
-  projectName: string
-): ProjectBackgroundData => {
-  return {
-    name: projectName,
-    description:
-      "This carbon sequestration project aims to restore degraded forestland through reforestation and improved forest management practices. The project follows methodology standards to ensure accurate measurement of carbon sequestration benefits.",
-    location: "Location not specified",
-    startDate: "Start date not specified",
-    feedstockType: "Not specified",
-    stakeholders: ["No stakeholders specified"],
-  };
 };
 
 // Mock data for project insights
@@ -136,6 +119,7 @@ export default async function OverviewPage({
         />
       }
       currentTopic="overview"
+      subtopics={[]} // No subtopics for the overview page
     >
       <div className="max-w-4xl mx-auto space-y-8">
         {/* Add IDs to each section for linking from the sidebar */}

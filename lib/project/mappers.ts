@@ -225,6 +225,14 @@ function mapStringArrayToSummaryItems(
 }
 
 /**
+ * Helper function to capitalize the first letter of a string
+ */
+function capitalizeFirstLetter(string: string): string {
+  if (!string) return "";
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+/**
  * Maps project data to the format required for the project background section
  * @param project The complete project data from the API
  * @returns Formatted project background data ready for UI components
@@ -239,8 +247,8 @@ export function mapProjectToBackgroundData(project: Project) {
       project.project_start_period ||
       "Date not specified",
     feedstockType: Array.isArray(project.feedstock_type)
-      ? project.feedstock_type.join(", ")
-      : project.feedstock_type || "Not specified",
+      ? project.feedstock_type.map(capitalizeFirstLetter).join(", ")
+      : capitalizeFirstLetter(project.feedstock_type || "Not specified"),
     stakeholders: Array.isArray(project.key_stakeholders)
       ? project.key_stakeholders
       : project.key_stakeholders
