@@ -12,11 +12,8 @@ export const metadata: Metadata = {
   description: "Browse and manage carbon projects in your portfolio",
 };
 
-export default async function DashboardPage({
-  searchParams,
-}: {
-  // Remove any custom typing and simply use the parameters as required
-}) {
+// Remove the empty object type that's triggering the lint error
+export default async function DashboardPage({ searchParams }) {
   // Get current page from search params or default to 1
   const currentPage = Number(
     typeof searchParams?.page === "string" ? searchParams.page : "1"
