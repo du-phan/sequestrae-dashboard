@@ -1,11 +1,11 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+// Removed unused Link import
+// Removed unused usePathname import
 
 export default function DashboardTopNavBar() {
-  const pathname = usePathname();
+  // Removed unused pathname variable
 
   return (
     <nav className="sticky top-0 z-40 bg-white border-b border-gray-200 h-16 shadow-sm">

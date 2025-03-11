@@ -1,4 +1,3 @@
-import React from "react";
 import { redirect } from "next/navigation";
 
 // Updated to properly await params in Next.js 14
