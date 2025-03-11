@@ -8,12 +8,6 @@ interface TopicSummaryCardProps {
   summaryText: string;
 
   /**
-   * Optional custom title for the card
-   * @default "Summary"
-   */
-  title?: string;
-
-  /**
    * Optional CSS class name for additional styling
    */
   className?: string;
@@ -25,7 +19,6 @@ interface TopicSummaryCardProps {
  */
 export default function TopicSummaryCard({
   summaryText,
-  title = "Summary",
   className = "",
 }: TopicSummaryCardProps) {
   return (
