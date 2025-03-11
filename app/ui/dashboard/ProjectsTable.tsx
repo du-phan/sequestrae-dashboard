@@ -194,25 +194,3 @@ function FeedstockTypeDisplay({
     </Tooltip>
   );
 }
-
-// Helper functions
-function formatDate(dateString: string) {
-  return new Date(dateString).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
-}
-
-function getStatusStyles(status: string) {
-  switch (status?.toLowerCase()) {
-    case "active":
-      return "bg-green-50 text-green-700 ring-1 ring-inset ring-green-600/20";
-    case "pending":
-      return "bg-yellow-50 text-yellow-700 ring-1 ring-inset ring-yellow-600/20";
-    case "completed":
-      return "bg-blue-50 text-blue-700 ring-1 ring-inset ring-blue-600/20";
-    default:
-      return "bg-gray-50 text-gray-700 ring-1 ring-inset ring-gray-500/10";
-  }
-}
