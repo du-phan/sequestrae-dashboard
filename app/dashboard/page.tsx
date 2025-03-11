@@ -13,8 +13,10 @@ export const metadata: Metadata = {
 };
 
 export default async function DashboardPage({
+  params,
   searchParams,
 }: {
+  params: { [key: string]: string };
   searchParams?: { [key: string]: string | string[] | undefined };
 }) {
   // Get current page from search params or default to 1
