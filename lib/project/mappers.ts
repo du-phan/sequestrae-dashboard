@@ -213,18 +213,6 @@ export function mapProjectToSocialData(project: Project): UITopicData {
 }
 
 /**
- * Helper function to map string arrays to summary item objects
- */
-function mapStringArrayToSummaryItems(
-  items: string[]
-): { id: string; text: string }[] {
-  return items.map((text, index) => ({
-    id: `item-${index}`,
-    text,
-  }));
-}
-
-/**
  * Helper function to capitalize the first letter of a string
  */
 function capitalizeFirstLetter(string: string): string {
