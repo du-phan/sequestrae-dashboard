@@ -11,12 +11,9 @@ export const metadata: Metadata = {
   description: "Browse and manage carbon projects in your portfolio",
 };
 
-// Next.js 15 recommended typing for page components
-// @ts-ignore - Disabling type checking for this component due to Next.js 15 params type issue
 export default async function DashboardPage({
   searchParams,
 }: {
-  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   params: {}; // Empty params for root pages
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
