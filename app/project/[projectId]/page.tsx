@@ -1,14 +1,11 @@
+import React from "react";
 import { redirect } from "next/navigation";
 
-// Updated to properly await params in Next.js 14
-export default async function ProjectPage({
-  params,
-}: {
-  params: { projectId: string };
-}) {
-  // Await the params object before accessing its properties
-  const { projectId } = await params;
+// Remove type annotations from params
+export default async function ProjectPage({ params }) {
+  // Access projectId directly from params (no await)
+  const { projectId } = params;
 
-  // Redirect to the overview page
+  // Redirect to the overview page - no code will execute after this
   redirect(`/project/${projectId}/overview`);
 }
