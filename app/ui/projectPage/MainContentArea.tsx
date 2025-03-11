@@ -2,7 +2,7 @@ import React from "react";
 import TopicIntro from "./TopicIntro";
 import TopicSummaryCard from "./TopicSummaryCard";
 import SubtopicSection from "./SubtopicSection";
-import { SubtopicData, TopicData } from "../../../types/ui";
+import { TopicData } from "../../../types/ui";
 import { textPresets } from "../theme";
 
 // Updated Props interface for the MainContentArea component
@@ -23,7 +23,6 @@ export default function MainContentArea({
   subtopics,
   topicSummary,
   summaryTitle,
-  projectId,
   className = "",
 }: MainContentAreaProps) {
   return (
