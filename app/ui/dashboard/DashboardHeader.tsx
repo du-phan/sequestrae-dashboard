@@ -14,9 +14,9 @@ export default function DashboardHeader() {
           {/* Left column with refined typography */}
           <div className="flex-1">
             <h1
-              className={`${textPresets.h2} text-gray-900 mb-4 leading-tight flex items-center gap-2`}
+              className={`${textPresets.h2} text-gray-900 mb-4 leading-tight`}
             >
-              <span className="text-blue-600">Welcome to</span> Sequestrae
+              Welcome to Sequestrae
             </h1>
             <p
               className={`${textPresets.paragraph} text-gray-700 max-w-prose leading-relaxed`}
