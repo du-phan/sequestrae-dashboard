@@ -15,6 +15,6 @@ interface SocialPageParams {
 
 // Using a properly typed interface for Next.js page props
 export default async function SocialRiskPage({ params }: SocialPageParams) {
-  const { projectId } = params;
+  const { projectId } = await params;
   return <StandardTopicPage projectId={projectId} topicId="social" />;
 }

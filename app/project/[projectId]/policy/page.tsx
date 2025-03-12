@@ -8,6 +8,6 @@ interface PolicyPageParams {
 
 // Using a properly typed interface for Next.js page props
 export default async function PolicyRiskPage({ params }: PolicyPageParams) {
-  const { projectId } = params;
+  const { projectId } = await params;
   return <StandardTopicPage projectId={projectId} topicId="policy" />;
 }

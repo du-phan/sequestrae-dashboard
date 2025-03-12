@@ -10,6 +10,6 @@ interface EnvironmentPageParams {
 export default async function EnvironmentRiskPage({
   params,
 }: EnvironmentPageParams) {
-  const { projectId } = params;
+  const { projectId } = await params;
   return <StandardTopicPage projectId={projectId} topicId="environment" />;
 }

@@ -7,6 +7,6 @@ interface DeliveryPageParams {
 }
 
 export default async function DeliveryRiskPage({ params }: DeliveryPageParams) {
-  const { projectId } = params;
+  const { projectId } = await params;
   return <StandardTopicPage projectId={projectId} topicId="delivery" />;
 }

@@ -19,12 +19,19 @@ type DashboardPageProps = {
 export default async function DashboardPage({
   searchParams,
 }: DashboardPageProps) {
+  // Await the Promise to get the actual search params object
+  const resolvedSearchParams = await searchParams;
+
   // Get current page from search params or default to 1
   const currentPage = Number(
-    typeof searchParams?.page === "string" ? searchParams.page : "1"
+    typeof resolvedSearchParams?.page === "string"
+      ? resolvedSearchParams.page
+      : "1"
   );
   const query =
-    typeof searchParams?.query === "string" ? searchParams.query : "";
+    typeof resolvedSearchParams?.query === "string"
+      ? resolvedSearchParams.query
+      : "";
 
   // Fetch projects for the current page
   const { projects, totalPages, totalProjects } = await getProjects({

@@ -10,6 +10,6 @@ interface IntegrityPageParams {
 export default async function IntegrityRiskPage({
   params,
 }: IntegrityPageParams) {
-  const { projectId } = params;
+  const { projectId } = await params;
   return <StandardTopicPage projectId={projectId} topicId="integrity" />;
 }

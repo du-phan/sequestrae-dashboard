@@ -44,7 +44,7 @@ interface OverviewPageParams {
 export default async function ProjectOverviewPage({
   params,
 }: OverviewPageParams) {
-  const { projectId } = params;
+  const { projectId } = await params;
 
   // Fetch project data - this is reused from the existing code
   const projectData = await getProjectAggregated(projectId);

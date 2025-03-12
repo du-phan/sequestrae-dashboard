@@ -6,7 +6,7 @@ export default async function ProjectPage({
 }: {
   params: Promise<{ projectId: string }>;
 }) {
-  const { projectId } = params;
+  const { projectId } = await params;
   // Redirect to overview page when accessing the project root
   return redirect(`/project/${projectId}/overview`);
 }
