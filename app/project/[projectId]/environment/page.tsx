@@ -1,9 +1,9 @@
 import StandardTopicPage from "@/app/ui/projectPage/StandardTopicPage";
 
 interface EnvironmentPageParams {
-  params: {
+  params: Promise<{
     projectId: string;
-  };
+  }>;
 }
 
 // Using a properly typed interface for Next.js page props

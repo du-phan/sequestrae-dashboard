@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 export default async function ProjectPage({
   params,
 }: {
-  params: { projectId: string };
+  params: Promise<{ projectId: string }>;
 }) {
   const { projectId } = params;
   // Redirect to overview page when accessing the project root

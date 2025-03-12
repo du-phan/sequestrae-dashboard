@@ -1,4 +1,3 @@
-// @ts-nocheck - Disabling TypeScript checking for this file due to Next.js 15 params type compatibility issue
 import { Metadata } from "next";
 import DashboardHeader from "@/app/ui/dashboard/DashboardHeader";
 import ProjectsTable from "@/app/ui/dashboard/ProjectsTable";
@@ -12,12 +11,14 @@ export const metadata: Metadata = {
   description: "Browse and manage carbon projects in your portfolio",
 };
 
+type DashboardPageProps = {
+  params: Promise<Record<string, never>>; // Indicates an empty object (no dynamic segments); // a Promise that resolves to an empty object
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+};
+
 export default async function DashboardPage({
   searchParams,
-}: {
-  params: {}; // Empty params for root pages
-  searchParams: { [key: string]: string | string[] | undefined };
-}) {
+}: DashboardPageProps) {
   // Get current page from search params or default to 1
   const currentPage = Number(
     typeof searchParams?.page === "string" ? searchParams.page : "1"

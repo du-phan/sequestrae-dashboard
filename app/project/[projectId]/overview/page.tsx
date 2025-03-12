@@ -35,9 +35,9 @@ const overviewSections = [
 ];
 
 interface OverviewPageParams {
-  params: {
+  params: Promise<{
     projectId: string;
-  };
+  }>;
 }
 
 // Using a properly typed interface for Next.js page props
