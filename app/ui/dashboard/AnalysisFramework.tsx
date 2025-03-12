@@ -35,7 +35,7 @@ export default function AnalysisFramework() {
   return (
     <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-8">
       <h3 className="text-base font-medium text-gray-800 mb-4 text-center">
-        Our Evaluation Framework
+        The Evaluation Framework
       </h3>
 
       <div className="flex flex-wrap justify-center gap-4">
@@ -71,7 +71,7 @@ export default function AnalysisFramework() {
         />
       </div>
       <p className="text-xs text-center text-gray-500 mt-4">
-        Our AI-powered engine evaluates every project across these 5 dimensions
+        Our AI-powered engine analyzes every project across these 5 dimensions
       </p>
     </div>
   );
