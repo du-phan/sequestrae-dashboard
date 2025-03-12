@@ -44,29 +44,31 @@ export default function ProjectFilters() {
       </h2>
 
       <div>
-        {/* Search input with improved styling */}
         <form onSubmit={handleSearch} className="w-full">
-          <div className="relative rounded-lg shadow-sm">
-            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
-              <MagnifyingGlassIcon
-                className="h-5 w-5 text-gray-400"
-                aria-hidden="true"
+          <div className="flex items-stretch gap-2">
+            <div className="relative flex-grow">
+              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
+                <MagnifyingGlassIcon
+                  className="h-5 w-5 text-gray-400"
+                  aria-hidden="true"
+                />
+              </div>
+              <input
+                type="text"
+                name="search"
+                placeholder="Search by project name, country, or registry..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="block w-full rounded-lg border-0 py-3 pl-12 pr-4 text-gray-900 ring-1 ring-inset ring-gray-300 
+                           placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-500 
+                           sm:text-sm sm:leading-6 transition-all duration-200"
               />
             </div>
-            <input
-              type="text"
-              name="search"
-              placeholder="Search by project name, country, or registry..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="block w-full rounded-lg border-0 py-3 pl-12 pr-24 text-gray-900 ring-1 ring-inset ring-gray-300 
-                         placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-500 
-                         sm:text-sm sm:leading-6 transition-all duration-200"
-            />
             <button
               type="submit"
-              className="absolute inset-y-0 right-0 flex items-center px-4 rounded-r-lg bg-blue-50 text-blue-600 
-                         hover:bg-blue-100 transition-colors duration-200"
+              className="shrink-0 flex items-center self-stretch px-5 rounded-lg bg-blue-50 text-blue-600 font-medium text-sm
+                         hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500
+                         transition-colors duration-200"
             >
               <span className="text-sm font-medium">Search</span>
             </button>
