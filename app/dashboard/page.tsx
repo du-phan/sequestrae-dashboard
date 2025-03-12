@@ -8,8 +8,8 @@ import AnalysisFramework from "@/app/ui/dashboard/AnalysisFramework";
 import { getProjects, getProjectsStats } from "@/lib/project/api";
 
 export const metadata: Metadata = {
-  title: "Projects Dashboard | Sequestrae",
-  description: "Browse and manage carbon projects in your portfolio",
+  title: "Biochar CDR Intelligence Platform | Sequestrae",
+  description: "Analyze biochar projects with AI-powered insights.",
 };
 
 type DashboardPageProps = {
