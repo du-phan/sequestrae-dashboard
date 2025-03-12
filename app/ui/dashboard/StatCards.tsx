@@ -23,35 +23,45 @@ const StatCard = ({
     typeof value === "number" ? new Intl.NumberFormat().format(value) : value;
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow duration-300">
-      <div className="p-5">
-        {/* Improved header with better spacing */}
+    <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all duration-300 group">
+      <div className="p-6">
+        {/* Card header with improved spacing and alignment */}
         <div className="flex items-center justify-between mb-4">
-          <p className="text-sm font-medium text-gray-500">{title}</p>
+          <p className="text-sm font-medium text-gray-600 group-hover:text-gray-800 transition-colors duration-300">
+            {title}
+          </p>
           <div
-            className={`p-2.5 rounded-full ${bgColor} flex items-center justify-center`}
+            className={`p-3 rounded-full ${bgColor} flex items-center justify-center transition-transform duration-300 group-hover:scale-110`}
           >
             <div className={`${iconColor}`}>{icon}</div>
           </div>
         </div>
 
-        {/* Enhanced value display with better vertical spacing */}
-        <div className="text-center py-2">
+        {/* Value display with animation */}
+        <div className="text-center py-3">
           <h3
-            className={`${textPresets.h3} text-gray-900 font-bold tracking-tight`}
+            className={`${textPresets.h3} text-gray-900 font-bold tracking-tight animate-fadeIn`}
           >
             {formattedValue}
           </h3>
 
-          {/* Optional subtitle for additional context */}
-          {subtitle && <p className="text-xs text-gray-500 mt-1">{subtitle}</p>}
+          {/* Subtitle with improved styling */}
+          {subtitle && (
+            <p className="text-xs text-gray-500 mt-1.5 group-hover:text-gray-600 transition-colors duration-300">
+              {subtitle}
+            </p>
+          )}
         </div>
       </div>
 
-      {/* Enhanced visual indicator at bottom */}
+      {/* Enhanced visual indicator with gradient that responds to hover */}
       <div
-        className="h-1.5 bg-gradient-to-r from-transparent via-opacity-100 to-transparent"
-        style={{ backgroundColor: `var(--${bgColor.split("-")[1]}-100)` }}
+        className="h-1.5 w-full group-hover:opacity-100 opacity-80 transition-opacity duration-300"
+        style={{
+          background: `linear-gradient(90deg, transparent, var(--${
+            bgColor.split("-")[1]
+          }-400), transparent)`,
+        }}
       ></div>
     </div>
   );
@@ -101,7 +111,7 @@ export default function StatCards({
           <svg
             className="w-6 h-6"
             fill="none"
-            viewBox="0 24 24"
+            viewBox="0 0 24 24"
             stroke="currentColor"
           >
             <path
