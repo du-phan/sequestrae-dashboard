@@ -4,6 +4,7 @@ import ProjectsTable from "@/app/ui/dashboard/ProjectsTable";
 import ProjectFilters from "@/app/ui/dashboard/ProjectFilters";
 import Pagination from "@/app/ui/dashboard/Pagination";
 import StatCards from "@/app/ui/dashboard/StatCards";
+import AnalysisFramework from "@/app/ui/dashboard/AnalysisFramework";
 import { getProjects, getProjectsStats } from "@/lib/project/api";
 
 export const metadata: Metadata = {
@@ -49,21 +50,29 @@ export default async function DashboardPage({
 
   return (
     <div className="max-w-7xl mx-auto">
+      {/* The enhanced header now stands on its own with proper spacing */}
       <DashboardHeader />
 
-      {/* Use global stats for the StatCards */}
-      <StatCards
-        projectsCount={totalProjects}
-        countriesCount={uniqueCountries}
-        registriesCount={uniqueRegistries}
-      />
+      {/* stat cards shifted down slightly for better visual flow after the new header */}
+      <div className="mb-8">
+        <StatCards
+          projectsCount={totalProjects}
+          countriesCount={uniqueCountries}
+          registriesCount={uniqueRegistries}
+        />
+      </div>
+
+      {/* New analysis framework component with horizontal layout */}
+      <AnalysisFramework />
 
       <div className="bg-white shadow-sm rounded-lg p-6 mb-6">
         <ProjectFilters />
       </div>
+
       <div className="bg-white shadow-sm rounded-lg p-6 mb-6">
         <ProjectsTable projects={projects} />
       </div>
+
       <div className="mt-6 flex flex-col sm:flex-row justify-between items-center gap-4">
         <p className="text-sm text-gray-600">
           {projects.length === 0

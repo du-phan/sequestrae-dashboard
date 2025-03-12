@@ -11,17 +11,47 @@ interface ProjectsTableProps {
 export default function ProjectsTable({ projects }: ProjectsTableProps) {
   return (
     <div>
-      <h2 className={`${textPresets.h4} text-gray-800 mb-4`}>All Projects</h2>
+      <h2
+        className={`${textPresets.h4} text-gray-800 mb-5 flex items-center gap-2`}
+      >
+        <svg
+          className="w-5 h-5 text-blue-500"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+          />
+        </svg>
+        All Projects
+      </h2>
 
       {projects.length === 0 ? (
-        <div className="text-center py-10">
-          <p className="text-gray-500 mb-4">No projects found</p>
-          <p className="text-sm text-gray-400">
+        <div className="text-center py-12 bg-gray-50 rounded-lg border border-gray-100">
+          <svg
+            className="mx-auto h-12 w-12 text-gray-400"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={1.5}
+              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+            />
+          </svg>
+          <p className="mt-4 text-gray-600 font-medium">No projects found</p>
+          <p className="mt-2 text-sm text-gray-500">
             Try adjusting your search or filters
           </p>
         </div>
       ) : (
-        <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 rounded-lg">
+        <div className="overflow-hidden shadow-sm ring-1 ring-black ring-opacity-5 rounded-lg">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
@@ -58,12 +88,12 @@ export default function ProjectsTable({ projects }: ProjectsTableProps) {
               {projects.map((project) => (
                 <tr
                   key={project.project_id}
-                  className="hover:bg-gray-50 transition-colors cursor-pointer"
+                  className="hover:bg-blue-50 transition-colors duration-150"
                 >
                   <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm">
                     <Link
                       href={`/project/${project.project_id}`}
-                      className="font-medium text-blue-600 hover:text-blue-800"
+                      className="font-medium text-blue-600 hover:text-blue-800 transition-colors duration-150"
                     >
                       {formatProjectName(project.project_name)}
                     </Link>
@@ -82,7 +112,7 @@ export default function ProjectsTable({ projects }: ProjectsTableProps) {
                   <td className="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm">
                     <Link
                       href={`/project/${project.project_id}`}
-                      className="text-blue-600 hover:text-blue-900"
+                      className="text-blue-600 hover:text-blue-900 font-medium transition-colors duration-150 px-3 py-1 bg-blue-50 rounded-md hover:bg-blue-100"
                     >
                       View
                     </Link>
