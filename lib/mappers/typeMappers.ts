@@ -1,7 +1,7 @@
 import {
   RiskFactorPointDB,
-  RiskFactor as ApiRiskFactor,
-  Subtopic as ApiSubtopic,
+  RiskFactor,
+  Subtopic,
   Project,
 } from "../../types/api";
 
@@ -32,9 +32,7 @@ export function mapRiskFactorPointToUI(
  * @param riskFactor The risk factor from the API
  * @returns UI-friendly risk factor
  */
-export function mapRiskFactorToUI(
-  riskFactor: ApiRiskFactor
-): ComponentRiskFactor {
+export function mapRiskFactorToUI(riskFactor: RiskFactor): ComponentRiskFactor {
   // Map all points to UI format
   const points = riskFactor.points.map(mapRiskFactorPointToUI);
 
@@ -54,7 +52,7 @@ export function mapRiskFactorToUI(
  * @param subtopic The subtopic from the API
  * @returns UI-ready subtopic data
  */
-export function mapSubtopicToUI(subtopic: ApiSubtopic): SubtopicData {
+export function mapSubtopicToUI(subtopic: Subtopic): SubtopicData {
   return {
     id:
       subtopic.subtopic_summary.subtopic_summary_id || Math.random().toString(),
@@ -141,47 +139,21 @@ export function determineRiskFactorType(points: RiskFactorPointDB[]): string {
   return maxType;
 }
 
-// Type mappers for API responses to UI types
-import {
-  ApiRiskFactor,
-  ApiRiskFactorPoint,
-  ApiSubtopic,
-} from "../../types/api";
-import { ComponentRiskFactor, ComponentSubtopic } from "../../types/ui";
+// NOTE: The following functions appear to be duplicates with slightly different interfaces.
+// They should be reviewed and potentially consolidated with the functions above
+// or properly differentiated if they serve distinct purposes.
 
-// Function to map API subtopics to UI subtopics
+/**
+ * Function to map API subtopics to UI subtopics
+ * @deprecated Consider using mapSubtopicToUI instead
+ */
 export function mapApiSubtopicsToComponentSubtopics(
-  apiSubtopics: ApiSubtopic[]
-): ComponentSubtopic[] {
+  apiSubtopics: Subtopic[]
+): SubtopicData[] {
   return apiSubtopics.map((subtopic) => ({
-    id: subtopic.id,
-    title: subtopic.name,
-    summary: subtopic.summary || "",
-    riskFactors: mapApiRiskFactorsToComponentRiskFactors(
-      subtopic.risk_factors || []
-    ),
-  }));
-}
-
-// Function to map API risk factors to UI risk factors
-export function mapApiRiskFactorsToComponentRiskFactors(
-  apiRiskFactors: ApiRiskFactor[]
-): ComponentRiskFactor[] {
-  return apiRiskFactors.map((riskFactor) => ({
-    id: riskFactor.id,
-    name: riskFactor.name,
-    type: riskFactor.type || "standard",
-    points: mapApiRiskFactorPoints(riskFactor.points || []),
-  }));
-}
-
-// Function to map API risk factor points
-export function mapApiRiskFactorPoints(
-  apiPoints: ApiRiskFactorPoint[]
-): { id: string; type: string; text: string }[] {
-  return apiPoints.map((point) => ({
-    id: point.id,
-    type: point.type || "standard",
-    text: point.text || "",
+    id: subtopic.subtopic_summary.subtopic_summary_id,
+    title: subtopic.subtopic_summary.sub_topic,
+    summary: subtopic.subtopic_summary.overall_summary || "",
+    riskFactors: subtopic.riskFactors.map(mapRiskFactorToUI),
   }));
 }

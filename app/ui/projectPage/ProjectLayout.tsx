@@ -11,7 +11,6 @@ interface ProjectLayoutProps {
   projectName: string;
   subtopics: SubTopic[];
   currentTopic: string;
-  currentPath?: string;
 
   /**
    * Optional custom sidebar content - used when the standard subtopics sidebar isn't appropriate
@@ -29,7 +28,6 @@ export default function ProjectLayout({
   projectName,
   subtopics,
   currentTopic,
-  currentPath = "",
   customSidebar,
 }: ProjectLayoutProps) {
   return (
@@ -44,11 +42,7 @@ export default function ProjectLayout({
             customSidebar
           ) : (
             // Otherwise render the standard subtopics sidebar
-            <LeftSidebar
-              subtopics={subtopics}
-              currentTopic={currentTopic}
-              currentPath={currentPath}
-            />
+            <LeftSidebar subtopics={subtopics} currentTopic={currentTopic} />
           )}
         </div>
 
