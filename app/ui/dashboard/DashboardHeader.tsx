@@ -1,6 +1,5 @@
 import React from "react";
 import { textPresets } from "@/app/ui/theme";
-import Image from "next/image";
 
 export default function DashboardHeader() {
   return (
