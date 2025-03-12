@@ -31,7 +31,7 @@ export default function DashboardHeader() {
           {/* Right column with key highlights and improved styling */}
           <div className="lg:max-w-md lg:pl-8 lg:border-l lg:border-gray-100 lg:pt-2">
             <h3
-              className={`${textPresets.h5} text-gray-800 mb-4 font-semibold text-base`}
+              className={`${textPresets.h5} text-gray-800 mb-6 font-semibold text-base`}
             >
               With Sequestrae, your team can:
             </h3>
@@ -87,7 +87,7 @@ export default function DashboardHeader() {
                   </svg>
                 </div>
                 <span className="leading-tight">
-                  Take actionable next steps with concrete recommendations.
+                  Get clear recommendations on what to do next.
                 </span>
               </li>
             </ul>
