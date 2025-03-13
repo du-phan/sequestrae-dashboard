@@ -93,7 +93,7 @@ export default function ProjectsTable({ projects }: ProjectsTableProps) {
                     <div>
                       <Link
                         href={`/project/${project.project_id}`}
-                        className="font-normal text-blue-500 hover:text-blue-700 transition-colors duration-150 hover:underline truncate max-w-xs block"
+                        className="font-medium text-gray-900 hover:text-blue-700 transition-colors duration-150 hover:underline truncate max-w-xs block"
                       >
                         <Tooltip
                           content={formatProjectName(project.project_name)}
@@ -226,7 +226,7 @@ function FeedstockTypeDisplay({
         {sortedTypes.map((type, index) => (
           <span
             key={index}
-            className="inline-flex items-center rounded-full bg-blue-50 px-2.5 py-0.5 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10"
+            className="inline-flex items-center rounded-md bg-gray-100 px-2 py-0.5 text-sm text-gray-700"
           >
             {type.text}
           </span>
@@ -250,7 +250,7 @@ function FeedstockTypeDisplay({
             {processedTypes.map((type, index) => (
               <span
                 key={index}
-                className="inline-flex items-center rounded-full bg-blue-100 px-2 py-0.5 text-xs font-medium text-blue-800 ring-1 ring-inset ring-blue-700/10"
+                className="inline-flex items-center rounded-md bg-blue-100 px-2 py-0.5 text-sm text-blue-800"
               >
                 {type.text}
               </span>
@@ -264,14 +264,14 @@ function FeedstockTypeDisplay({
         {displayTypes.map((type, index) => (
           <span
             key={index}
-            className="inline-flex items-center rounded-full bg-blue-50 px-2.5 py-0.5 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10"
+            className="inline-flex items-center rounded-md bg-gray-100 px-2 py-0.5 text-sm text-gray-700"
           >
             {type.text.length > MAX_DISPLAY_LENGTH
               ? `${type.text.substring(0, MAX_DISPLAY_LENGTH)}...`
               : type.text}
           </span>
         ))}
-        <span className="inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10">
+        <span className="inline-flex items-center rounded-md bg-gray-100 px-2 py-0.5 text-sm text-gray-500">
           +{feedstockTypes.length - MAX_ITEMS_TO_SHOW}
         </span>
       </div>
