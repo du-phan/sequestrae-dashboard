@@ -97,6 +97,7 @@ export default function ProjectsTable({ projects }: ProjectsTableProps) {
                       >
                         <Tooltip
                           content={formatProjectName(project.project_name)}
+                          maxWidth="250px"
                         >
                           <span>{formatProjectName(project.project_name)}</span>
                         </Tooltip>
@@ -168,7 +169,10 @@ function RegistryDisplay({ registry, projectUrl }: RegistryDisplayProps) {
 
   // With URL, make it clickable with helpful tooltip and icon
   return (
-    <Tooltip content={`View project on ${formattedRegistry}'s website`}>
+    <Tooltip
+      content={`View project on ${formattedRegistry}'s website`}
+      position="bottom"
+    >
       <a
         href={projectUrl}
         target="_blank"
@@ -238,8 +242,8 @@ function FeedstockTypeDisplay({
   return (
     <Tooltip
       content={
-        <div className="max-w-xs p-2">
-          <p className="font-medium mb-1.5">All feedstock types:</p>
+        <div className="p-4">
+          <p className="font-medium mb-2 text-white">All feedstock types:</p>
           <div className="flex flex-wrap gap-1.5">
             {processedTypes.map((type, index) => (
               <span
@@ -252,6 +256,7 @@ function FeedstockTypeDisplay({
           </div>
         </div>
       }
+      maxWidth="350px"
     >
       <div className="flex flex-wrap gap-1.5 cursor-help">
         {displayTypes.map((type, index) => (

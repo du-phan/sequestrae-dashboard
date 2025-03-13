@@ -341,3 +341,47 @@ html[data-theme="dark"] {
 .animation-delay-4000 {
   animation-delay: 4s;
 }
+
+/* Animation for tooltips */
+@keyframes tooltipFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tooltip-animation-enter {
+  animation: tooltipFadeIn 0.15s ease-out forwards;
+}
+
+/* Animation for tooltips */
+@keyframes tooltipFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tooltip-animation-enter {
+  animation: tooltipFadeIn 0.2s ease-out forwards;
+}
+
+.tooltip-animation-exit {
+  opacity: 0;
+  transition: opacity 0.15s ease-in;
+}
+
+/* Add a proper class for tooltip triggers */
+.tooltip-trigger {
+  cursor: help;
+  position: relative;
+  display: inline-flex;
+}
