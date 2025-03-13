@@ -7,7 +7,9 @@ import {
   ArrowTopRightOnSquareIcon,
   EyeIcon,
   DocumentIcon,
+  MagnifyingGlassIcon,
 } from "@heroicons/react/20/solid";
+import ProjectFilters from "./ProjectFilters";
 
 interface ProjectsTableProps {
   projects: Project[];
@@ -19,120 +21,133 @@ export default function ProjectsTable({ projects }: ProjectsTableProps) {
       className="bg-white rounded-lg shadow-sm border border-gray-100 p-6 mt-6"
       id="projects"
     >
-      <h2
-        className={`${textPresets.h4} text-gray-800 mb-5 flex items-center gap-2`}
-      >
-        <DocumentIcon className="w-5 h-5 text-blue-500" aria-hidden="true" />
-        All Projects
-      </h2>
-
-      {projects.length === 0 ? (
-        <div className="text-center py-16 px-4 bg-white rounded-lg border border-gray-200 shadow-sm">
-          <DocumentIcon
-            className="mx-auto h-12 w-12 text-gray-300"
-            aria-hidden="true"
-          />
-          <p className="mt-4 text-gray-700 font-medium text-lg">
-            No projects found
-          </p>
-          <p className="mt-2 text-sm text-gray-500 max-w-sm mx-auto">
-            Projects will appear here once they are added to the system.
-          </p>
-        </div>
-      ) : (
-        <div className="overflow-hidden rounded-lg border border-gray-200">
-          <table
-            className="min-w-full divide-y divide-gray-200 table-fixed"
-            role="table"
-            aria-label="Projects list"
-            style={{ maxWidth: "1200px" }}
+      <div className="flex flex-col">
+        <div className="pb-4">
+          <h2
+            className={`${textPresets.h4} text-gray-800 mb-3 flex items-center gap-2`}
           >
-            <thead className="bg-gray-50">
-              <tr>
-                <th
-                  scope="col"
-                  className="py-3.5 pl-5 pr-3 text-left text-sm font-semibold text-gray-900 border-b border-gray-200 w-[30%]"
-                >
-                  Project
-                </th>
-                <th
-                  scope="col"
-                  className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 border-b border-gray-200 w-[20%]"
-                >
-                  Registry
-                </th>
-                <th
-                  scope="col"
-                  className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 border-b border-gray-200 w-[15%]"
-                >
-                  Country
-                </th>
-                <th
-                  scope="col"
-                  className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 border-b border-gray-200 w-[25%]"
-                >
-                  Feedstock Type
-                </th>
-                <th
-                  scope="col"
-                  className="relative py-3.5 pl-3 pr-5 border-b border-gray-200 w-[10%]"
-                >
-                  <span className="sr-only">Actions</span>
-                </th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-200 bg-white">
-              {projects.map((project, idx) => (
-                <tr
-                  key={project.project_id}
-                  className={`${
-                    idx % 2 === 0 ? "bg-white" : "bg-gray-50"
-                  } hover:bg-blue-50 transition-colors duration-200`}
-                >
-                  <td className="py-4 pl-5 pr-3 text-sm">
-                    <div>
+            <DocumentIcon
+              className="w-5 h-5 text-blue-500"
+              aria-hidden="true"
+            />
+            Projects
+          </h2>
+
+          {/* Integrated search filters */}
+          <ProjectFilters />
+        </div>
+
+        {projects.length === 0 ? (
+          <div className="text-center py-16 px-4 bg-white rounded-lg mt-2">
+            <DocumentIcon
+              className="mx-auto h-12 w-12 text-gray-300"
+              aria-hidden="true"
+            />
+            <p className="mt-4 text-gray-700 font-medium text-lg">
+              No projects found
+            </p>
+            <p className="mt-2 text-sm text-gray-500 max-w-sm mx-auto">
+              Try adjusting your search criteria to find what you're looking
+              for.
+            </p>
+          </div>
+        ) : (
+          <div className="overflow-hidden rounded-lg border border-gray-200 mt-2">
+            <table
+              className="min-w-full divide-y divide-gray-200 table-fixed"
+              role="table"
+              aria-label="Projects list"
+              style={{ maxWidth: "1200px" }}
+            >
+              <thead className="bg-gray-50">
+                <tr>
+                  <th
+                    scope="col"
+                    className="py-3.5 pl-5 pr-3 text-left text-sm font-semibold text-gray-900 border-b border-gray-200 w-[30%]"
+                  >
+                    Project
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 border-b border-gray-200 w-[20%]"
+                  >
+                    Registry
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 border-b border-gray-200 w-[15%]"
+                  >
+                    Country
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 border-b border-gray-200 w-[25%]"
+                  >
+                    Feedstock Type
+                  </th>
+                  <th
+                    scope="col"
+                    className="relative py-3.5 pl-3 pr-5 border-b border-gray-200 w-[10%]"
+                  >
+                    <span className="sr-only">Actions</span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-gray-200 bg-white">
+                {projects.map((project, idx) => (
+                  <tr
+                    key={project.project_id}
+                    className={`${
+                      idx % 2 === 0 ? "bg-white" : "bg-gray-50"
+                    } hover:bg-blue-50 transition-colors duration-200`}
+                  >
+                    <td className="py-4 pl-5 pr-3 text-sm">
+                      <div>
+                        <Link
+                          href={`/project/${project.project_id}`}
+                          className="font-medium text-gray-900 hover:text-blue-700 transition-colors duration-150 hover:underline truncate max-w-xs block"
+                        >
+                          <Tooltip
+                            content={formatProjectName(project.project_name)}
+                            maxWidth="250px"
+                          >
+                            <span>
+                              {formatProjectName(project.project_name)}
+                            </span>
+                          </Tooltip>
+                        </Link>
+                      </div>
+                    </td>
+                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+                      <RegistryDisplay
+                        registry={project.registry}
+                        projectUrl={project.project_url}
+                      />
+                    </td>
+                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+                      {project.country}
+                    </td>
+                    <td className="px-3 py-4 text-sm text-gray-600">
+                      <FeedstockTypeDisplay
+                        feedstockTypes={project.feedstock_type}
+                      />
+                    </td>
+                    <td className="py-4 pl-3 pr-5 text-sm text-right">
                       <Link
                         href={`/project/${project.project_id}`}
-                        className="font-medium text-gray-900 hover:text-blue-700 transition-colors duration-150 hover:underline truncate max-w-xs block"
+                        className="inline-flex items-center justify-center gap-1 text-blue-600 hover:text-blue-900 font-medium transition-colors duration-150 px-3 py-1.5 bg-blue-50 rounded-md hover:bg-blue-100"
                       >
-                        <Tooltip
-                          content={formatProjectName(project.project_name)}
-                          maxWidth="250px"
-                        >
-                          <span>{formatProjectName(project.project_name)}</span>
-                        </Tooltip>
+                        <EyeIcon className="h-4 w-4" aria-hidden="true" />
+                        <span>View</span>
                       </Link>
-                    </div>
-                  </td>
-                  <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
-                    <RegistryDisplay
-                      registry={project.registry}
-                      projectUrl={project.project_url}
-                    />
-                  </td>
-                  <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
-                    {project.country}
-                  </td>
-                  <td className="px-3 py-4 text-sm text-gray-600">
-                    <FeedstockTypeDisplay
-                      feedstockTypes={project.feedstock_type}
-                    />
-                  </td>
-                  <td className="py-4 pl-3 pr-5 text-sm text-right">
-                    <Link
-                      href={`/project/${project.project_id}`}
-                      className="inline-flex items-center justify-center gap-1 text-blue-600 hover:text-blue-900 font-medium transition-colors duration-150 px-3 py-1.5 bg-blue-50 rounded-md hover:bg-blue-100"
-                    >
-                      <EyeIcon className="h-4 w-4" aria-hidden="true" />
-                      <span>View</span>
-                    </Link>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

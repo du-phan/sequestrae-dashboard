@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import DashboardHeader from "@/app/ui/dashboard/DashboardHeader";
 import ProjectsTable from "@/app/ui/dashboard/ProjectsTable";
-import ProjectFilters from "@/app/ui/dashboard/ProjectFilters";
 import Pagination from "@/app/ui/dashboard/Pagination";
 import StatCards from "@/app/ui/dashboard/StatCards";
 import AnalysisFramework from "@/app/ui/dashboard/AnalysisFramework";
@@ -13,7 +12,7 @@ export const metadata: Metadata = {
 };
 
 type DashboardPageProps = {
-  params: Promise<Record<string, never>>; // Indicates an empty object (no dynamic segments); // a Promise that resolves to an empty object
+  params: Promise<Record<string, never>>;
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
@@ -41,7 +40,6 @@ export default async function DashboardPage({
   });
 
   // Fetch global statistics across all projects
-  // This ensures we get accurate counts of registries and countries
   const { uniqueRegistries, uniqueCountries } = await getProjectsStats();
 
   // Calculate pagination display numbers
@@ -60,17 +58,11 @@ export default async function DashboardPage({
         />
       </div>
 
-      {/* New analysis framework component with horizontal layout */}
+      {/* Analysis framework component */}
       <AnalysisFramework />
 
-      <div className="bg-white shadow-sm rounded-lg p-6 mb-6">
-        <ProjectFilters />
-      </div>
-
-      <div
-        id="search-results"
-        className="bg-white shadow-sm rounded-lg p-6 mb-6"
-      >
+      {/* Projects table with integrated search */}
+      <div id="search-results" className="mb-6">
         <ProjectsTable projects={projects} />
       </div>
 
