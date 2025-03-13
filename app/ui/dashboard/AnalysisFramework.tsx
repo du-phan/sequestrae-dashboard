@@ -33,10 +33,15 @@ const Dimension = ({ icon, name, color, bgColor }: DimensionProps) => {
 
 export default function AnalysisFramework() {
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-8">
-      <h3 className="text-base font-medium text-gray-800 mb-4 text-center">
-        The Evaluation Framework
-      </h3>
+    <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-6">
+      <div className="flex flex-col items-center mb-4">
+        <h3 className="text-base font-medium text-gray-800">
+          Our Evaluation Framework
+        </h3>
+        <p className="text-xs text-center text-gray-500 mt-1">
+          Every project is analyzed across these five dimensions
+        </p>
+      </div>
 
       <div className="flex flex-wrap justify-center gap-4">
         <Dimension
@@ -70,9 +75,6 @@ export default function AnalysisFramework() {
           bgColor="bg-rose-50"
         />
       </div>
-      <p className="text-xs text-center text-gray-500 mt-4">
-        Our AI-powered engine analyzes every project across these 5 dimensions
-      </p>
     </div>
   );
 }

@@ -3,6 +3,12 @@ import Link from "next/link";
 import { textPresets } from "@/app/ui/theme";
 import { Project } from "@/types/ui";
 import { Tooltip } from "@/app/ui/common/Tooltip";
+import {
+  ArrowTopRightOnSquareIcon,
+  EyeIcon,
+  DocumentIcon,
+} from "@heroicons/react/20/solid";
+import ProjectFilters from "./ProjectFilters";
 
 interface ProjectsTableProps {
   projects: Project[];
@@ -10,119 +16,137 @@ interface ProjectsTableProps {
 
 export default function ProjectsTable({ projects }: ProjectsTableProps) {
   return (
-    <div>
-      <h2
-        className={`${textPresets.h4} text-gray-800 mb-5 flex items-center gap-2`}
-      >
-        <svg
-          className="w-5 h-5 text-blue-500"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
-          />
-        </svg>
-        All Projects
-      </h2>
-
-      {projects.length === 0 ? (
-        <div className="text-center py-12 bg-gray-50 rounded-lg border border-gray-100">
-          <svg
-            className="mx-auto h-12 w-12 text-gray-400"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
+    <div
+      className="bg-white rounded-lg shadow-sm border border-gray-100 p-6 mt-6"
+      id="projects"
+    >
+      <div className="flex flex-col">
+        <div className="pb-4">
+          <h2
+            className={`${textPresets.h4} text-gray-800 mb-6 flex items-center gap-2`}
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={1.5}
-              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+            <DocumentIcon
+              className="w-5 h-5 text-blue-500"
+              aria-hidden="true"
             />
-          </svg>
-          <p className="mt-4 text-gray-600 font-medium">No projects found</p>
-          <p className="mt-2 text-sm text-gray-500">
-            Try adjusting your search or filters
-          </p>
+            Projects
+          </h2>
+
+          {/* Integrated search filters */}
+          <ProjectFilters />
         </div>
-      ) : (
-        <div className="overflow-hidden shadow-sm ring-1 ring-black ring-opacity-5 rounded-lg">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
-              <tr>
-                <th
-                  scope="col"
-                  className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900"
-                >
-                  Project
-                </th>
-                <th
-                  scope="col"
-                  className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                >
-                  Registry
-                </th>
-                <th
-                  scope="col"
-                  className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                >
-                  Country
-                </th>
-                <th
-                  scope="col"
-                  className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-                >
-                  Feedstock Type
-                </th>
-                <th scope="col" className="relative py-3.5 pl-3 pr-4">
-                  <span className="sr-only">Actions</span>
-                </th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-200 bg-white">
-              {projects.map((project) => (
-                <tr
-                  key={project.project_id}
-                  className="hover:bg-blue-50 transition-colors duration-150"
-                >
-                  <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm">
-                    <Link
-                      href={`/project/${project.project_id}`}
-                      className="font-medium text-blue-600 hover:text-blue-800 transition-colors duration-150"
-                    >
-                      {formatProjectName(project.project_name)}
-                    </Link>
-                  </td>
-                  <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                    {capitalizeFirstLetter(project.registry)}
-                  </td>
-                  <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                    {project.country}
-                  </td>
-                  <td className="px-3 py-4 text-sm text-gray-500">
-                    <FeedstockTypeDisplay
-                      feedstockTypes={project.feedstock_type}
-                    />
-                  </td>
-                  <td className="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm">
-                    <Link
-                      href={`/project/${project.project_id}`}
-                      className="text-blue-600 hover:text-blue-900 font-medium transition-colors duration-150 px-3 py-1 bg-blue-50 rounded-md hover:bg-blue-100"
-                    >
-                      View
-                    </Link>
-                  </td>
+
+        {projects.length === 0 ? (
+          <div className="text-center py-16 px-4 bg-white rounded-lg mt-3">
+            <DocumentIcon
+              className="mx-auto h-12 w-12 text-gray-300"
+              aria-hidden="true"
+            />
+            <p className="mt-4 text-gray-700 font-medium text-lg">
+              No project found
+            </p>
+            <p className="mt-2 text-sm text-gray-500 max-w-sm mx-auto">
+              Try adjusting your search criteria to find what you are looking
+              for.
+            </p>
+          </div>
+        ) : (
+          <div className="overflow-hidden rounded-lg border border-gray-200 mt-3">
+            <table
+              className="min-w-full divide-y divide-gray-200 table-fixed"
+              role="table"
+              aria-label="Projects list"
+              style={{ maxWidth: "1200px" }}
+            >
+              <thead className="bg-gray-50">
+                <tr>
+                  <th
+                    scope="col"
+                    className="py-3.5 pl-5 pr-3 text-left text-sm font-semibold text-gray-900 border-b border-gray-200 w-[30%]"
+                  >
+                    Project
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 border-b border-gray-200 w-[20%]"
+                  >
+                    Registry
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 border-b border-gray-200 w-[15%]"
+                  >
+                    Country
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 border-b border-gray-200 w-[25%]"
+                  >
+                    Feedstock Type
+                  </th>
+                  <th
+                    scope="col"
+                    className="relative py-3.5 pl-3 pr-5 border-b border-gray-200 w-[10%]"
+                  >
+                    <span className="sr-only">Actions</span>
+                  </th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+              </thead>
+              <tbody className="divide-y divide-gray-200 bg-white">
+                {projects.map((project, idx) => (
+                  <tr
+                    key={project.project_id}
+                    className={`${
+                      idx % 2 === 0 ? "bg-white" : "bg-gray-50"
+                    } hover:bg-blue-50 transition-colors duration-200`}
+                  >
+                    <td className="py-4 pl-5 pr-3 text-sm">
+                      <div>
+                        <Link
+                          href={`/project/${project.project_id}`}
+                          className="font-medium text-gray-900 hover:text-blue-700 transition-colors duration-150 hover:underline truncate max-w-xs block"
+                        >
+                          <Tooltip
+                            content={formatProjectName(project.project_name)}
+                            maxWidth="250px"
+                          >
+                            <span>
+                              {formatProjectName(project.project_name)}
+                            </span>
+                          </Tooltip>
+                        </Link>
+                      </div>
+                    </td>
+                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+                      <RegistryDisplay
+                        registry={project.registry}
+                        projectUrl={project.project_url}
+                      />
+                    </td>
+                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-600">
+                      {project.country}
+                    </td>
+                    <td className="px-3 py-4 text-sm text-gray-600">
+                      <FeedstockTypeDisplay
+                        feedstockTypes={project.feedstock_type}
+                      />
+                    </td>
+                    <td className="py-4 pl-3 pr-5 text-sm text-right">
+                      <Link
+                        href={`/project/${project.project_id}`}
+                        className="inline-flex items-center justify-center gap-1 text-blue-600 hover:text-blue-900 font-medium transition-colors duration-150 px-3 py-1.5 bg-blue-50 rounded-md hover:bg-blue-100"
+                      >
+                        <EyeIcon className="h-4 w-4" aria-hidden="true" />
+                        <span>View</span>
+                      </Link>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
@@ -137,6 +161,47 @@ function formatProjectName(name: string): string {
 function capitalizeFirstLetter(string: string): string {
   if (!string) return "";
   return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+// New component for displaying registry with optional link
+interface RegistryDisplayProps {
+  registry: string;
+  projectUrl?: string | null;
+}
+
+function RegistryDisplay({ registry, projectUrl }: RegistryDisplayProps) {
+  const formattedRegistry = capitalizeFirstLetter(registry);
+
+  // If there's no URL, just display the registry name
+  if (!projectUrl) {
+    return (
+      <span className="inline-flex items-center px-2.5 py-0.5 rounded-md bg-gray-100 text-gray-800">
+        {formattedRegistry}
+      </span>
+    );
+  }
+
+  // With URL, make it clickable with helpful tooltip and icon
+  return (
+    <Tooltip
+      content={`View project on ${formattedRegistry}'s website`}
+      position="bottom"
+    >
+      <a
+        href={projectUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group inline-flex items-center gap-1.5 text-gray-700 hover:text-blue-600 transition-colors duration-150 px-2.5 py-0.5 rounded-md bg-gray-100 hover:bg-blue-50"
+        aria-label={`Visit project page on ${formattedRegistry} registry (opens in new tab)`}
+      >
+        {formattedRegistry}
+        <ArrowTopRightOnSquareIcon
+          className="h-3.5 w-3.5 text-gray-400 group-hover:text-blue-500 transition-colors duration-150"
+          aria-hidden="true"
+        />
+      </a>
+    </Tooltip>
+  );
 }
 
 interface FeedstockTypeDisplayProps {
@@ -175,7 +240,7 @@ function FeedstockTypeDisplay({
         {sortedTypes.map((type, index) => (
           <span
             key={index}
-            className="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10"
+            className="inline-flex items-center rounded-md bg-gray-100 px-2 py-0.5 text-sm text-gray-700"
           >
             {type.text}
           </span>
@@ -191,13 +256,15 @@ function FeedstockTypeDisplay({
   return (
     <Tooltip
       content={
-        <div className="max-w-xs p-2">
-          <p className="font-medium mb-1.5">All feedstock types:</p>
+        <div className="p-3">
+          <p className="font-medium mb-1.5 text-white text-xs">
+            All feedstock types:
+          </p>
           <div className="flex flex-wrap gap-1.5">
             {processedTypes.map((type, index) => (
               <span
                 key={index}
-                className="inline-flex items-center rounded-md bg-gray-100 px-2 py-1 text-xs font-medium text-gray-700 ring-1 ring-inset ring-gray-500/10"
+                className="inline-flex items-center rounded-md bg-blue-100 px-2 py-0.5 text-sm text-blue-800"
               >
                 {type.text}
               </span>
@@ -205,20 +272,21 @@ function FeedstockTypeDisplay({
           </div>
         </div>
       }
+      maxWidth="350px"
     >
       <div className="flex flex-wrap gap-1.5 cursor-help">
         {displayTypes.map((type, index) => (
           <span
             key={index}
-            className="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10"
+            className="inline-flex items-center rounded-md bg-gray-100 px-2 py-0.5 text-sm text-gray-700"
           >
             {type.text.length > MAX_DISPLAY_LENGTH
               ? `${type.text.substring(0, MAX_DISPLAY_LENGTH)}...`
               : type.text}
           </span>
         ))}
-        <span className="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10">
-          +{feedstockTypes.length - MAX_ITEMS_TO_SHOW} more
+        <span className="inline-flex items-center rounded-md bg-gray-100 px-2 py-0.5 text-sm text-gray-500">
+          +{feedstockTypes.length - MAX_ITEMS_TO_SHOW}
         </span>
       </div>
     </Tooltip>

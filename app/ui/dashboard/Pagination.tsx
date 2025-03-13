@@ -73,7 +73,8 @@ export default function Pagination({
           }
         )}
         onClick={() => {
-          if (currentPage > 1) replace(createPageURL(currentPage - 1));
+          if (currentPage > 1)
+            replace(createPageURL(currentPage - 1), { scroll: false });
         }}
         disabled={currentPage <= 1}
       >
@@ -100,7 +101,7 @@ export default function Pagination({
           return (
             <button
               key={`page-${page}`}
-              onClick={() => replace(createPageURL(page))}
+              onClick={() => replace(createPageURL(page), { scroll: false })}
               className={clsx(
                 "relative inline-flex items-center px-4 py-2 text-sm font-medium focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 mx-0.5",
                 {
@@ -127,7 +128,8 @@ export default function Pagination({
           }
         )}
         onClick={() => {
-          if (currentPage < totalPages) replace(createPageURL(currentPage + 1));
+          if (currentPage < totalPages)
+            replace(createPageURL(currentPage + 1), { scroll: false });
         }}
         disabled={currentPage >= totalPages}
       >
