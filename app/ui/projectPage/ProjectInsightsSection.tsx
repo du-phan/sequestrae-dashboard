@@ -261,6 +261,9 @@ export default function ProjectInsightsSection({
 
                         {item.topic && (
                           <div className="mt-1.5 flex items-center">
+                            <span className="text-xs text-gray-500 mr-2">
+                              From:
+                            </span>
                             <span
                               className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${styles.badge} transition-colors`}
                             >
