@@ -7,7 +7,6 @@ import {
   ArrowTopRightOnSquareIcon,
   EyeIcon,
   DocumentIcon,
-  MagnifyingGlassIcon,
 } from "@heroicons/react/20/solid";
 import ProjectFilters from "./ProjectFilters";
 
