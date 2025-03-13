@@ -24,7 +24,8 @@ export default function Pagination({
     const params = new URLSearchParams(searchParams?.toString() || "");
 
     params.set("page", pageNumber.toString());
-    return `${pathname}?${params.toString()}`;
+    // Add hash fragment to maintain scroll position at the table
+    return `${pathname}?${params.toString()}#search-results`;
   };
 
   // Generate page numbers to display
