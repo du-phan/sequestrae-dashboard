@@ -33,7 +33,7 @@ const Dimension = ({ icon, name, color, bgColor }: DimensionProps) => {
 
 export default function AnalysisFramework() {
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-8">
+    <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-6">
       <h3 className="text-base font-medium text-gray-800 mb-4 text-center">
         The Evaluation Framework
       </h3>

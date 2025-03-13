@@ -43,9 +43,9 @@ export default function ProjectFilters() {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-6">
       <h2
-        className={`${textPresets.h4} text-gray-800 mb-4 flex items-center gap-2`}
+        className={`${textPresets.h4} text-gray-800 mb-5 flex items-center gap-2`}
       >
         <MagnifyingGlassIcon
           className="h-5 w-5 text-blue-500"
