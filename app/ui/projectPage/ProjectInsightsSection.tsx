@@ -162,14 +162,14 @@ export default function ProjectInsightsSection({
 
     return (
       <div
-        className={`border rounded-lg bg-white border-gray-200 shadow-sm transition-all duration-300 group ${
-          styles.hoverBorder
-        } ${isExpanded ? "shadow-md" : "hover:shadow-md"}`}
+        className={`border rounded-lg bg-white border-gray-200 shadow-sm transition-all duration-300 ${
+          isExpanded ? "shadow-md" : "hover:shadow-md"
+        }`}
       >
         {/* Card header with enhanced styling */}
         <div className="flex justify-between items-center p-5 border-b border-gray-100">
           <div className="flex items-center">
-            {/* Category icon - removed the colored background circle */}
+            {/* Category icon */}
             <div className={`mr-3 ${styles.iconColor}`}>
               <div className="w-5 h-5">{styles.icon}</div>
             </div>
@@ -236,7 +236,7 @@ export default function ProjectInsightsSection({
             </p>
           )}
 
-          {/* Expanded view with enhanced styling */}
+          {/* Expanded view with insights aligned vertically with the heading */}
           {isExpanded && (
             <div className="space-y-4">
               {items.length === 0 ? (
@@ -248,14 +248,11 @@ export default function ProjectInsightsSection({
               ) : (
                 <ul className="space-y-4 pt-1">
                   {items.map((item) => (
-                    <li
-                      key={item.id}
-                      className="flex p-3 rounded-lg border border-gray-100 hover:border-gray-200 transition-all duration-200 group/item hover:bg-gray-50"
-                    >
+                    <li key={item.id} className="flex group">
                       <div
-                        className={`flex-shrink-0 mt-0.5 mr-3 ${styles.iconColor} transition-transform group-hover/item:scale-110`}
+                        className={`flex-shrink-0 mt-1 mr-3 ${styles.iconColor}`}
                       >
-                        <div className="w-5 h-5">{styles.icon}</div>
+                        <div className="w-4 h-4">{styles.icon}</div>
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className={`${textPresets.paragraph} text-gray-800`}>
@@ -263,7 +260,7 @@ export default function ProjectInsightsSection({
                         </p>
 
                         {item.topic && (
-                          <div className="mt-2 flex items-center">
+                          <div className="mt-1.5 flex items-center">
                             <span
                               className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${styles.badge} transition-colors`}
                             >
@@ -282,13 +279,7 @@ export default function ProjectInsightsSection({
 
         {/* Card footer for expanded view */}
         {isExpanded && items.length > 0 && (
-          <div
-            className={`px-5 py-3 ${styles.bgColor} bg-opacity-30 rounded-b-lg border-t border-gray-100 flex justify-between items-center`}
-          >
-            <span className="text-xs text-gray-500">
-              {items.length} {items.length === 1 ? "item" : "items"}
-            </span>
-
+          <div className="px-5 py-3 bg-gray-50 rounded-b-lg border-t border-gray-100 flex justify-end items-center">
             <button
               onClick={() => toggleCategory(category)}
               className="text-sm text-gray-500 hover:text-gray-700 hover:underline flex items-center"
