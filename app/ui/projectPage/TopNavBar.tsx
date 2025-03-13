@@ -41,10 +41,20 @@ const getCurrentTopicName = (
   return matchedNavItem?.name || "Overview";
 };
 
+/**
+ * Format project name by replacing underscores with spaces
+ */
+const formatProjectName = (name: string): string => {
+  return name.replace(/_/g, " ");
+};
+
 const TopNavBar = ({ projectId, projectName }: TopNavBarProps) => {
   const pathname = usePathname();
   const basePath = projectId ? `/project/${projectId}` : "/project";
   const currentTopicName = getCurrentTopicName(pathname, basePath);
+
+  // Format the project name for display while keeping original for the title attribute
+  const displayProjectName = formatProjectName(projectName);
 
   return (
     <nav
@@ -92,9 +102,9 @@ const TopNavBar = ({ projectId, projectName }: TopNavBarProps) => {
           <Link
             href={basePath}
             className="hover:text-blue-600 transition-colors truncate max-w-[70%] flex-shrink-1 font-medium text-gray-800"
-            title={projectName} // Add title for tooltip on hover
+            title={projectName} // Original name for tooltip
           >
-            {projectName}
+            {displayProjectName}
           </Link>
         </div>
 
