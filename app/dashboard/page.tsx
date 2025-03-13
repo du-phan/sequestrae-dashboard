@@ -69,7 +69,10 @@ export default async function DashboardPage({
         <ProjectFilters />
       </div>
 
-      <div className="bg-white shadow-sm rounded-lg p-6 mb-6">
+      <div
+        id="search-results"
+        className="bg-white shadow-sm rounded-lg p-6 mb-6"
+      >
         <ProjectsTable projects={projects} />
       </div>
 
