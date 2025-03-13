@@ -188,8 +188,8 @@ export default function TopicNavigationGuideSection({
               {/* Improved visual cards - matching RiskFactorCard styling */}
               <div className="grid grid-cols-1 gap-3 lg:grid-cols-3">
                 {/* Strengths card - with consistent styling */}
-                <div className="bg-green-50 rounded-lg border border-green-100 transition-all duration-200 hover:shadow-sm">
-                  <div className="p-3 border-b border-green-100">
+                <div className="bg-white rounded-lg border border-gray-200 shadow-sm transition-all duration-200 hover:border-green-200 hover:shadow">
+                  <div className="p-3 border-b border-gray-100 bg-green-50">
                     <p
                       className={`${textPresets.label} text-green-700 font-medium`}
                     >
@@ -197,15 +197,15 @@ export default function TopicNavigationGuideSection({
                     </p>
                   </div>
                   <div className="p-3">
-                    <p className={`${textPresets.caption} text-gray-600`}>
+                    <p className={`${textPresets.paragraph} text-gray-600`}>
                       Positive aspects that support project success
                     </p>
                   </div>
                 </div>
 
                 {/* Considerations card - with consistent styling */}
-                <div className="bg-amber-50 rounded-lg border border-amber-100 transition-all duration-200 hover:shadow-sm">
-                  <div className="p-3 border-b border-amber-100">
+                <div className="bg-white rounded-lg border border-gray-200 shadow-sm transition-all duration-200 hover:border-amber-200 hover:shadow">
+                  <div className="p-3 border-b border-gray-100 bg-amber-50">
                     <p
                       className={`${textPresets.label} text-amber-700 font-medium`}
                     >
@@ -213,15 +213,15 @@ export default function TopicNavigationGuideSection({
                     </p>
                   </div>
                   <div className="p-3">
-                    <p className={`${textPresets.caption} text-gray-600`}>
+                    <p className={`${textPresets.paragraph} text-gray-600`}>
                       Areas that require attention or may present challenges
                     </p>
                   </div>
                 </div>
 
                 {/* Recommended Actions card - with consistent styling */}
-                <div className="bg-blue-50 rounded-lg border border-blue-100 transition-all duration-200 hover:shadow-sm">
-                  <div className="p-3 border-b border-blue-100">
+                <div className="bg-white rounded-lg border border-gray-200 shadow-sm transition-all duration-200 hover:border-blue-200 hover:shadow">
+                  <div className="p-3 border-b border-gray-100 bg-blue-50">
                     <p
                       className={`${textPresets.label} text-blue-700 font-medium`}
                     >
@@ -229,7 +229,7 @@ export default function TopicNavigationGuideSection({
                     </p>
                   </div>
                   <div className="p-3">
-                    <p className={`${textPresets.caption} text-gray-600`}>
+                    <p className={`${textPresets.paragraph} text-gray-600`}>
                       Suggestions to address considerations or enhance outcomes
                     </p>
                   </div>
