@@ -24,7 +24,7 @@ export default function ProjectsTable({ projects }: ProjectsTableProps) {
       <div className="flex flex-col">
         <div className="pb-4">
           <h2
-            className={`${textPresets.h4} text-gray-800 mb-3 flex items-center gap-2`}
+            className={`${textPresets.h4} text-gray-800 mb-6 flex items-center gap-2`}
           >
             <DocumentIcon
               className="w-5 h-5 text-blue-500"
@@ -38,7 +38,7 @@ export default function ProjectsTable({ projects }: ProjectsTableProps) {
         </div>
 
         {projects.length === 0 ? (
-          <div className="text-center py-16 px-4 bg-white rounded-lg mt-2">
+          <div className="text-center py-16 px-4 bg-white rounded-lg mt-3">
             <DocumentIcon
               className="mx-auto h-12 w-12 text-gray-300"
               aria-hidden="true"
@@ -52,7 +52,7 @@ export default function ProjectsTable({ projects }: ProjectsTableProps) {
             </p>
           </div>
         ) : (
-          <div className="overflow-hidden rounded-lg border border-gray-200 mt-2">
+          <div className="overflow-hidden rounded-lg border border-gray-200 mt-3">
             <table
               className="min-w-full divide-y divide-gray-200 table-fixed"
               role="table"
