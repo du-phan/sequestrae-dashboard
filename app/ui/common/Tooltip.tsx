@@ -164,12 +164,12 @@ export const Tooltip: React.FC<TooltipProps> = ({
         createPortal(
           <div
             ref={tooltipRef}
-            className={`fixed z-50 rounded-md shadow-lg bg-gray-800 text-white tooltip-animation-enter ${className}`}
+            className={`fixed z-50 rounded-md shadow-lg bg-gray-800 text-white tooltip-animation-enter text-xs ${className}`}
             style={{
               top: `${tooltipPosition.top}px`,
               left: `${tooltipPosition.left}px`,
               maxWidth: maxWidth,
-              padding: isSimpleText ? "0.5rem 0.75rem" : "0", // Apply padding directly to container for simple text
+              padding: isSimpleText ? "0.375rem 0.625rem" : "0", // Reduced padding for simple text
             }}
             role="tooltip"
           >

@@ -242,13 +242,15 @@ function FeedstockTypeDisplay({
   return (
     <Tooltip
       content={
-        <div className="p-4">
-          <p className="font-medium mb-2 text-white">All feedstock types:</p>
+        <div className="p-3">
+          <p className="font-medium mb-1.5 text-white text-xs">
+            All feedstock types:
+          </p>
           <div className="flex flex-wrap gap-1.5">
             {processedTypes.map((type, index) => (
               <span
                 key={index}
-                className="inline-flex items-center rounded-full bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800 ring-1 ring-inset ring-blue-700/10"
+                className="inline-flex items-center rounded-full bg-blue-100 px-2 py-0.5 text-xs font-medium text-blue-800 ring-1 ring-inset ring-blue-700/10"
               >
                 {type.text}
               </span>
