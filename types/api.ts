@@ -77,6 +77,7 @@ export interface Project {
   key_stakeholders?: string[];
   created_at: string;
   updated_at?: string;
+  project_url?: string | null; // New field for registry project URL
 
   // JSON arrays directly matching the table structure
   detailed_answers: DetailedAnswer[];

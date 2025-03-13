@@ -145,7 +145,8 @@ export async function getProjects({
         project_name, 
         registry,
         country,
-        feedstock_type
+        feedstock_type,
+        project_url
       `
       )
       .range(from, to);

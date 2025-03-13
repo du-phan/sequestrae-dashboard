@@ -68,4 +68,5 @@ export interface Project {
   feedstock_type: string[];
   project_description?: string | null;
   key_stakeholders?: string[];
+  project_url?: string | null; // New field for registry project URL
 }

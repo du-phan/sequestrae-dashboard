@@ -3,6 +3,7 @@ import Link from "next/link";
 import { textPresets } from "@/app/ui/theme";
 import { Project } from "@/types/ui";
 import { Tooltip } from "@/app/ui/common/Tooltip";
+import { ArrowTopRightOnSquareIcon } from "@heroicons/react/20/solid";
 
 interface ProjectsTableProps {
   projects: Project[];
@@ -99,7 +100,10 @@ export default function ProjectsTable({ projects }: ProjectsTableProps) {
                     </Link>
                   </td>
                   <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                    {capitalizeFirstLetter(project.registry)}
+                    <RegistryDisplay
+                      registry={project.registry}
+                      projectUrl={project.project_url}
+                    />
                   </td>
                   <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                     {project.country}
@@ -137,6 +141,40 @@ function formatProjectName(name: string): string {
 function capitalizeFirstLetter(string: string): string {
   if (!string) return "";
   return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+// New component for displaying registry with optional link
+interface RegistryDisplayProps {
+  registry: string;
+  projectUrl?: string | null;
+}
+
+function RegistryDisplay({ registry, projectUrl }: RegistryDisplayProps) {
+  const formattedRegistry = capitalizeFirstLetter(registry);
+
+  // If there's no URL, just display the registry name
+  if (!projectUrl) {
+    return <span>{formattedRegistry}</span>;
+  }
+
+  // With URL, make it clickable with helpful tooltip and icon
+  return (
+    <Tooltip content={`View project on ${formattedRegistry}'s website`}>
+      <a
+        href={projectUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group inline-flex items-center gap-1 text-gray-600 hover:text-blue-600 transition-colors duration-150"
+        aria-label={`Visit project page on ${formattedRegistry} registry (opens in new tab)`}
+      >
+        {formattedRegistry}
+        <ArrowTopRightOnSquareIcon
+          className="h-4 w-4 text-gray-400 group-hover:text-blue-500 transition-colors duration-150"
+          aria-hidden="true"
+        />
+      </a>
+    </Tooltip>
+  );
 }
 
 interface FeedstockTypeDisplayProps {
