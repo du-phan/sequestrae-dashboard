@@ -5,12 +5,9 @@ import {
   ArrowSmallRightIcon,
   ClipboardDocumentCheckIcon,
   ShieldExclamationIcon,
-  GlobeAmericasIcon, // Replacement for TreeIcon
+  GlobeAmericasIcon,
   DocumentTextIcon,
   UserGroupIcon,
-  CheckCircleIcon,
-  ExclamationCircleIcon,
-  ArrowRightCircleIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
@@ -83,108 +80,185 @@ export default function TopicNavigationGuideSection({
     return (
       <Link
         href={href}
-        className="flex items-start p-4 rounded-lg border border-gray-100 hover:border-blue-100 hover:bg-blue-50 transition-colors group"
+        className="flex items-start p-5 rounded-lg border border-gray-200 hover:border-blue-200 bg-white hover:bg-blue-50 transition-all duration-200 shadow-sm hover:shadow group relative"
       >
-        <div className="mr-4 text-gray-500 group-hover:text-blue-600">
+        {/* Icon with enhanced styling */}
+        <div className="flex-shrink-0 mr-4 text-blue-600 bg-blue-50 p-2 rounded-lg group-hover:bg-blue-100 transition-colors">
           {icon}
         </div>
-        <div>
+
+        {/* Content container with improved spacing */}
+        <div className="flex-grow pr-6">
           <h4
-            className={`${textPresets.label} text-gray-800 mb-1 group-hover:text-blue-600`}
+            className={`${textPresets.label} text-gray-900 font-medium mb-1.5 group-hover:text-blue-700 transition-colors`}
           >
             {name}
           </h4>
-          <p className={`${textPresets.caption} text-gray-600`}>
+          <p
+            className={`${textPresets.caption} text-gray-600 group-hover:text-gray-700 transition-colors`}
+          >
             {description}
           </p>
         </div>
-        <ArrowSmallRightIcon className="h-5 w-5 ml-auto text-gray-400 group-hover:text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity" />
+
+        {/* Always visible arrow that enhances on hover */}
+        <div className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center justify-center">
+          <ArrowSmallRightIcon className="h-5 w-5 text-gray-400 group-hover:text-blue-600 group-hover:translate-x-0.5 transition-all duration-200" />
+        </div>
       </Link>
     );
   };
 
-  // Component for the analysis structure explanation - improved spacing
+  // Enhanced component for the analysis structure explanation with improved visual design
   const AnalysisStructureCard = () => {
     return (
-      <div className="rounded-lg border border-gray-100 p-5 mt-4">
-        <h4
-          className={`${textPresets.h4} text-gray-800 mb-3 flex items-center`}
-        >
-          <BookOpenIcon className="h-5 w-5 mr-2 text-gray-600" />
-          How Our Analysis Is Organized
-        </h4>
-
-        <p className={`${textPresets.paragraph} text-gray-700 mb-2`}>
-          Each topic is analyzed using a consistent framework to help you
-          understand the project comprehensively:
-        </p>
-
-        {/* Reduced spacing between numbered points */}
-        <div className="pl-2 space-y-2">
-          <div className="flex">
-            <div className="w-5 h-5 text-gray-500 mr-2 flex-shrink-0 mt-0.5">
-              <span className="block">1</span>
+      <div className="rounded-lg border border-gray-200 bg-white shadow-sm overflow-hidden">
+        {/* Streamlined header with improved vertical alignment */}
+        <div className="p-4 border-b border-gray-100 bg-gray-50">
+          <div className="flex items-center">
+            <div className="flex-shrink-0 mr-2.5 text-blue-600 bg-blue-50 p-1 rounded-md">
+              <BookOpenIcon className="h-4 w-4" />
             </div>
-            <p className={`${textPresets.paragraph} text-gray-700 my-0`}>
-              <strong>Subtopics</strong>: Major areas of analysis are divided
-              into specific subtopics that examine key aspects of the project.
-            </p>
+            <h4 className={`${textPresets.h4} text-gray-800 m-0`}>
+              Methodology
+            </h4>
           </div>
+        </div>
 
-          <div className="flex">
-            <div className="w-5 h-5 text-gray-500 mr-2 flex-shrink-0 mt-0.5">
-              <span className="block">2</span>
-            </div>
-            <p className={`${textPresets.paragraph} text-gray-700 my-0`}>
-              <strong>Factors</strong>: Within each subtopic, we identify
-              specific factors that could impact project success.
-            </p>
-          </div>
+        {/* Card body with consistent padding */}
+        <div className="p-5">
+          <p className={`${textPresets.paragraph} text-gray-600 mb-5`}>
+            Each topic is analyzed using a consistent framework to help you
+            understand the project comprehensively:
+          </p>
 
-          <div className="flex">
-            <div className="w-5 h-5 text-gray-500 mr-2 flex-shrink-0 mt-0.5">
-              <span className="block">3</span>
+          {/* Visual process flow with connected cards - improved spacing */}
+          <div className="relative space-y-6 pb-1">
+            {/* Connector line for visual flow (hidden on mobile) */}
+            <div className="absolute left-4 top-10 bottom-12 w-0.5 bg-blue-100 hidden md:block"></div>
+
+            {/* Step 1: Subtopics - with enhanced styling */}
+            <div className="flex flex-col md:flex-row md:items-center gap-3 relative">
+              <div className="flex-shrink-0 bg-blue-50 rounded-full w-8 h-8 flex items-center justify-center shadow-sm border border-blue-200 text-blue-700 z-10">
+                <span className="inline-flex items-center justify-center text-sm font-semibold leading-none">
+                  1
+                </span>
+              </div>
+              <div className="flex-1 bg-white p-4 rounded-lg border border-gray-200 shadow-sm hover:shadow hover:border-blue-200 transition-all duration-300">
+                <h5
+                  className={`${textPresets.label} text-gray-900 font-medium mb-1.5`}
+                >
+                  Subtopics
+                </h5>
+                <p
+                  className={`${textPresets.paragraph} text-gray-600 max-w-prose mb-0`}
+                >
+                  Major areas of analysis are divided into specific subtopics
+                  that examine key aspects of the project.
+                </p>
+              </div>
             </div>
-            <div>
-              <p className={`${textPresets.paragraph} text-gray-700 mb-2`}>
-                <strong>Assessment Framework</strong>: Each factor is assessed
-                using three categories:
-              </p>
-              <ul className="space-y-2 ml-1">
-                <li className="flex items-start">
-                  <div className="text-green-500 mr-2 flex-shrink-0 mt-1">
-                    <CheckCircleIcon className="h-4 w-4" />
+
+            {/* Step 2: Factors - with enhanced styling */}
+            <div className="flex flex-col md:flex-row md:items-center gap-3 relative">
+              <div className="flex-shrink-0 bg-blue-50 rounded-full w-8 h-8 flex items-center justify-center shadow-sm border border-blue-200 text-blue-700 z-10">
+                <span className="inline-flex items-center justify-center text-sm font-semibold leading-none">
+                  2
+                </span>
+              </div>
+              <div className="flex-1 bg-white p-4 rounded-lg border border-gray-200 shadow-sm hover:shadow hover:border-blue-200 transition-all duration-300">
+                <h5
+                  className={`${textPresets.label} text-gray-900 font-medium mb-1.5`}
+                >
+                  Factors
+                </h5>
+                <p
+                  className={`${textPresets.paragraph} text-gray-600 max-w-prose mb-0`}
+                >
+                  Within each subtopic, we identify specific factors that could
+                  impact project success.
+                </p>
+              </div>
+            </div>
+
+            {/* Step 3: Assessment Framework - with enhanced styling */}
+            <div className="flex flex-col md:flex-row md:items-center gap-3 relative">
+              <div className="flex-shrink-0 bg-blue-50 rounded-full w-8 h-8 flex items-center justify-center shadow-sm border border-blue-200 text-blue-700 z-10">
+                <span className="inline-flex items-center justify-center text-sm font-semibold leading-none">
+                  3
+                </span>
+              </div>
+              <div className="flex-1 bg-white p-4 rounded-lg border border-gray-200 shadow-sm hover:shadow hover:border-blue-200 transition-all duration-300">
+                <h5
+                  className={`${textPresets.label} text-gray-900 font-medium mb-2`}
+                >
+                  Assessment Framework
+                </h5>
+                <p
+                  className={`${textPresets.paragraph} text-gray-600 max-w-prose mb-4`}
+                >
+                  For each factor, the insights are organized into three
+                  categories to provide a comprehensive evaluation:
+                </p>
+
+                {/* Clean visual cards without icons */}
+                <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+                  {/* Strengths card - no icon */}
+                  <div className="bg-white rounded-lg border border-gray-200 shadow-sm transition-all duration-200 hover:shadow hover:border-green-200">
+                    <div className="py-2.5 border-b border-gray-100 bg-green-50">
+                      <p
+                        className={`${textPresets.label} text-green-700 font-medium text-center`}
+                      >
+                        Strengths
+                      </p>
+                    </div>
+                    <div className="p-3">
+                      <p
+                        className={`${textPresets.caption} text-gray-600 text-center`}
+                      >
+                        Positive aspects that support project success
+                      </p>
+                    </div>
                   </div>
-                  <p
-                    className={`${textPresets.paragraphSmall} text-gray-700 my-0`}
-                  >
-                    <strong>Strengths</strong>: Positive aspects that support
-                    project success
-                  </p>
-                </li>
-                <li className="flex items-start">
-                  <div className="text-amber-500 mr-2 flex-shrink-0 mt-1">
-                    <ExclamationCircleIcon className="h-4 w-4" />
+
+                  {/* Considerations card - no icon */}
+                  <div className="bg-white rounded-lg border border-gray-200 shadow-sm transition-all duration-200 hover:shadow hover:border-amber-200">
+                    <div className="py-2.5 border-b border-gray-100 bg-amber-50">
+                      <p
+                        className={`${textPresets.label} text-amber-700 font-medium text-center`}
+                      >
+                        Considerations
+                      </p>
+                    </div>
+                    <div className="p-3">
+                      <p
+                        className={`${textPresets.caption} text-gray-600 text-center`}
+                      >
+                        Areas that require attention or may present challenges
+                      </p>
+                    </div>
                   </div>
-                  <p
-                    className={`${textPresets.paragraphSmall} text-gray-700 my-0`}
-                  >
-                    <strong>Considerations</strong>: Areas that require
-                    attention or may present challenges
-                  </p>
-                </li>
-                <li className="flex items-start">
-                  <div className="text-blue-500 mr-2 flex-shrink-0 mt-1">
-                    <ArrowRightCircleIcon className="h-4 w-4" />
+
+                  {/* Recommended Actions card - no icon */}
+                  <div className="bg-white rounded-lg border border-gray-200 shadow-sm transition-all duration-200 hover:shadow hover:border-blue-200">
+                    <div className="py-2.5 border-b border-gray-100 bg-blue-50">
+                      <p
+                        className={`${textPresets.label} text-blue-700 font-medium text-center`}
+                      >
+                        Recommended Actions
+                      </p>
+                    </div>
+                    <div className="p-3">
+                      <p
+                        className={`${textPresets.caption} text-gray-600 text-center`}
+                      >
+                        Suggestions to address considerations or enhance
+                        outcomes
+                      </p>
+                    </div>
                   </div>
-                  <p
-                    className={`${textPresets.paragraphSmall} text-gray-700 my-0`}
-                  >
-                    <strong>Recommended Actions</strong>: Suggestions to address
-                    considerations or enhance project outcomes
-                  </p>
-                </li>
-              </ul>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -195,8 +269,8 @@ export default function TopicNavigationGuideSection({
   return (
     <div className={`bg-white rounded-lg shadow-sm ${className}`}>
       {/* Section header with standard styling */}
-      <div className="p-8 pb-0">
-        <div className="flex mb-8">
+      <div className="p-6 pb-4">
+        <div className="flex mb-4">
           <div className="flex-shrink-0 w-1 bg-blue-600 rounded-full self-stretch"></div>
           <h2 className={`${textPresets.h3} text-gray-800 ml-4 py-0 mb-0`}>
             How to Navigate This Analysis
@@ -204,8 +278,8 @@ export default function TopicNavigationGuideSection({
         </div>
       </div>
 
-      {/* Content area */}
-      <div className="px-8 pb-8">
+      {/* Content area - reduced unnecessary margins */}
+      <div className="px-6 pb-6">
         <div className="ml-5">
           <p className={`${textPresets.paragraph} text-gray-600 mb-5`}>
             Our analysis is organized into five key topics, each examining
@@ -214,7 +288,7 @@ export default function TopicNavigationGuideSection({
           </p>
 
           {/* Topics grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
             {topics.map((topic) => (
               <TopicCard
                 key={topic.name}
@@ -226,7 +300,10 @@ export default function TopicNavigationGuideSection({
             ))}
           </div>
 
-          {/* Analysis structure explanation */}
+          {/* Simple divider without star icon */}
+          <div className="h-px bg-gray-100 mb-6"></div>
+
+          {/* Analysis structure explanation - with background color styling */}
           <AnalysisStructureCard />
         </div>
       </div>

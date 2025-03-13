@@ -76,12 +76,12 @@ export default function ProjectBackgroundSection({
     if (!value || (Array.isArray(value) && value.length === 0)) return null;
 
     return (
-      <div className={`flex items-start ${className}`}>
-        <div className="flex-shrink-0 w-5 h-5 mt-1 mr-3 text-gray-500">
+      <div className={`flex items-start group ${className}`}>
+        <div className="flex-shrink-0 w-5 h-5 mt-1 mr-3 text-blue-500">
           {icon}
         </div>
         <div>
-          <p className={`${textPresets.label} text-gray-600 mb-1`}>{label}</p>
+          <p className={`${textPresets.label} text-gray-500 mb-1`}>{label}</p>
           {Array.isArray(value) ? (
             <ul className="space-y-1">
               {value.map((item, index) => (
@@ -116,13 +116,11 @@ export default function ProjectBackgroundSection({
         </div>
       </div>
 
-      {/* Content with responsive layout */}
+      {/* Content with improved spacing */}
       <div className="px-8 pb-8">
         <div className="ml-5">
-          {/* Image rendering block removed */}
-
           {/* Key project information in a responsive grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 mb-8">
             <DetailItem
               icon={<CalendarIcon />}
               label="Project Start"
@@ -153,7 +151,7 @@ export default function ProjectBackgroundSection({
           </div>
 
           {/* Project description section */}
-          <div className="mt-8">
+          <div className="border-t border-gray-100 pt-6">
             <DetailItem
               icon={<DocumentTextIcon />}
               label="Description"
