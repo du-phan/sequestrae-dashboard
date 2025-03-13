@@ -43,10 +43,10 @@ export default function ProjectsTable({ projects }: ProjectsTableProps) {
               aria-hidden="true"
             />
             <p className="mt-4 text-gray-700 font-medium text-lg">
-              No projects found
+              No project found
             </p>
             <p className="mt-2 text-sm text-gray-500 max-w-sm mx-auto">
-              Try adjusting your search criteria to find what you're looking
+              Try adjusting your search criteria to find what you are looking
               for.
             </p>
           </div>
