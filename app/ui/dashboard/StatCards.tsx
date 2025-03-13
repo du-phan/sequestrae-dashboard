@@ -1,5 +1,4 @@
 import React from "react";
-import { textPresets } from "@/app/ui/theme";
 
 interface StatCardProps {
   title: string;
@@ -87,9 +86,9 @@ export default function StatCards({
       />
 
       <StatCard
-        title="Countries"
+        title="Geographical Scope"
         value={countriesCount}
-        subtitle="Global distribution"
+        subtitle="Countries represented"
         icon={
           <svg
             className="w-5 h-5"
@@ -105,8 +104,8 @@ export default function StatCards({
             />
           </svg>
         }
-        bgColor="bg-indigo-50"
-        iconColor="text-indigo-500"
+        bgColor="bg-amber-50"
+        iconColor="text-amber-500"
       />
 
       <StatCard

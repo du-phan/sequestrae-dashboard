@@ -16,14 +16,16 @@ export default function DashboardHeader() {
             <h1
               className={`${textPresets.h2} text-gray-900 mb-3 leading-tight`}
             >
-              Biochar Carbon Removal Intelligence
+              Welcome to Sequestrae
             </h1>
             <p
               className={`${textPresets.paragraph} text-gray-600 max-w-2xl leading-relaxed mb-4`}
             >
-              Explore biochar projects from leading registries—Puro.earth,
-              Verra, and Riverse—analyzed through our standardized evaluation
-              framework to help you make informed carbon removal decisions.
+              We gather public documents of biochar projects from the leading
+              registries (Puro.earth, Verra, Riverse) into one streamlined
+              platform. Every project is carefully analyzed using our
+              transparent, standardized evaluation framework, making it easier
+              for you to quickly compare and understand biochar project quality.
             </p>
 
             <a
@@ -42,9 +44,9 @@ export default function DashboardHeader() {
             </h3>
             <ul className="space-y-3.5">
               {[
-                "Compare projects using consistent quality metrics",
-                "Accelerate due diligence with standardized analysis",
-                "Select projects aligned with your ESG goals",
+                "Accelerate your due diligence and simplify project analysis",
+                "Select high-quality projects aligned with your ESG goals",
+                "Get clear recommendations on what to do next",
               ].map((item, index) => (
                 <li key={index} className="flex gap-3 items-start">
                   <div className="flex-shrink-0 w-5 h-5 text-blue-600 bg-blue-50 rounded-full flex items-center justify-center mt-0.5">
