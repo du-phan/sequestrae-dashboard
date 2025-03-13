@@ -50,11 +50,9 @@ export default async function DashboardPage({
 
   return (
     <div className="max-w-7xl mx-auto">
-      {/* The enhanced header now stands on its own with proper spacing */}
       <DashboardHeader />
 
-      {/* stat cards shifted down slightly for better visual flow after the new header */}
-      <div className="mb-8">
+      <div className="mb-6">
         <StatCards
           projectsCount={totalProjects}
           countriesCount={uniqueCountries}
