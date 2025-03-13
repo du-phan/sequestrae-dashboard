@@ -15,7 +15,10 @@ interface ProjectsTableProps {
 
 export default function ProjectsTable({ projects }: ProjectsTableProps) {
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+    <div
+      className="bg-white rounded-lg shadow-sm border border-gray-100 p-6 mt-6"
+      id="projects"
+    >
       <h2
         className={`${textPresets.h4} text-gray-800 mb-5 flex items-center gap-2`}
       >

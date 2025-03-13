@@ -18,51 +18,34 @@ const StatCard = ({
   iconColor,
   subtitle,
 }: StatCardProps) => {
-  // Format numbers with thousands separators for better readability
+  // Format numbers with thousands separators
   const formattedValue =
     typeof value === "number" ? new Intl.NumberFormat().format(value) : value;
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all duration-300 group">
-      <div className="p-6">
-        {/* Card header with improved spacing and alignment */}
-        <div className="flex items-center justify-between mb-4">
-          <p className="text-sm font-medium text-gray-600 group-hover:text-gray-800 transition-colors duration-300">
-            {title}
-          </p>
-          <div
-            className={`p-3 rounded-full ${bgColor} flex items-center justify-center transition-transform duration-300 group-hover:scale-110`}
-          >
-            <div className={`${iconColor}`}>{icon}</div>
+    <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden hover:border-gray-200 transition-all duration-200">
+      <div className="p-5">
+        {/* Improved card header */}
+        <div className="flex items-center justify-between mb-3">
+          <p className="text-sm font-medium text-gray-700">{title}</p>
+          <div className={`p-2.5 rounded-md ${bgColor}`}>
+            <div className={`${iconColor} w-5 h-5`}>{icon}</div>
           </div>
         </div>
 
-        {/* Value display with animation */}
-        <div className="text-center py-3">
-          <h3
-            className={`${textPresets.h3} text-gray-900 font-bold tracking-tight animate-fadeIn`}
-          >
+        {/* Better value display */}
+        <div className="mt-2">
+          <h3 className={`text-2xl font-bold text-gray-900`}>
             {formattedValue}
           </h3>
 
-          {/* Subtitle with improved styling */}
-          {subtitle && (
-            <p className="text-xs text-gray-500 mt-1.5 group-hover:text-gray-600 transition-colors duration-300">
-              {subtitle}
-            </p>
-          )}
+          {/* Improved subtitle */}
+          {subtitle && <p className="text-xs text-gray-500 mt-1">{subtitle}</p>}
         </div>
       </div>
 
-      {/* Enhanced visual indicator with gradient that responds to hover */}
-      <div
-        className="h-1.5 w-full group-hover:opacity-100 opacity-80 transition-opacity duration-300"
-        style={{
-          background: `linear-gradient(90deg, transparent, var(--${
-            bgColor.split("-")[1]
-          }-400), transparent)`,
-        }}
-      ></div>
+      {/* Subtle indicator line */}
+      <div className={`h-0.5 w-full ${bgColor.replace("50", "100")}`}></div>
     </div>
   );
 };
@@ -79,14 +62,14 @@ export default function StatCards({
   countriesCount,
 }: StatCardsProps) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
       <StatCard
-        title="Total Biochar Projects"
+        title="Biochar Projects"
         value={projectsCount}
-        subtitle="Projects analyzed in the platform"
+        subtitle="Total projects analyzed"
         icon={
           <svg
-            className="w-6 h-6"
+            className="w-5 h-5"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -94,22 +77,22 @@ export default function StatCards({
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
-              strokeWidth={2}
+              strokeWidth={1.5}
               d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
             />
           </svg>
         }
         bgColor="bg-blue-50"
-        iconColor="text-blue-600"
+        iconColor="text-blue-500"
       />
 
       <StatCard
-        title="Countries Represented"
+        title="Countries"
         value={countriesCount}
-        subtitle="Global project distribution"
+        subtitle="Global distribution"
         icon={
           <svg
-            className="w-6 h-6"
+            className="w-5 h-5"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -117,22 +100,22 @@ export default function StatCards({
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
-              strokeWidth={2}
+              strokeWidth={1.5}
               d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
             />
           </svg>
         }
         bgColor="bg-indigo-50"
-        iconColor="text-indigo-600"
+        iconColor="text-indigo-500"
       />
 
       <StatCard
-        title="Unique Registries"
+        title="Registries"
         value={registriesCount}
-        subtitle="Carbon credit registries"
+        subtitle="Carbon credit standards"
         icon={
           <svg
-            className="w-6 h-6"
+            className="w-5 h-5"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -140,13 +123,13 @@ export default function StatCards({
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
-              strokeWidth={2}
+              strokeWidth={1.5}
               d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
             />
           </svg>
         }
         bgColor="bg-green-50"
-        iconColor="text-green-600"
+        iconColor="text-green-500"
       />
     </div>
   );
