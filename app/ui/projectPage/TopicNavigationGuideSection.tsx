@@ -8,6 +8,7 @@ import {
   GlobeAmericasIcon, // Replacement for TreeIcon
   DocumentTextIcon,
   UserGroupIcon,
+  // Removed StarIcon import
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
@@ -103,13 +104,18 @@ export default function TopicNavigationGuideSection({
   // Enhanced component for the analysis structure explanation with improved visual design
   const AnalysisStructureCard = () => {
     return (
-      <div className="rounded-lg border border-gray-100 p-5 bg-white">
+      <div className="rounded-lg border border-gray-100 p-5 bg-gray-50 relative overflow-hidden">
+        {/* Remove the diagonal stripes pattern since we're using background color instead */}
+
         <h4
           className={`${textPresets.h4} text-gray-800 mb-4 flex items-center`}
         >
           <BookOpenIcon className="h-5 w-5 mr-2 text-blue-600" />
-          How Our Analysis Is Organized
+          Methodology
         </h4>
+
+        {/* Light divider to separate from main content */}
+        <div className="w-16 h-0.5 bg-blue-100 mb-5"></div>
 
         <p className={`${textPresets.paragraph} text-gray-600 mb-5`}>
           Each topic is analyzed using a consistent framework to help you
@@ -119,11 +125,11 @@ export default function TopicNavigationGuideSection({
         {/* Visual process flow with connected cards - improved spacing */}
         <div className="relative space-y-4 pb-1">
           {/* Connector line for visual flow (hidden on mobile) */}
-          <div className="absolute left-4 top-8 bottom-10 w-0.5 bg-gray-100 hidden md:block"></div>
+          <div className="absolute left-4 top-8 bottom-10 w-0.5 bg-gray-200 hidden md:block"></div>
 
           {/* Step 1: Subtopics - with fixed padding */}
           <div className="flex flex-col md:flex-row md:items-center gap-3 relative">
-            <div className="flex-shrink-0 bg-blue-50 rounded-full w-8 h-8 flex items-center justify-center shadow-sm border border-blue-200 text-blue-600 z-10">
+            <div className="flex-shrink-0 bg-white rounded-full w-8 h-8 flex items-center justify-center shadow-sm border border-gray-200 text-gray-700 z-10">
               <span className="inline-flex items-center justify-center text-sm font-semibold leading-none">
                 1
               </span>
@@ -143,7 +149,7 @@ export default function TopicNavigationGuideSection({
 
           {/* Step 2: Factors - with fixed padding */}
           <div className="flex flex-col md:flex-row md:items-center gap-3 relative">
-            <div className="flex-shrink-0 bg-blue-50 rounded-full w-8 h-8 flex items-center justify-center shadow-sm border border-blue-200 text-blue-600 z-10">
+            <div className="flex-shrink-0 bg-white rounded-full w-8 h-8 flex items-center justify-center shadow-sm border border-gray-200 text-gray-700 z-10">
               <span className="inline-flex items-center justify-center text-sm font-semibold leading-none">
                 2
               </span>
@@ -163,15 +169,21 @@ export default function TopicNavigationGuideSection({
 
           {/* Step 3: Assessment Framework - refined number styling */}
           <div className="flex flex-col md:flex-row md:items-center gap-3 relative">
-            <div className="flex-shrink-0 bg-blue-50 rounded-full w-8 h-8 flex items-center justify-center shadow-sm border border-blue-200 text-blue-600 z-10">
+            <div className="flex-shrink-0 bg-white rounded-full w-8 h-8 flex items-center justify-center shadow-sm border border-gray-200 text-gray-700 z-10">
               <span className="inline-flex items-center justify-center text-sm font-semibold leading-none">
                 3
               </span>
             </div>
             <div className="flex-1 bg-white p-4 rounded-lg border border-gray-100 shadow-sm">
-              <h5 className={`${textPresets.label} text-gray-800 mb-3`}>
-                Assessment Framework for each Factor
+              <h5 className={`${textPresets.label} text-gray-800 mb-2`}>
+                Assessment Framework
               </h5>
+              <p
+                className={`${textPresets.paragraph} text-gray-600 max-w-prose mb-4`}
+              >
+                For each factor, the insights are organized into three
+                categories to provide a comprehensive evaluation:
+              </p>
 
               {/* Improved visual cards - matching RiskFactorCard styling */}
               <div className="grid grid-cols-1 gap-3 lg:grid-cols-3">
@@ -251,7 +263,7 @@ export default function TopicNavigationGuideSection({
         </p>
 
         {/* Topics grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
           {topics.map((topic) => (
             <TopicCard
               key={topic.name}
@@ -263,7 +275,10 @@ export default function TopicNavigationGuideSection({
           ))}
         </div>
 
-        {/* Analysis structure explanation - removed unnecessary margin */}
+        {/* Simple divider without star icon */}
+        <div className="h-px bg-gray-100 mb-6"></div>
+
+        {/* Analysis structure explanation - with background color styling */}
         <AnalysisStructureCard />
       </div>
     </div>
