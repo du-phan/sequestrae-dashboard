@@ -81,22 +81,31 @@ export default function TopicNavigationGuideSection({
     return (
       <Link
         href={href}
-        className="flex items-start p-4 rounded-lg border border-gray-100 hover:border-blue-100 hover:bg-blue-50 transition-colors group"
+        className="flex items-start p-5 rounded-lg border border-gray-200 hover:border-blue-200 bg-white hover:bg-blue-50 transition-all duration-200 shadow-sm hover:shadow group relative"
       >
-        <div className="mr-4 text-gray-500 group-hover:text-blue-600">
+        {/* Icon with enhanced styling */}
+        <div className="flex-shrink-0 mr-4 text-blue-600 bg-blue-50 p-2 rounded-lg group-hover:bg-blue-100 transition-colors">
           {icon}
         </div>
-        <div>
+
+        {/* Content container with improved spacing */}
+        <div className="flex-grow pr-6">
           <h4
-            className={`${textPresets.label} text-gray-800 mb-1 group-hover:text-blue-600`}
+            className={`${textPresets.label} text-gray-900 font-medium mb-1.5 group-hover:text-blue-700 transition-colors`}
           >
             {name}
           </h4>
-          <p className={`${textPresets.caption} text-gray-600`}>
+          <p
+            className={`${textPresets.caption} text-gray-600 group-hover:text-gray-700 transition-colors`}
+          >
             {description}
           </p>
         </div>
-        <ArrowSmallRightIcon className="h-5 w-5 ml-auto text-gray-400 group-hover:text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity" />
+
+        {/* Always visible arrow that enhances on hover */}
+        <div className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center justify-center">
+          <ArrowSmallRightIcon className="h-5 w-5 text-gray-400 group-hover:text-blue-600 group-hover:translate-x-0.5 transition-all duration-200" />
+        </div>
       </Link>
     );
   };
