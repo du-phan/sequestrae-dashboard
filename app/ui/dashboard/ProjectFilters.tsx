@@ -68,7 +68,7 @@ export default function ProjectFilters() {
                 ref={searchInputRef}
                 type="text"
                 name="search"
-                placeholder="Search by project name, country, or registry..."
+                placeholder="Search by project name, registry, country or feedstock type..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="block w-full rounded-lg border-0 py-3 pl-12 pr-4 text-gray-900 ring-1 ring-inset ring-gray-300 

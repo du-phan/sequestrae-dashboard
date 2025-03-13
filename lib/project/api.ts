@@ -153,7 +153,7 @@ export async function getProjects({
     // Add text search if query parameter is provided
     if (query) {
       projectQuery = projectQuery.or(
-        `project_name.ilike.%${query}%,country.ilike.%${query}%,registry.ilike.%${query}%`
+        `project_name.ilike.%${query}%,country.ilike.%${query}%,registry.ilike.%${query}%,feedstock_type_in_string.ilike.%${query}%`
       );
     }
 
@@ -172,9 +172,8 @@ export async function getProjects({
 
     if (query) {
       countQuery = countQuery.or(
-        `project_name.ilike.%${query}%,country.ilike.%${query}%,registry.ilike.%${query}%`
+        `project_name.ilike.%${query}%,country.ilike.%${query}%,registry.ilike.%${query}%,feedstock_type_in_string.ilike.%${query}%`
       );
-      // Removed feedstock_type array search
     }
 
     const { count, error: countError } = await countQuery;
