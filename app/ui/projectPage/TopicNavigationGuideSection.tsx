@@ -256,30 +256,32 @@ export default function TopicNavigationGuideSection({
 
       {/* Content area - reduced unnecessary margins */}
       <div className="px-6 pb-6">
-        <p className={`${textPresets.paragraph} text-gray-600 mb-5`}>
-          Our analysis is organized into five key topics, each examining
-          different aspects of the project. Click on any topic to explore
-          detailed findings and recommendations.
-        </p>
+        <div className="ml-5">
+          <p className={`${textPresets.paragraph} text-gray-600 mb-5`}>
+            Our analysis is organized into five key topics, each examining
+            different aspects of the project. Click on any topic to explore
+            detailed findings and recommendations.
+          </p>
 
-        {/* Topics grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-          {topics.map((topic) => (
-            <TopicCard
-              key={topic.name}
-              name={topic.name}
-              description={topic.description}
-              href={topic.href}
-              icon={topic.icon}
-            />
-          ))}
+          {/* Topics grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+            {topics.map((topic) => (
+              <TopicCard
+                key={topic.name}
+                name={topic.name}
+                description={topic.description}
+                href={topic.href}
+                icon={topic.icon}
+              />
+            ))}
+          </div>
+
+          {/* Simple divider without star icon */}
+          <div className="h-px bg-gray-100 mb-6"></div>
+
+          {/* Analysis structure explanation - with background color styling */}
+          <AnalysisStructureCard />
         </div>
-
-        {/* Simple divider without star icon */}
-        <div className="h-px bg-gray-100 mb-6"></div>
-
-        {/* Analysis structure explanation - with background color styling */}
-        <AnalysisStructureCard />
       </div>
     </div>
   );
