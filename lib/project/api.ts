@@ -152,7 +152,9 @@ export async function getProjects({
 
     // Add text search if query parameter is provided
     if (query) {
-      projectQuery = projectQuery.ilike("project_name", `%${query}%`);
+      projectQuery = projectQuery.or(
+        `project_name.ilike.%${query}%,country.ilike.%${query}%,registry.ilike.%${query}%`
+      );
     }
 
     // Execute the query
@@ -164,10 +166,18 @@ export async function getProjects({
     }
 
     // Get total count for pagination
-    const { count, error: countError } = await supabase
+    let countQuery = supabase
       .from("projects")
-      .select("project_id", { count: "exact" })
-      .ilike("project_name", query ? `%${query}%` : "%");
+      .select("project_id", { count: "exact" });
+
+    if (query) {
+      countQuery = countQuery.or(
+        `project_name.ilike.%${query}%,country.ilike.%${query}%,registry.ilike.%${query}%`
+      );
+      // Removed feedstock_type array search
+    }
+
+    const { count, error: countError } = await countQuery;
 
     if (countError) {
       console.error("Error fetching project count:", countError);
