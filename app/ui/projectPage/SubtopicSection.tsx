@@ -2,6 +2,7 @@ import React from "react";
 import { ComponentRiskFactor } from "../../../types/ui";
 import RiskFactorCard from "./RiskFactorCard";
 import { textPresets } from "../theme";
+import CollapsibleSummary from "./CollapsibleSummary";
 
 interface SubtopicSectionProps {
   /**
@@ -37,7 +38,7 @@ interface SubtopicSectionProps {
 
 /**
  * SubtopicSection component - Displays a subtopic with its summary and risk factors
- * Improved with clearer visual hierarchy and better labeling
+ * Improved with clearer visual hierarchy and better labeling while maintaining SSR
  */
 export default function SubtopicSection({
   id,
@@ -68,9 +69,32 @@ export default function SubtopicSection({
         </h3>
       </div>
 
-      {/* Enhanced summary section */}
-      <div className="mb-8 ml-1">
-        <p className={`${textPresets.paragraph} text-gray-600`}>{summary}</p>
+      {/* Enhanced summary section with visual improvements */}
+      <div className="mb-8">
+        <div className="bg-gray-50 border border-gray-100 rounded-lg p-5 relative">
+          <div className="flex items-start mb-3">
+            <svg
+              className="w-5 h-5 text-blue-500 mt-0.5 mr-2 flex-shrink-0"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            <h4 className={`${textPresets.label} text-gray-700 font-medium`}>
+              Summary
+            </h4>
+          </div>
+
+          {/* Client component handles the collapsible functionality */}
+          <CollapsibleSummary summary={summary} />
+        </div>
       </div>
 
       {/* Risk factors section with explicit header */}
@@ -91,7 +115,6 @@ export default function SubtopicSection({
               name={riskFactor.name}
               type={riskFactor.type}
               points={riskFactor.points}
-              // Pass a label to explicitly identify this as a factor
               factorLabel="Factor"
             />
           ))}
