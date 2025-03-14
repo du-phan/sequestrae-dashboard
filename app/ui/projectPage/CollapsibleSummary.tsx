@@ -28,7 +28,7 @@ export default function CollapsibleSummary({
   const summaryRef = useRef<HTMLParagraphElement>(null);
 
   // Character threshold for considering a summary "long"
-  const LONG_SUMMARY_THRESHOLD = 700;
+  const LONG_SUMMARY_THRESHOLD = 500;
 
   // Check if summary is long on mount and window resize
   useEffect(() => {
