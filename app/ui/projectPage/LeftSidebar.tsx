@@ -383,7 +383,9 @@ export default function LeftSidebar({
         <h3
           className={`uppercase tracking-wider text-gray-500 font-semibold mb-4 ${textPresets.caption}`}
         >
-          {currentTopic === "overview" ? "Project Overview" : "Topic Sections"}
+          {currentTopic === "overview"
+            ? "Project Overview"
+            : "Subtopic Sections"}
         </h3>
 
         {subtopics.length > 0 ? (
