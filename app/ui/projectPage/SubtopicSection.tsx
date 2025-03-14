@@ -37,7 +37,7 @@ interface SubtopicSectionProps {
 
 /**
  * SubtopicSection component - Displays a subtopic with its summary and risk factors
- * Redesigned with elegant divider and improved spacing
+ * Improved with clearer visual hierarchy and better labeling
  */
 export default function SubtopicSection({
   id,
@@ -49,37 +49,59 @@ export default function SubtopicSection({
 }: SubtopicSectionProps) {
   return (
     <div id={id} data-subtopic-id={id} className={`w-full ${className}`}>
-      {/* Elegant divider with improved spacing */}
+      {/* Enhanced divider with improved spacing */}
       {!isFirst && (
-        <div className="mt-10 mb-10">
+        <div className="mt-12 mb-12">
           <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent"></div>
         </div>
       )}
 
-      {/* Subtopic heading and summary */}
-      <h3 className={`${textPresets.h4} text-gray-700 mb-3 font-medium`}>
-        {title}
-      </h3>
-      <p className={`${textPresets.paragraphSmall} mb-6 text-gray-600`}>
-        {summary}
-      </p>
+      {/* Subtopic heading with improved visual distinction */}
+      <div className="mb-6 pb-2 border-b border-gray-100">
+        <div className="flex items-center mb-1">
+          <span className="text-xs font-medium uppercase tracking-wider text-blue-600 mr-2">
+            Subtopic
+          </span>
+        </div>
+        <h3 className={`${textPresets.h4} text-gray-800 font-medium`}>
+          {title}
+        </h3>
+      </div>
 
-      <div className="space-y-6">
-        {riskFactors.map((riskFactor) => (
-          <RiskFactorCard
-            key={riskFactor.id}
-            id={String(riskFactor.id)}
-            name={riskFactor.name}
-            type={riskFactor.type}
-            points={riskFactor.points}
-          />
-        ))}
+      {/* Enhanced summary section */}
+      <div className="mb-8 ml-1">
+        <p className={`${textPresets.paragraph} text-gray-600`}>{summary}</p>
+      </div>
 
-        {riskFactors.length === 0 && (
-          <p className={`${textPresets.paragraphSmall} italic text-gray-500`}>
-            No risk factors available for this subtopic.
-          </p>
-        )}
+      {/* Risk factors section with explicit header */}
+      <div className="mb-4 ml-1">
+        <h4 className={`${textPresets.label} text-gray-600 font-medium mb-6`}>
+          {riskFactors.length > 0 ? (
+            <>Key Factors ({riskFactors.length})</>
+          ) : (
+            "Key Factors"
+          )}
+        </h4>
+
+        <div className="space-y-8">
+          {riskFactors.map((riskFactor) => (
+            <RiskFactorCard
+              key={riskFactor.id}
+              id={String(riskFactor.id)}
+              name={riskFactor.name}
+              type={riskFactor.type}
+              points={riskFactor.points}
+              // Pass a label to explicitly identify this as a factor
+              factorLabel="Factor"
+            />
+          ))}
+
+          {riskFactors.length === 0 && (
+            <p className={`${textPresets.paragraphSmall} italic text-gray-500`}>
+              No risk factors available for this subtopic.
+            </p>
+          )}
+        </div>
       </div>
     </div>
   );

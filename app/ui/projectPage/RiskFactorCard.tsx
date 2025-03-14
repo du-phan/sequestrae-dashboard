@@ -29,6 +29,11 @@ interface RiskFactorCardProps {
   points: RiskFactorPoint[];
 
   /**
+   * Label to describe this item (e.g. "Factor")
+   */
+  factorLabel?: string;
+
+  /**
    * Optional className for additional styling
    */
   className?: string;
@@ -36,12 +41,13 @@ interface RiskFactorCardProps {
 
 /**
  * RiskFactorCard component - Displays a risk factor with its points
- * Features collapsed view with point type counts and expanded view with tabs
+ * Enhanced with clearer labeling and improved hierarchy
  */
 export default function RiskFactorCard({
   id, // Include id in props
   name,
   points,
+  factorLabel = "",
   className = "",
 }: RiskFactorCardProps) {
   // State for expanded/collapsed view
@@ -272,128 +278,137 @@ export default function RiskFactorCard({
     <div
       id={id} // Ensure id is properly set for IntersectionObserver
       data-risk-factor-id={id} // Add data attribute for easier selection
-      className={`border rounded-lg p-6 bg-white border-gray-200 shadow-sm ${className} scroll-mt-24`}
+      className={`border rounded-lg bg-white border-gray-200 shadow-sm ${className} scroll-mt-24`}
     >
-      {/* Header with risk factor name */}
-      <h3 className={`${textPresets.h4} text-gray-800 mb-4`}>{name}</h3>
+      {/* Enhanced header with factor label and clearer hierarchy */}
+      <div className="border-b border-gray-100 py-4 px-6">
+        {factorLabel && (
+          <span className="inline-block text-xs font-medium uppercase tracking-wider text-blue-600 mb-1">
+            {factorLabel}
+          </span>
+        )}
+        <h3 className={`${textPresets.h4} text-gray-800`}>{name}</h3>
+      </div>
 
-      {/* Collapsed view shows count badges */}
-      {!isExpanded ? (
-        <div>
-          {/* Point type counts - updated to use black text for badges */}
-          <div className="flex flex-wrap gap-2 mb-4">
-            {strengthsCount > 0 && (
-              <span
-                className={`px-3 py-1 ${textPresets.caption} ${strengthsStyle.bgColor} text-gray-800 border ${strengthsStyle.borderColor} rounded-full flex items-center`}
-              >
-                {/* Using consistent black text for both number and label */}
-                {strengthsCount}{" "}
-                {strengthsCount === 1 ? "Strength" : "Strengths"}
-              </span>
-            )}
-            {considerationsCount > 0 && (
-              <span
-                className={`px-3 py-1 ${textPresets.caption} ${considerationsStyle.bgColor} text-gray-800 border ${considerationsStyle.borderColor} rounded-full flex items-center`}
-              >
-                {/* Using consistent black text for both number and label */}
-                {considerationsCount}{" "}
-                {considerationsCount === 1 ? "Consideration" : "Considerations"}
-              </span>
-            )}
-            {actionsCount > 0 && (
-              <span
-                className={`px-3 py-1 ${textPresets.caption} ${actionsStyle.bgColor} text-gray-800 border ${actionsStyle.borderColor} rounded-full flex items-center`}
-              >
-                {/* Using consistent black text for both number and label */}
-                {actionsCount} {actionsCount === 1 ? "Action" : "Actions"}
-              </span>
-            )}
-          </div>
+      {/* Card body with improved padding */}
+      <div className="p-6 pt-5">
+        {/* Collapsed view shows count badges */}
+        {!isExpanded ? (
+          <div>
+            {/* Point type counts with improved spacing */}
+            <div className="flex flex-wrap gap-2 mb-5">
+              {strengthsCount > 0 && (
+                <span
+                  className={`px-3 py-1 ${textPresets.caption} ${strengthsStyle.bgColor} text-gray-800 border ${strengthsStyle.borderColor} rounded-full flex items-center`}
+                >
+                  {strengthsCount}{" "}
+                  {strengthsCount === 1 ? "Strength" : "Strengths"}
+                </span>
+              )}
+              {considerationsCount > 0 && (
+                <span
+                  className={`px-3 py-1 ${textPresets.caption} ${considerationsStyle.bgColor} text-gray-800 border ${considerationsStyle.borderColor} rounded-full flex items-center`}
+                >
+                  {considerationsCount}{" "}
+                  {considerationsCount === 1
+                    ? "Consideration"
+                    : "Considerations"}
+                </span>
+              )}
+              {actionsCount > 0 && (
+                <span
+                  className={`px-3 py-1 ${textPresets.caption} ${actionsStyle.bgColor} text-gray-800 border ${actionsStyle.borderColor} rounded-full flex items-center`}
+                >
+                  {actionsCount} {actionsCount === 1 ? "Action" : "Actions"}
+                </span>
+              )}
+            </div>
 
-          {/* Expand button - updated to use the new handler */}
-          <button
-            className={`text-blue-600 hover:text-blue-700 ${textPresets.label} flex items-center`}
-            onClick={handleExpand}
-            aria-expanded="false"
-          >
-            View Details
-            <svg
-              className="ml-2 h-4 w-4"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-              aria-hidden="true"
+            {/* Expand button with improved styling */}
+            <button
+              className={`text-blue-600 hover:text-blue-700 ${textPresets.label} flex items-center transition-colors`}
+              onClick={handleExpand}
+              aria-expanded="false"
             >
-              <path
-                fillRule="evenodd"
-                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </button>
-        </div>
-      ) : (
-        <div>
-          {/* Tab navigation - removed icons from tabs */}
-          <div
-            className="flex space-x-2 mb-6 border-b border-gray-100 pb-2"
-            role="tablist"
-          >
-            <TabButton
-              tab="strengths"
-              label="Strengths"
-              activeTab={activeTab}
-              onClick={setActiveTab}
-              pointType="strengths"
-            />
-            <TabButton
-              tab="considerations"
-              label="Considerations"
-              activeTab={activeTab}
-              onClick={setActiveTab}
-              pointType="considerations"
-            />
-            <TabButton
-              tab="actions"
-              label="Recommended Actions"
-              activeTab={activeTab}
-              onClick={setActiveTab}
-              pointType="recommended_actions"
-            />
+              View Details
+              <svg
+                className="ml-2 h-4 w-4 transition-transform"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </button>
           </div>
-
-          {/* Tab content area */}
-          <div
-            className="mb-6"
-            role="tabpanel"
-            aria-label={`${activeTab} panel`}
-          >
-            {renderTabContent()}
-          </div>
-
-          {/* Collapse button */}
-          <button
-            className={`text-blue-600 hover:text-blue-700 ${textPresets.label} flex items-center`}
-            onClick={() => setIsExpanded(false)}
-            aria-expanded="true"
-          >
-            Collapse
-            <svg
-              className="ml-2 h-4 w-4"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-              aria-hidden="true"
+        ) : (
+          <div>
+            {/* Tab navigation with improved spacing */}
+            <div
+              className="flex space-x-2 mb-6 border-b border-gray-100 pb-3"
+              role="tablist"
             >
-              <path
-                fillRule="evenodd"
-                d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z"
-                clipRule="evenodd"
+              <TabButton
+                tab="strengths"
+                label="Strengths"
+                activeTab={activeTab}
+                onClick={setActiveTab}
+                pointType="strengths"
               />
-            </svg>
-          </button>
-        </div>
-      )}
+              <TabButton
+                tab="considerations"
+                label="Considerations"
+                activeTab={activeTab}
+                onClick={setActiveTab}
+                pointType="considerations"
+              />
+              <TabButton
+                tab="actions"
+                label="Recommended Actions"
+                activeTab={activeTab}
+                onClick={setActiveTab}
+                pointType="recommended_actions"
+              />
+            </div>
+
+            {/* Tab content area with improved spacing */}
+            <div
+              className="mb-6"
+              role="tabpanel"
+              aria-label={`${activeTab} panel`}
+            >
+              {renderTabContent()}
+            </div>
+
+            {/* Collapse button with improved styling */}
+            <button
+              className={`text-blue-600 hover:text-blue-700 ${textPresets.label} flex items-center transition-colors`}
+              onClick={() => setIsExpanded(false)}
+              aria-expanded="true"
+            >
+              Collapse
+              <svg
+                className="ml-2 h-4 w-4 transition-transform"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
