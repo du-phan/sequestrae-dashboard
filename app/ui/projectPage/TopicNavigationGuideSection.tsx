@@ -120,7 +120,7 @@ export default function TopicNavigationGuideSection({
               <BookOpenIcon className="h-4 w-4" />
             </div>
             <h4 className={`${textPresets.h4} text-gray-800 m-0`}>
-              Methodology
+              How Each Topic is Analyzed
             </h4>
           </div>
         </div>
@@ -128,8 +128,8 @@ export default function TopicNavigationGuideSection({
         {/* Card body with consistent padding */}
         <div className="p-5">
           <p className={`${textPresets.paragraph} text-gray-600 mb-5`}>
-            Each topic is analyzed using a consistent framework to help you
-            understand the project comprehensively:
+            Our step-by-step framework provides clear, practical insights—giving
+            you a comprehensive understanding of the project:
           </p>
 
           {/* Visual process flow with connected cards - improved spacing */}
@@ -153,8 +153,8 @@ export default function TopicNavigationGuideSection({
                 <p
                   className={`${textPresets.paragraph} text-gray-600 max-w-prose mb-0`}
                 >
-                  Major areas of analysis are divided into specific subtopics
-                  that examine key aspects of the project.
+                  Each topic is divided into clear subtopics covering key areas
+                  of analysis.
                 </p>
               </div>
             </div>
@@ -175,8 +175,8 @@ export default function TopicNavigationGuideSection({
                 <p
                   className={`${textPresets.paragraph} text-gray-600 max-w-prose mb-0`}
                 >
-                  Within each subtopic, we identify specific factors that could
-                  impact project success.
+                  Within each subtopic, we highlight specific factors that
+                  directly influence project performance.
                 </p>
               </div>
             </div>
@@ -197,8 +197,7 @@ export default function TopicNavigationGuideSection({
                 <p
                   className={`${textPresets.paragraph} text-gray-600 max-w-prose mb-4`}
                 >
-                  For each factor, the insights are organized into three
-                  categories to provide a comprehensive evaluation:
+                  Each factor is assessed clearly in three categories:
                 </p>
 
                 {/* Clean visual cards without icons */}
@@ -216,7 +215,7 @@ export default function TopicNavigationGuideSection({
                       <p
                         className={`${textPresets.caption} text-gray-600 text-center`}
                       >
-                        Positive aspects that support project success
+                        Positive aspects supporting project quality
                       </p>
                     </div>
                   </div>
@@ -234,7 +233,7 @@ export default function TopicNavigationGuideSection({
                       <p
                         className={`${textPresets.caption} text-gray-600 text-center`}
                       >
-                        Areas that require attention or may present challenges
+                        Issues or areas needing attention
                       </p>
                     </div>
                   </div>
@@ -252,7 +251,7 @@ export default function TopicNavigationGuideSection({
                       <p
                         className={`${textPresets.caption} text-gray-600 text-center`}
                       >
-                        Suggestions to address considerations or enhance
+                        Clear next steps to resolve uncertainties or improve
                         outcomes
                       </p>
                     </div>
@@ -282,9 +281,10 @@ export default function TopicNavigationGuideSection({
       <div className="px-6 pb-6">
         <div className="ml-5">
           <p className={`${textPresets.paragraph} text-gray-600 mb-5`}>
-            Our analysis is organized into five key topics, each examining
-            different aspects of the project. Click on any topic to explore
-            detailed findings and recommendations.
+            We have structured our analysis into five key topics to help you
+            easily explore and understand all aspects of a biochar project.
+            Click any topic below for detailed insights and practical
+            recommendations:
           </p>
 
           {/* Topics grid */}
