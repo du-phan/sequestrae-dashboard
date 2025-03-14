@@ -72,7 +72,7 @@ export default function SubtopicSection({
       {/* Enhanced summary section with visual improvements */}
       <div className="mb-8">
         <div className="bg-gray-50 border border-gray-100 rounded-lg p-5 relative">
-          <div className="flex items-start mb-3">
+          <div className="flex items-start">
             <svg
               className="w-5 h-5 text-blue-500 mt-0.5 mr-2 flex-shrink-0"
               fill="none"
@@ -87,13 +87,17 @@ export default function SubtopicSection({
                 d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
               />
             </svg>
-            <h4 className={`${textPresets.label} text-gray-700 font-medium`}>
-              Summary
-            </h4>
-          </div>
+            <div className="flex-1">
+              <h4
+                className={`${textPresets.label} text-gray-700 font-medium mb-3`}
+              >
+                Summary
+              </h4>
 
-          {/* Client component handles the collapsible functionality */}
-          <CollapsibleSummary summary={summary} />
+              {/* Client component handles the collapsible functionality */}
+              <CollapsibleSummary summary={summary} />
+            </div>
+          </div>
         </div>
       </div>
 
