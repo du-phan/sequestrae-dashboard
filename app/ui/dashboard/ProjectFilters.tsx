@@ -66,9 +66,9 @@ export default function ProjectFilters() {
         </div>
         <button
           type="submit"
-          className="shrink-0 flex items-center self-stretch px-5 rounded-lg bg-lavender-50 text-lavender-600 font-medium text-sm
-                     hover:bg-lavender-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-lavender-400
-                     transition-colors duration-200"
+          className="shrink-0 flex items-center self-stretch px-5 rounded-lg bg-lavender-100 text-lavender-800 font-medium text-sm
+                     hover:bg-lavender-200 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-lavender-300
+                     transition-colors duration-200 shadow-sm"
         >
           <span className="text-sm font-medium">Search</span>
         </button>

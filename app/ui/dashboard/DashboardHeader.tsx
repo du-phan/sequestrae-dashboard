@@ -32,7 +32,7 @@ export default function DashboardHeader() {
             {/* Button remains in the same position */}
             <a
               href="#projects"
-              className="inline-flex items-center justify-center py-2.5 px-5 rounded-lg bg-[#A38DB7] text-white font-medium hover:bg-opacity-90 transition-all duration-200 group shadow-sm"
+              className="inline-flex items-center justify-center py-2.5 px-5 rounded-lg bg-lavender-600 text-white font-medium hover:bg-lavender-700 transition-all duration-200 group shadow-sm"
             >
               Browse all projects
               <ArrowRightIcon className="ml-2 w-4 h-4 group-hover:translate-x-0.5 transition-transform" />

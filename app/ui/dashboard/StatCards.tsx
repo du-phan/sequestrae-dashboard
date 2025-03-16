@@ -1,5 +1,4 @@
 import React from "react";
-import { colorPalette } from "@/app/ui/theme";
 
 interface StatCardProps {
   title: string;

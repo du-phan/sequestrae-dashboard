@@ -20,20 +20,20 @@ export function getComponentColors(type: ComponentType) {
   switch (type) {
     case "primary":
       return {
-        bg: `bg-[${colorPalette.lavender[50]}]`,
-        bgHover: `hover:bg-[${colorPalette.lavender[100]}]`,
-        text: `text-[${colorPalette.lavender[500]}]`,
-        textHover: `hover:text-[${colorPalette.lavender[700]}]`,
-        border: `border-[${colorPalette.lavender[200]}]`,
+        bg: `bg-lavender-50`,
+        bgHover: `hover:bg-lavender-100`,
+        text: `text-lavender-700`,
+        textHover: `hover:text-lavender-800`,
+        border: `border-lavender-200`,
         shadow: `shadow-[0_2px_8px_rgba(163,141,183,0.15)]`,
       };
     case "secondary":
       return {
-        bg: `bg-[${colorPalette.teal[50]}]`,
-        bgHover: `hover:bg-[${colorPalette.teal[100]}]`,
-        text: `text-[${colorPalette.teal[500]}]`,
-        textHover: `hover:text-[${colorPalette.teal[700]}]`,
-        border: `border-[${colorPalette.teal[200]}]`,
+        bg: `bg-tealCustom-50`,
+        bgHover: `hover:bg-tealCustom-100`,
+        text: `text-tealCustom-700`,
+        textHover: `hover:text-tealCustom-800`,
+        border: `border-tealCustom-200`,
         shadow: `shadow-[0_2px_8px_rgba(131,183,173,0.15)]`,
       };
     case "info":
@@ -74,29 +74,12 @@ export function getComponentColors(type: ComponentType) {
       };
     default:
       return {
-        bg: `bg-[${colorPalette.lavender[50]}]`,
-        bgHover: `hover:bg-[${colorPalette.lavender[100]}]`,
-        text: `text-[${colorPalette.lavender[500]}]`,
-        textHover: `hover:text-[${colorPalette.lavender[700]}]`,
-        border: `border-[${colorPalette.lavender[200]}]`,
+        bg: `bg-lavender-50`,
+        bgHover: `hover:bg-lavender-100`,
+        text: `text-lavender-700`,
+        textHover: `hover:text-lavender-800`,
+        border: `border-lavender-200`,
         shadow: `shadow-[0_2px_8px_rgba(163,141,183,0.15)]`,
       };
   }
-}
-
-/**
- * Generate CSS variable values for our custom colors
- * Useful for creating a theme that can be used via CSS variables
- */
-export function generateCssColorVariables() {
-  let cssVars = {};
-
-  // Generate variables for each color in our palette
-  Object.entries(colorPalette).forEach(([colorName, shades]) => {
-    Object.entries(shades).forEach(([shade, value]) => {
-      cssVars[`--color-${colorName}-${shade}`] = value;
-    });
-  });
-
-  return cssVars;
 }

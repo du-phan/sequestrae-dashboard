@@ -134,9 +134,12 @@ export default function ProjectsTable({ projects }: ProjectsTableProps) {
                     <td className="py-4 pl-3 pr-5 text-sm text-right">
                       <Link
                         href={`/project/${project.project_id}`}
-                        className="inline-flex items-center justify-center gap-1 text-lavender-600 hover:text-lavender-700 font-medium transition-colors duration-150 px-3 py-1.5 bg-lavender-50 rounded-md hover:bg-lavender-100"
+                        className="inline-flex items-center justify-center gap-1 text-lavender-800 font-medium transition-colors duration-150 px-3 py-1.5 bg-lavender-100 rounded-md hover:bg-lavender-200 shadow-sm"
                       >
-                        <EyeIcon className="h-4 w-4" aria-hidden="true" />
+                        <EyeIcon
+                          className="h-4 w-4 text-lavender-700"
+                          aria-hidden="true"
+                        />
                         <span>View</span>
                       </Link>
                     </td>
@@ -240,7 +243,7 @@ function FeedstockTypeDisplay({
         {sortedTypes.map((type, index) => (
           <span
             key={index}
-            className="inline-flex items-center rounded-md bg-lavender-50 px-2 py-0.5 text-sm text-lavender-700"
+            className="inline-flex items-center rounded-md bg-gray-100 px-2.5 py-0.5 text-sm text-gray-800"
           >
             {type.text}
           </span>
@@ -264,7 +267,7 @@ function FeedstockTypeDisplay({
             {processedTypes.map((type, index) => (
               <span
                 key={index}
-                className="inline-flex items-center rounded-md bg-lavender-100 px-2 py-0.5 text-sm text-lavender-800"
+                className="inline-flex items-center rounded-md bg-gray-200 px-2.5 py-0.5 text-sm text-gray-800"
               >
                 {type.text}
               </span>
@@ -278,14 +281,14 @@ function FeedstockTypeDisplay({
         {displayTypes.map((type, index) => (
           <span
             key={index}
-            className="inline-flex items-center rounded-md bg-lavender-50 px-2 py-0.5 text-sm text-lavender-700"
+            className="inline-flex items-center rounded-md bg-gray-100 px-2.5 py-0.5 text-sm text-gray-800"
           >
             {type.text.length > MAX_DISPLAY_LENGTH
               ? `${type.text.substring(0, MAX_DISPLAY_LENGTH)}...`
               : type.text}
           </span>
         ))}
-        <span className="inline-flex items-center rounded-md bg-gray-100 px-2 py-0.5 text-sm text-gray-500">
+        <span className="inline-flex items-center rounded-md bg-gray-100 px-2.5 py-0.5 text-sm text-gray-500">
           +{feedstockTypes.length - MAX_ITEMS_TO_SHOW}
         </span>
       </div>
