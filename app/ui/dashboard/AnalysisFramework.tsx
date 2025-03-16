@@ -47,32 +47,32 @@ export default function AnalysisFramework() {
         <Dimension
           icon={<CalculatorIcon className="w-5 h-5" />}
           name="Carbon Accounting & Integrity"
-          color="text-blue-600"
-          bgColor="bg-blue-50"
+          color="text-blueCustom-400"
+          bgColor="bg-blueCustom-50"
         />
         <Dimension
           icon={<ExclamationTriangleIcon className="w-5 h-5" />}
           name="Delivery Risk"
-          color="text-amber-600"
-          bgColor="bg-amber-50"
+          color="text-amberCustom-400"
+          bgColor="bg-amberCustom-50"
         />
         <Dimension
           icon={<GlobeAmericasIcon className="w-5 h-5" />}
           name="Environmental Impact"
-          color="text-green-600"
-          bgColor="bg-green-50"
+          color="text-greenCustom-400"
+          bgColor="bg-greenCustom-50"
         />
         <Dimension
           icon={<ScaleIcon className="w-5 h-5" />}
           name="Policy Landscape"
-          color="text-indigo-600"
-          bgColor="bg-indigo-50"
+          color="text-lavender-500"
+          bgColor="bg-lavender-50"
         />
         <Dimension
           icon={<UserGroupIcon className="w-5 h-5" />}
           name="Social Impact"
-          color="text-rose-600"
-          bgColor="bg-rose-50"
+          color="text-roseCustom-400"
+          bgColor="bg-roseCustom-50"
         />
       </div>
     </div>

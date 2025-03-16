@@ -73,6 +73,114 @@ export const zIndex = {
   tooltip: 50,
 };
 
+/**
+ * Custom color palette derived from brand color (#A38DB7)
+ * Creates a cohesive pastel palette that harmonizes with the brand identity
+ */
+export const colorPalette = {
+  // Primary brand color
+  lavender: {
+    50: "#F5F2F7",
+    100: "#E9E2EE",
+    200: "#D4C6DE",
+    300: "#BEA9CD",
+    400: "#A38DB7", // Brand color
+    500: "#8C74A3",
+    600: "#75608D",
+    700: "#5E4C70",
+    800: "#473952",
+    900: "#2F2636",
+  },
+  // Complementary colors
+  teal: {
+    50: "#F2F7F6",
+    100: "#E2EEEB",
+    200: "#C6DED8",
+    300: "#A9CDC4",
+    400: "#83B7AD",
+    500: "#69A398",
+    600: "#508B7F",
+    700: "#3C6E64",
+    800: "#2A504A",
+    900: "#1C352F",
+  },
+  blue: {
+    50: "#F2F5F8",
+    100: "#E2EBF1",
+    200: "#C6D7E3",
+    300: "#A9C3D5",
+    400: "#8DA3B7",
+    500: "#738CA1",
+    600: "#5A7387",
+    700: "#445A6D",
+    800: "#2F4153",
+    900: "#1E2A36",
+  },
+  green: {
+    50: "#F2F7F4",
+    100: "#E3EEE8",
+    200: "#C7DED2",
+    300: "#ABCDBB",
+    400: "#8DB7A3",
+    500: "#72A189",
+    600: "#588870",
+    700: "#426C57",
+    800: "#2E503E",
+    900: "#1D3327",
+  },
+  amber: {
+    50: "#F7F5F2",
+    100: "#EEEAE2",
+    200: "#DED5C6",
+    300: "#CDBFA9",
+    400: "#B7A38D",
+    500: "#A18C72",
+    600: "#8B7558",
+    700: "#6E5D44",
+    800: "#504530",
+    900: "#352E1C",
+  },
+  rose: {
+    50: "#F7F2F5",
+    100: "#EEE2E9",
+    200: "#DEC6D4",
+    300: "#CDA9BE",
+    400: "#B78DA3",
+    500: "#A1738C",
+    600: "#875A73",
+    700: "#6D445A",
+    800: "#532F41",
+    900: "#361E2A",
+  },
+};
+
+// Semantic color mappings
+export const semanticColors = {
+  primary: colorPalette.lavender[400], // Main brand color
+  primary_light: colorPalette.lavender[100],
+  primary_dark: colorPalette.lavender[600],
+
+  secondary: colorPalette.teal[400],
+  secondary_light: colorPalette.teal[100],
+  secondary_dark: colorPalette.teal[600],
+
+  info: colorPalette.blue[400],
+  info_light: colorPalette.blue[100],
+  info_dark: colorPalette.blue[600],
+
+  success: colorPalette.green[400],
+  success_light: colorPalette.green[100],
+  success_dark: colorPalette.green[600],
+
+  warning: colorPalette.amber[400],
+  warning_light: colorPalette.amber[100],
+  warning_dark: colorPalette.amber[600],
+
+  error: colorPalette.rose[400],
+  error_light: colorPalette.rose[100],
+  error_dark: colorPalette.rose[600],
+};
+
 // Color scheme - these are CSS variables that can be used in Tailwind classes
 const colors = {
   primary: "var(--color-primary)",
@@ -133,6 +241,8 @@ const theme = {
   transitions,
   maxWidths,
   zIndex,
+  colorPalette, // Add our custom palette to the theme
+  semanticColors,
 };
 
 export default theme;

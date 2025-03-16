@@ -1,4 +1,5 @@
 import React from "react";
+import { colorPalette } from "@/app/ui/theme";
 
 interface StatCardProps {
   title: string;
@@ -82,8 +83,8 @@ export default function StatCards({
             />
           </svg>
         }
-        bgColor="bg-blue-50"
-        iconColor="text-blue-500"
+        bgColor="bg-blueCustom-50"
+        iconColor="text-blueCustom-400"
       />
 
       <StatCard
@@ -105,8 +106,8 @@ export default function StatCards({
             />
           </svg>
         }
-        bgColor="bg-amber-50"
-        iconColor="text-amber-500"
+        bgColor="bg-amberCustom-50"
+        iconColor="text-amberCustom-400"
       />
 
       <StatCard
@@ -128,8 +129,8 @@ export default function StatCards({
             />
           </svg>
         }
-        bgColor="bg-green-50"
-        iconColor="text-green-500"
+        bgColor="bg-greenCustom-50"
+        iconColor="text-greenCustom-400"
       />
     </div>
   );

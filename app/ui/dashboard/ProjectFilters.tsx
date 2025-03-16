@@ -59,15 +59,15 @@ export default function ProjectFilters() {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="block w-full rounded-lg border-0 py-3 pl-12 pr-4 text-gray-900 ring-1 ring-inset ring-gray-300 
-                       placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-500 
+                       placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-lavender-400 
                        sm:text-sm sm:leading-6 transition-all duration-200"
             aria-label="Search projects"
           />
         </div>
         <button
           type="submit"
-          className="shrink-0 flex items-center self-stretch px-5 rounded-lg bg-blue-50 text-blue-600 font-medium text-sm
-                     hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500
+          className="shrink-0 flex items-center self-stretch px-5 rounded-lg bg-lavender-50 text-lavender-600 font-medium text-sm
+                     hover:bg-lavender-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-lavender-400
                      transition-colors duration-200"
         >
           <span className="text-sm font-medium">Search</span>

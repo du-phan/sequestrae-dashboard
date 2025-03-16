@@ -68,7 +68,7 @@ export default function Pagination({
         className={clsx(
           "relative inline-flex items-center rounded-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 focus:z-20 focus:outline-offset-0 mr-2",
           {
-            "hover:bg-gray-50": currentPage > 1,
+            "hover:bg-lavender-50 hover:text-lavender-500": currentPage > 1,
             "opacity-50 cursor-not-allowed": currentPage <= 1,
           }
         )}
@@ -103,10 +103,10 @@ export default function Pagination({
               key={`page-${page}`}
               onClick={() => replace(createPageURL(page), { scroll: false })}
               className={clsx(
-                "relative inline-flex items-center px-4 py-2 text-sm font-medium focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 mx-0.5",
+                "relative inline-flex items-center px-4 py-2 text-sm font-medium focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lavender-500 mx-0.5",
                 {
-                  "bg-blue-600 text-white": currentPage === page,
-                  "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50":
+                  "bg-lavender-500 text-white": currentPage === page,
+                  "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-lavender-50 hover:text-lavender-600":
                     currentPage !== page,
                 }
               )}
@@ -123,7 +123,8 @@ export default function Pagination({
         className={clsx(
           "relative inline-flex items-center rounded-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 focus:z-20 focus:outline-offset-0 ml-2",
           {
-            "hover:bg-gray-50": currentPage < totalPages,
+            "hover:bg-lavender-50 hover:text-lavender-500":
+              currentPage < totalPages,
             "opacity-50 cursor-not-allowed": currentPage >= totalPages,
           }
         )}

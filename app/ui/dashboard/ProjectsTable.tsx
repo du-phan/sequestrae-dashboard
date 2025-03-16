@@ -26,7 +26,7 @@ export default function ProjectsTable({ projects }: ProjectsTableProps) {
             className={`${textPresets.h4} text-gray-800 mb-6 flex items-center gap-2`}
           >
             <DocumentIcon
-              className="w-5 h-5 text-blue-500"
+              className="w-5 h-5 text-lavender-400"
               aria-hidden="true"
             />
             Projects
@@ -98,13 +98,13 @@ export default function ProjectsTable({ projects }: ProjectsTableProps) {
                     key={project.project_id}
                     className={`${
                       idx % 2 === 0 ? "bg-white" : "bg-gray-50"
-                    } hover:bg-blue-50 transition-colors duration-200`}
+                    } hover:bg-lavender-50 transition-colors duration-200`}
                   >
                     <td className="py-4 pl-5 pr-3 text-sm">
                       <div>
                         <Link
                           href={`/project/${project.project_id}`}
-                          className="font-medium text-gray-900 hover:text-blue-700 transition-colors duration-150 hover:underline truncate max-w-xs block"
+                          className="font-medium text-gray-900 hover:text-lavender-600 transition-colors duration-150 hover:underline truncate max-w-xs block"
                         >
                           <Tooltip
                             content={formatProjectName(project.project_name)}
@@ -134,7 +134,7 @@ export default function ProjectsTable({ projects }: ProjectsTableProps) {
                     <td className="py-4 pl-3 pr-5 text-sm text-right">
                       <Link
                         href={`/project/${project.project_id}`}
-                        className="inline-flex items-center justify-center gap-1 text-blue-600 hover:text-blue-900 font-medium transition-colors duration-150 px-3 py-1.5 bg-blue-50 rounded-md hover:bg-blue-100"
+                        className="inline-flex items-center justify-center gap-1 text-lavender-600 hover:text-lavender-700 font-medium transition-colors duration-150 px-3 py-1.5 bg-lavender-50 rounded-md hover:bg-lavender-100"
                       >
                         <EyeIcon className="h-4 w-4" aria-hidden="true" />
                         <span>View</span>
@@ -191,12 +191,12 @@ function RegistryDisplay({ registry, projectUrl }: RegistryDisplayProps) {
         href={projectUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="group inline-flex items-center gap-1.5 text-gray-700 hover:text-blue-600 transition-colors duration-150 px-2.5 py-0.5 rounded-md bg-gray-100 hover:bg-blue-50"
+        className="group inline-flex items-center gap-1.5 text-gray-700 hover:text-lavender-600 transition-colors duration-150 px-2.5 py-0.5 rounded-md bg-gray-100 hover:bg-lavender-50"
         aria-label={`Visit project page on ${formattedRegistry} registry (opens in new tab)`}
       >
         {formattedRegistry}
         <ArrowTopRightOnSquareIcon
-          className="h-3.5 w-3.5 text-gray-400 group-hover:text-blue-500 transition-colors duration-150"
+          className="h-3.5 w-3.5 text-gray-400 group-hover:text-lavender-500 transition-colors duration-150"
           aria-hidden="true"
         />
       </a>
@@ -240,7 +240,7 @@ function FeedstockTypeDisplay({
         {sortedTypes.map((type, index) => (
           <span
             key={index}
-            className="inline-flex items-center rounded-md bg-gray-100 px-2 py-0.5 text-sm text-gray-700"
+            className="inline-flex items-center rounded-md bg-lavender-50 px-2 py-0.5 text-sm text-lavender-700"
           >
             {type.text}
           </span>
@@ -264,7 +264,7 @@ function FeedstockTypeDisplay({
             {processedTypes.map((type, index) => (
               <span
                 key={index}
-                className="inline-flex items-center rounded-md bg-blue-100 px-2 py-0.5 text-sm text-blue-800"
+                className="inline-flex items-center rounded-md bg-lavender-100 px-2 py-0.5 text-sm text-lavender-800"
               >
                 {type.text}
               </span>
@@ -278,7 +278,7 @@ function FeedstockTypeDisplay({
         {displayTypes.map((type, index) => (
           <span
             key={index}
-            className="inline-flex items-center rounded-md bg-gray-100 px-2 py-0.5 text-sm text-gray-700"
+            className="inline-flex items-center rounded-md bg-lavender-50 px-2 py-0.5 text-sm text-lavender-700"
           >
             {type.text.length > MAX_DISPLAY_LENGTH
               ? `${type.text.substring(0, MAX_DISPLAY_LENGTH)}...`
