@@ -1,6 +1,7 @@
 import React from "react";
 import { textPresets } from "@/app/ui/theme";
 import { ArrowRightIcon } from "@heroicons/react/20/solid";
+import ButtonLink from "@/app/ui/common/ButtonLink";
 
 export default function DashboardHeader() {
   return (
@@ -29,14 +30,16 @@ export default function DashboardHeader() {
               for you to quickly compare and understand biochar project quality.
             </p>
 
-            {/* Button remains in the same position */}
-            <a
+            {/* Enhanced button with properly colored icon */}
+            <ButtonLink
               href="#projects"
-              className="inline-flex items-center justify-center py-2.5 px-5 rounded-lg bg-lavender-600 text-white font-medium hover:bg-lavender-700 transition-all duration-200 group shadow-sm"
+              variant="primary"
+              size="md"
+              icon={<ArrowRightIcon className="w-4 h-4" aria-hidden="true" />}
+              ariaLabel="Browse all biochar projects"
             >
               Browse all projects
-              <ArrowRightIcon className="ml-2 w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-            </a>
+            </ButtonLink>
           </div>
 
           {/* Feature box positioned to align with the title - spans 4 columns */}

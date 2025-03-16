@@ -9,6 +9,7 @@ import {
   DocumentIcon,
 } from "@heroicons/react/20/solid";
 import ProjectFilters from "./ProjectFilters";
+import TableActionButton from "@/app/ui/common/TableActionButton";
 
 interface ProjectsTableProps {
   projects: Project[];
@@ -132,16 +133,18 @@ export default function ProjectsTable({ projects }: ProjectsTableProps) {
                       />
                     </td>
                     <td className="py-4 pl-3 pr-5 text-sm text-right">
-                      <Link
+                      <TableActionButton
                         href={`/project/${project.project_id}`}
-                        className="inline-flex items-center justify-center gap-1 text-lavender-800 font-medium transition-colors duration-150 px-3 py-1.5 bg-lavender-100 rounded-md hover:bg-lavender-200 shadow-sm"
+                        icon={
+                          <EyeIcon className="h-4 w-4" aria-hidden="true" />
+                        }
+                        ariaLabel={`View details for ${formatProjectName(
+                          project.project_name
+                        )}`}
+                        variant="default"
                       >
-                        <EyeIcon
-                          className="h-4 w-4 text-lavender-700"
-                          aria-hidden="true"
-                        />
-                        <span>View</span>
-                      </Link>
+                        View
+                      </TableActionButton>
                     </td>
                   </tr>
                 ))}
