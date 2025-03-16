@@ -75,7 +75,7 @@ export default function SubtopicSection({
         <div className="bg-gray-50 border border-gray-100 rounded-lg p-5 relative">
           <div className="flex items-start">
             <svg
-              className="w-5 h-5 text-lavender-600 mt-0.5 mr-2 flex-shrink-0"
+              className="w-5 h-5 text-lavender-600 mr-2 flex-shrink-0 mt-0"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -89,14 +89,13 @@ export default function SubtopicSection({
               />
             </svg>
             <div className="flex-1">
-              <h4
-                className={`${textPresets.label} text-gray-700 font-medium mb-3`}
-              >
+              {/* Updated summary heading to match TopicIntro and TopicSummaryCard */}
+              <div className="text-xs font-semibold uppercase tracking-wide text-lavender-700">
                 Summary
-              </h4>
+              </div>
 
               {/* Client component handles the collapsible functionality */}
-              <CollapsibleSummary summary={summary} />
+              <CollapsibleSummary summary={summary} className="mt-1" />
             </div>
           </div>
         </div>

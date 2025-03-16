@@ -52,22 +52,25 @@ export default function TopicIntro({
 
       {/* Description with improved visual presentation */}
       <div className="ml-5 relative">
-        <div className="bg-gray-50 border border-gray-100 rounded-lg p-6 mb-2 shadow-sm">
+        <div className="bg-lavender-50/50 border border-gray-100 rounded-lg p-6 mb-2 shadow-sm">
           <div className="flex">
             {/* Book icon */}
-            <div className="flex-shrink-0 mr-4 text-lavender-600">
-              <BookOpenIcon className="h-5 w-5" />
+            <div className="flex-shrink-0 mr-4 text-lavender-500">
+              <BookOpenIcon
+                className="h-5 w-5"
+                style={{ height: "1.375rem", width: "1.375rem" }}
+              />
             </div>
 
             {/* Description text with enhanced styling */}
             <div className="flex-grow">
-              {/* Small label - updated with more contrast */}
-              <div className="mb-2 text-xs font-medium uppercase tracking-wide text-lavender-800">
+              {/* Small label - removed bottom margin */}
+              <div className="text-xs font-semibold uppercase tracking-wide text-lavender-700">
                 Topic Introduction
               </div>
 
               <p
-                className={`${textPresets.paragraph} text-gray-700 leading-relaxed mb-0`}
+                className={`${textPresets.paragraph} text-gray-700 leading-relaxed mb-0 mt-1`}
               >
                 {description}
               </p>

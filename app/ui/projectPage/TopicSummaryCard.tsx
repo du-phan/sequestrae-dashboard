@@ -36,7 +36,7 @@ export default function TopicSummaryCard({
       <div className="p-6">
         {summaryText ? (
           <div className="flex">
-            {/* Enhanced icon with better positioning - adjusted for better alignment */}
+            {/* Enhanced icon with better positioning */}
             <div className="mr-4 flex-shrink-0">
               <svg
                 width="24"
@@ -59,13 +59,15 @@ export default function TopicSummaryCard({
               </svg>
             </div>
 
-            {/* Summary text with enhanced typography - removed bottom margin from heading */}
+            {/* Summary text with enhanced typography */}
             <div>
-              <h3 className={`${textPresets.h5} text-lavender-800 mb-1`}>
+              {/* Small label - removed bottom margin */}
+              <div className="text-xs font-semibold uppercase tracking-wide text-lavender-700">
                 Key Summary
-              </h3>
+              </div>
+
               <p
-                className={`${textPresets.body} text-gray-700 leading-relaxed max-w-prose mb-0`}
+                className={`${textPresets.paragraph} text-gray-700 leading-relaxed max-w-prose mb-0 mt-1`}
               >
                 {summaryText}
               </p>

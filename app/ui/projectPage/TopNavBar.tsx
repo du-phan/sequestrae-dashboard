@@ -120,11 +120,11 @@ const TopNavBar = ({ projectId, projectName }: TopNavBarProps) => {
                   <li key={item.name}>
                     <Link
                       href={href}
-                      className={`px-3 py-2 text-sm font-medium rounded-md transition-colors whitespace-nowrap ${
+                      className={`px-3 py-2 text-sm font-medium rounded-t-sm transition-all duration-200 whitespace-nowrap border-b ${
                         isActive
-                          ? "bg-lavender-100 text-lavender-700"
-                          : "text-gray-700 hover:text-lavender-600 hover:bg-gray-50"
-                      }`}
+                          ? "text-lavender-700 border-lavender-500 bg-lavender-50/80"
+                          : "text-gray-700 hover:text-lavender-600 hover:bg-gray-50/80 border-transparent hover:border-lavender-200/70"
+                      } h-10 flex items-center`}
                     >
                       {item.name}
                     </Link>
