@@ -4,23 +4,24 @@ import { ArrowRightIcon } from "@heroicons/react/20/solid";
 
 export default function DashboardHeader() {
   return (
-    <div className="bg-white shadow-sm rounded-xl mb-6 overflow-hidden border border-gray-100">
-      {/* Subtle gradient accent */}
-      <div className="h-1 bg-gradient-to-r from-blue-400 to-indigo-500 opacity-90"></div>
-
-      {/* Main header section with improved spacing */}
+    <div className="bg-white rounded-lg shadow-md mb-8 overflow-hidden">
       <div className="p-6 md:p-8">
-        <div className="flex flex-col lg:flex-row lg:items-start gap-6 md:gap-8">
-          {/* Left column with more concise text */}
-          <div className="flex-1">
-            <h1
-              className={`${textPresets.h2} text-gray-900 mb-3 leading-tight`}
-            >
-              Welcome to Sequestrae
-            </h1>
-            <p
-              className={`${textPresets.paragraph} text-gray-600 max-w-2xl leading-relaxed mb-4`}
-            >
+        {/* Header and content using grid layout for precise positioning */}
+        <div className="lg:grid lg:grid-cols-12 lg:gap-8">
+          {/* Main content area - spans 8 columns */}
+          <div className="lg:col-span-8">
+            {/* Title section */}
+            <div className="mb-6">
+              <h1
+                className={`text-3xl md:text-4xl font-bold text-gray-900 mb-2`}
+              >
+                Welcome to Sequestrae
+              </h1>
+              <div className="h-1 w-12 bg-[#A38DB7] rounded-full mb-4"></div>
+            </div>
+
+            {/* Main paragraph */}
+            <p className={`${textPresets.paragraph} max-w-2xl mb-6`}>
               We gather public documents of biochar projects from the leading
               registries (Puro.earth, Verra, Riverse) into one streamlined
               platform. Every project is carefully analyzed using our
@@ -28,46 +29,51 @@ export default function DashboardHeader() {
               for you to quickly compare and understand biochar project quality.
             </p>
 
+            {/* Button remains in the same position */}
             <a
               href="#projects"
-              className="inline-flex items-center text-sm font-medium text-blue-600 hover:text-blue-800 transition-colors group"
+              className="inline-flex items-center justify-center py-2.5 px-5 rounded-lg bg-[#A38DB7] text-white font-medium hover:bg-opacity-90 transition-all duration-200 group shadow-sm"
             >
               Browse all projects
-              <ArrowRightIcon className="ml-1 w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+              <ArrowRightIcon className="ml-2 w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </a>
           </div>
 
-          {/* Right column with improved feature list */}
-          <div className="lg:max-w-sm lg:pl-6 lg:border-l lg:border-gray-100">
-            <h3 className={`text-gray-800 font-medium mb-4 text-base`}>
-              With Sequestrae, you can:
-            </h3>
-            <ul className="space-y-3.5">
-              {[
-                "Accelerate your due diligence and simplify project analysis",
-                "Select high-quality projects aligned with your ESG goals",
-                "Get clear recommendations on what to do next",
-              ].map((item, index) => (
-                <li key={index} className="flex gap-3 items-start">
-                  <div className="flex-shrink-0 w-5 h-5 text-blue-600 bg-blue-50 rounded-full flex items-center justify-center mt-0.5">
-                    <svg
-                      className="w-3 h-3"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </div>
-                  <span className="text-sm text-gray-700 leading-tight">
-                    {item}
-                  </span>
-                </li>
-              ))}
-            </ul>
+          {/* Feature box positioned to align with the title - spans 4 columns */}
+          <div className="mt-8 lg:mt-0 lg:col-span-4">
+            <div className="bg-gray-50 rounded-lg p-6 h-auto">
+              <h3 className="text-gray-800 font-semibold mb-4 text-base">
+                With Sequestrae, you can:
+              </h3>
+              <ul className="space-y-4">
+                {[
+                  "Accelerate your due diligence and simplify project analysis",
+                  "Select high-quality projects aligned with your ESG goals",
+                  "Get clear recommendations on what to do next",
+                ].map((item, index) => (
+                  <li key={index} className="flex gap-3 items-start">
+                    <div className="flex-shrink-0 w-5 h-5 text-[#A38DB7] flex items-center justify-center mt-0.5">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </div>
+                    <span className="text-sm text-gray-600 leading-snug">
+                      {item}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </div>
