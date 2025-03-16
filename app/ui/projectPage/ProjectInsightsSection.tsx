@@ -97,38 +97,38 @@ export default function ProjectInsightsSection({
       case "strengths":
         return {
           icon: <CheckCircleIcon className="w-full h-full" />,
-          iconColor: "text-green-500",
-          bgColor: "bg-green-50",
-          borderColor: "border-green-100",
-          textColor: "text-green-700",
+          iconColor: "text-greenCustom-500",
+          bgColor: "bg-greenCustom-50",
+          borderColor: "border-greenCustom-100",
+          textColor: "text-greenCustom-700",
           title: "Key Strengths",
-          badge: "bg-green-100 text-green-800",
-          hoverBorder: "hover:border-green-200",
-          hoverShadow: "group-hover:shadow-green-100/50",
+          badge: "bg-greenCustom-100 text-greenCustom-800",
+          hoverBorder: "hover:border-greenCustom-200",
+          hoverShadow: "group-hover:shadow-greenCustom-100/50",
         };
       case "considerations":
         return {
           icon: <ExclamationCircleIcon className="w-full h-full" />,
-          iconColor: "text-amber-500",
-          bgColor: "bg-amber-50",
-          borderColor: "border-amber-100",
-          textColor: "text-amber-700",
+          iconColor: "text-roseCustom-500",
+          bgColor: "bg-roseCustom-50",
+          borderColor: "border-roseCustom-100",
+          textColor: "text-roseCustom-700",
           title: "Key Considerations",
-          badge: "bg-amber-100 text-amber-800",
-          hoverBorder: "hover:border-amber-200",
-          hoverShadow: "group-hover:shadow-amber-100/50",
+          badge: "bg-roseCustom-100 text-roseCustom-800",
+          hoverBorder: "hover:border-roseCustom-200",
+          hoverShadow: "group-hover:shadow-roseCustom-100/50",
         };
       case "recommendedActions":
         return {
           icon: <ArrowRightCircleIcon className="w-full h-full" />,
-          iconColor: "text-blue-500",
-          bgColor: "bg-blue-50",
-          borderColor: "border-blue-100",
-          textColor: "text-blue-700",
+          iconColor: "text-blueCustom-500",
+          bgColor: "bg-blueCustom-50",
+          borderColor: "border-blueCustom-100",
+          textColor: "text-blueCustom-700",
           title: "Recommended Actions",
-          badge: "bg-blue-100 text-blue-800",
-          hoverBorder: "hover:border-blue-200",
-          hoverShadow: "group-hover:shadow-blue-100/50",
+          badge: "bg-blueCustom-100 text-blueCustom-800",
+          hoverBorder: "hover:border-blueCustom-200",
+          hoverShadow: "group-hover:shadow-blueCustom-100/50",
         };
       default:
         return {
@@ -202,7 +202,7 @@ export default function ProjectInsightsSection({
           {!isExpanded && items.length > 0 && (
             <button
               onClick={() => toggleCategory(category)}
-              className="w-full text-left rounded-md hover:bg-gray-50 py-2 px-3 -mx-1 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-blue-100"
+              className="w-full text-left rounded-md hover:bg-gray-50 py-2 px-3 -mx-1 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-lavender-100"
               aria-label={`Expand ${styles.title}`}
             >
               <div className="flex items-center">
@@ -221,7 +221,7 @@ export default function ProjectInsightsSection({
                 </span>
 
                 {items.length > 1 && (
-                  <span className="text-xs text-blue-500 ml-2 whitespace-nowrap">
+                  <span className="text-xs text-blueCustom-500 ml-2 whitespace-nowrap">
                     +{items.length - 1} more
                   </span>
                 )}
@@ -304,7 +304,7 @@ export default function ProjectInsightsSection({
       {/* Section header with standard styling to match other components */}
       <div className="p-8 pb-0">
         <div className="flex mb-8">
-          <div className="flex-shrink-0 w-1 bg-blue-600 rounded-full self-stretch"></div>
+          <div className="flex-shrink-0 w-1 bg-lavender-600 rounded-full self-stretch"></div>
           <h2 className={`${textPresets.h3} text-gray-800 ml-4 py-0 mb-0`}>
             Project Insights
           </h2>

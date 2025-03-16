@@ -91,10 +91,10 @@ export default function RiskFactorCard({
     switch (pointType) {
       case "strengths":
         return {
-          bgColor: "bg-green-50",
-          textColor: "text-green-700", // Kept for tab styling
-          borderColor: "border-green-100",
-          iconColor: "text-green-500",
+          bgColor: "bg-greenCustom-50",
+          textColor: "text-greenCustom-700",
+          borderColor: "border-greenCustom-100",
+          iconColor: "text-greenCustom-500",
           icon: (
             <svg
               className="w-4 h-4 flex-shrink-0"
@@ -112,10 +112,10 @@ export default function RiskFactorCard({
         };
       case "considerations":
         return {
-          bgColor: "bg-amber-50",
-          textColor: "text-amber-700",
-          borderColor: "border-amber-100",
-          iconColor: "text-amber-500",
+          bgColor: "bg-roseCustom-50",
+          textColor: "text-roseCustom-700",
+          borderColor: "border-roseCustom-100",
+          iconColor: "text-roseCustom-500",
           icon: (
             <svg
               className="w-4 h-4"
@@ -133,10 +133,10 @@ export default function RiskFactorCard({
         };
       case "recommended_actions":
         return {
-          bgColor: "bg-blue-50",
-          textColor: "text-blue-700",
-          borderColor: "border-blue-100",
-          iconColor: "text-blue-500",
+          bgColor: "bg-blueCustom-50",
+          textColor: "text-blueCustom-700",
+          borderColor: "border-blueCustom-100",
+          iconColor: "text-blueCustom-500",
           icon: (
             <svg
               className="w-4 h-4"
@@ -257,7 +257,7 @@ export default function RiskFactorCard({
         } rounded-md transition-colors ${
           activeTab === tab
             ? `${style.bgColor} ${style.textColor}` // Active state styling with matching colors
-            : "text-gray-600 hover:text-blue-600 hover:bg-gray-50" // Inactive state styling
+            : `text-gray-600 hover:${style.textColor} hover:bg-gray-50` // Improved hover state using category color
         }`}
         onClick={() => onClick(tab)}
         aria-selected={activeTab === tab}
@@ -283,7 +283,7 @@ export default function RiskFactorCard({
       {/* Enhanced header with factor label and clearer hierarchy */}
       <div className="border-b border-gray-100 py-4 px-6">
         {factorLabel && (
-          <span className="inline-block text-xs font-medium uppercase tracking-wider text-blue-600 mb-1">
+          <span className="inline-block text-xs font-medium uppercase tracking-wider text-lavender-600 mb-1">
             {factorLabel}
           </span>
         )}
@@ -326,7 +326,7 @@ export default function RiskFactorCard({
 
             {/* Expand button with improved styling */}
             <button
-              className={`text-blue-600 hover:text-blue-700 ${textPresets.label} flex items-center transition-colors`}
+              className={`text-lavender-600 hover:text-lavender-700 ${textPresets.label} flex items-center transition-colors`}
               onClick={handleExpand}
               aria-expanded="false"
             >
@@ -387,7 +387,7 @@ export default function RiskFactorCard({
 
             {/* Collapse button with improved styling */}
             <button
-              className={`text-blue-600 hover:text-blue-700 ${textPresets.label} flex items-center transition-colors`}
+              className={`text-lavender-600 hover:text-lavender-700 ${textPresets.label} flex items-center transition-colors`}
               onClick={() => setIsExpanded(false)}
               aria-expanded="true"
             >

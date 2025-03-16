@@ -77,7 +77,7 @@ export default function ProjectBackgroundSection({
 
     return (
       <div className={`flex items-start group ${className}`}>
-        <div className="flex-shrink-0 w-5 h-5 mt-1 mr-3 text-blue-500">
+        <div className="flex-shrink-0 w-5 h-5 mt-1 mr-3 text-lavender-500">
           {icon}
         </div>
         <div>
@@ -109,7 +109,7 @@ export default function ProjectBackgroundSection({
       {/* Section header with standard styling */}
       <div className="p-8 pb-0">
         <div className="flex mb-8">
-          <div className="flex-shrink-0 w-1 bg-blue-600 rounded-full self-stretch"></div>
+          <div className="flex-shrink-0 w-1 bg-lavender-600 rounded-full self-stretch"></div>
           <h2 className={`${textPresets.h3} text-gray-800 ml-4 py-0 mb-0`}>
             Project Background
           </h2>
