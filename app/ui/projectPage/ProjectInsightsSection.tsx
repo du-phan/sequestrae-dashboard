@@ -206,7 +206,10 @@ export default function ProjectInsightsSection({
               aria-label={`Expand ${styles.title}`}
             >
               <div className="flex items-center">
-                <span className={`${styles.textColor} font-medium text-sm`}>
+                {/* Enhanced insight count with badge styling for better visibility */}
+                <span
+                  className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${styles.bgColor} ${styles.textColor} border ${styles.borderColor}`}
+                >
                   {items.length === 1
                     ? "1 insight"
                     : `${items.length} insights`}

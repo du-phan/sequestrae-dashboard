@@ -80,17 +80,17 @@ export default function TopicNavigationGuideSection({
     return (
       <Link
         href={href}
-        className="flex items-start p-5 rounded-lg border border-gray-200 hover:border-blue-200 bg-white hover:bg-blue-50 transition-all duration-200 shadow-sm hover:shadow group relative"
+        className="flex items-start p-5 rounded-lg border border-gray-200 hover:border-lavender-200 bg-white hover:bg-lavender-50 transition-all duration-200 shadow-sm hover:shadow group relative"
       >
         {/* Icon with enhanced styling */}
-        <div className="flex-shrink-0 mr-4 text-blue-600 bg-blue-50 p-2 rounded-lg group-hover:bg-blue-100 transition-colors">
+        <div className="flex-shrink-0 mr-4 text-lavender-600 bg-lavender-50 p-2 rounded-lg group-hover:bg-lavender-100 transition-colors">
           {icon}
         </div>
 
         {/* Content container with improved spacing */}
         <div className="flex-grow pr-6">
           <h4
-            className={`${textPresets.label} text-gray-900 font-medium mb-1.5 group-hover:text-blue-700 transition-colors`}
+            className={`${textPresets.label} text-gray-900 font-medium mb-1.5 group-hover:text-lavender-700 transition-colors`}
           >
             {name}
           </h4>
@@ -103,7 +103,7 @@ export default function TopicNavigationGuideSection({
 
         {/* Always visible arrow that enhances on hover */}
         <div className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center justify-center">
-          <ArrowSmallRightIcon className="h-5 w-5 text-gray-400 group-hover:text-blue-600 group-hover:translate-x-0.5 transition-all duration-200" />
+          <ArrowSmallRightIcon className="h-5 w-5 text-gray-400 group-hover:text-lavender-600 group-hover:translate-x-0.5 transition-all duration-200" />
         </div>
       </Link>
     );
@@ -116,7 +116,7 @@ export default function TopicNavigationGuideSection({
         {/* Streamlined header with improved vertical alignment */}
         <div className="p-4 border-b border-gray-100 bg-gray-50">
           <div className="flex items-center">
-            <div className="flex-shrink-0 mr-2.5 text-blue-600 bg-blue-50 p-1 rounded-md">
+            <div className="flex-shrink-0 mr-2.5 text-lavender-600 bg-lavender-50 p-1 rounded-md">
               <BookOpenIcon className="h-4 w-4" />
             </div>
             <h4 className={`${textPresets.h4} text-gray-800 m-0`}>
@@ -135,16 +135,16 @@ export default function TopicNavigationGuideSection({
           {/* Visual process flow with connected cards - improved spacing */}
           <div className="relative space-y-6 pb-1">
             {/* Connector line for visual flow (hidden on mobile) */}
-            <div className="absolute left-4 top-10 bottom-12 w-0.5 bg-blue-100 hidden md:block"></div>
+            <div className="absolute left-4 top-10 bottom-12 w-0.5 bg-lavender-100 hidden md:block"></div>
 
             {/* Step 1: Subtopics - with enhanced styling */}
             <div className="flex flex-col md:flex-row md:items-center gap-3 relative">
-              <div className="flex-shrink-0 bg-blue-50 rounded-full w-8 h-8 flex items-center justify-center shadow-sm border border-blue-200 text-blue-700 z-10">
+              <div className="flex-shrink-0 bg-lavender-50 rounded-full w-8 h-8 flex items-center justify-center shadow-sm border border-lavender-200 text-lavender-700 z-10">
                 <span className="inline-flex items-center justify-center text-sm font-semibold leading-none">
                   1
                 </span>
               </div>
-              <div className="flex-1 bg-white p-4 rounded-lg border border-gray-200 shadow-sm hover:shadow hover:border-blue-200 transition-all duration-300">
+              <div className="flex-1 bg-white p-4 rounded-lg border border-gray-200 shadow-sm hover:shadow hover:border-lavender-200 transition-all duration-300">
                 <h5
                   className={`${textPresets.label} text-gray-900 font-medium mb-1.5`}
                 >
@@ -161,12 +161,12 @@ export default function TopicNavigationGuideSection({
 
             {/* Step 2: Factors - with enhanced styling */}
             <div className="flex flex-col md:flex-row md:items-center gap-3 relative">
-              <div className="flex-shrink-0 bg-blue-50 rounded-full w-8 h-8 flex items-center justify-center shadow-sm border border-blue-200 text-blue-700 z-10">
+              <div className="flex-shrink-0 bg-lavender-50 rounded-full w-8 h-8 flex items-center justify-center shadow-sm border border-lavender-200 text-lavender-700 z-10">
                 <span className="inline-flex items-center justify-center text-sm font-semibold leading-none">
                   2
                 </span>
               </div>
-              <div className="flex-1 bg-white p-4 rounded-lg border border-gray-200 shadow-sm hover:shadow hover:border-blue-200 transition-all duration-300">
+              <div className="flex-1 bg-white p-4 rounded-lg border border-gray-200 shadow-sm hover:shadow hover:border-lavender-200 transition-all duration-300">
                 <h5
                   className={`${textPresets.label} text-gray-900 font-medium mb-1.5`}
                 >
@@ -183,12 +183,12 @@ export default function TopicNavigationGuideSection({
 
             {/* Step 3: Assessment Framework - with enhanced styling */}
             <div className="flex flex-col md:flex-row md:items-center gap-3 relative">
-              <div className="flex-shrink-0 bg-blue-50 rounded-full w-8 h-8 flex items-center justify-center shadow-sm border border-blue-200 text-blue-700 z-10">
+              <div className="flex-shrink-0 bg-lavender-50 rounded-full w-8 h-8 flex items-center justify-center shadow-sm border border-lavender-200 text-lavender-700 z-10">
                 <span className="inline-flex items-center justify-center text-sm font-semibold leading-none">
                   3
                 </span>
               </div>
-              <div className="flex-1 bg-white p-4 rounded-lg border border-gray-200 shadow-sm hover:shadow hover:border-blue-200 transition-all duration-300">
+              <div className="flex-1 bg-white p-4 rounded-lg border border-gray-200 shadow-sm hover:shadow hover:border-lavender-200 transition-all duration-300">
                 <h5
                   className={`${textPresets.label} text-gray-900 font-medium mb-2`}
                 >
@@ -200,13 +200,13 @@ export default function TopicNavigationGuideSection({
                   Each factor is assessed clearly in three categories:
                 </p>
 
-                {/* Clean visual cards without icons */}
+                {/* Clean visual cards without icons - using our custom color palette */}
                 <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
                   {/* Strengths card - no icon */}
-                  <div className="bg-white rounded-lg border border-gray-200 shadow-sm transition-all duration-200 hover:shadow hover:border-green-200">
-                    <div className="py-2.5 border-b border-gray-100 bg-green-50">
+                  <div className="bg-white rounded-lg border border-gray-200 shadow-sm transition-all duration-200 hover:shadow hover:border-greenCustom-200">
+                    <div className="py-2.5 border-b border-gray-100 bg-greenCustom-50">
                       <p
-                        className={`${textPresets.label} text-green-700 font-medium text-center`}
+                        className={`${textPresets.label} text-greenCustom-700 font-medium text-center`}
                       >
                         Strengths
                       </p>
@@ -221,10 +221,10 @@ export default function TopicNavigationGuideSection({
                   </div>
 
                   {/* Considerations card - no icon */}
-                  <div className="bg-white rounded-lg border border-gray-200 shadow-sm transition-all duration-200 hover:shadow hover:border-amber-200">
-                    <div className="py-2.5 border-b border-gray-100 bg-amber-50">
+                  <div className="bg-white rounded-lg border border-gray-200 shadow-sm transition-all duration-200 hover:shadow hover:border-roseCustom-200">
+                    <div className="py-2.5 border-b border-gray-100 bg-roseCustom-50">
                       <p
-                        className={`${textPresets.label} text-amber-700 font-medium text-center`}
+                        className={`${textPresets.label} text-roseCustom-700 font-medium text-center`}
                       >
                         Considerations
                       </p>
@@ -239,10 +239,10 @@ export default function TopicNavigationGuideSection({
                   </div>
 
                   {/* Recommended Actions card - no icon */}
-                  <div className="bg-white rounded-lg border border-gray-200 shadow-sm transition-all duration-200 hover:shadow hover:border-blue-200">
-                    <div className="py-2.5 border-b border-gray-100 bg-blue-50">
+                  <div className="bg-white rounded-lg border border-gray-200 shadow-sm transition-all duration-200 hover:shadow hover:border-blueCustom-200">
+                    <div className="py-2.5 border-b border-gray-100 bg-blueCustom-50">
                       <p
-                        className={`${textPresets.label} text-blue-700 font-medium text-center`}
+                        className={`${textPresets.label} text-blueCustom-700 font-medium text-center`}
                       >
                         Recommended Actions
                       </p>
@@ -270,7 +270,7 @@ export default function TopicNavigationGuideSection({
       {/* Section header with standard styling */}
       <div className="p-6 pb-4">
         <div className="flex mb-4">
-          <div className="flex-shrink-0 w-1 bg-blue-600 rounded-full self-stretch"></div>
+          <div className="flex-shrink-0 w-1 bg-lavender-600 rounded-full self-stretch"></div>
           <h2 className={`${textPresets.h3} text-gray-800 ml-4 py-0 mb-0`}>
             How to Navigate This Analysis
           </h2>

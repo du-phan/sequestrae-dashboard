@@ -202,8 +202,8 @@ export default function SimplePageSidebar({
                   className={`block px-3 py-2 rounded-md text-sm transition-colors 
                     ${
                       isActive
-                        ? "bg-blue-50 text-blue-700 font-medium"
-                        : "text-gray-600 hover:bg-gray-50 hover:text-blue-600"
+                        ? "bg-lavender-100 text-lavender-800 font-medium border-l-4 border-lavender-500 pl-2"
+                        : "text-gray-600 hover:bg-gray-50 hover:text-lavender-600"
                     }`}
                 >
                   {section.name}
