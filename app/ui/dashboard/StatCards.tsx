@@ -22,12 +22,14 @@ const StatCard = ({
     typeof value === "number" ? new Intl.NumberFormat().format(value) : value;
 
   return (
-    <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden hover:border-gray-200 transition-all duration-200">
+    <div className="bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden hover:border-gray-200 hover:shadow-md transition-all duration-200">
       <div className="p-5">
         {/* Improved card header */}
         <div className="flex items-center justify-between mb-3">
           <p className="text-sm font-medium text-gray-700">{title}</p>
-          <div className={`p-2.5 rounded-md ${bgColor}`}>
+          <div
+            className={`p-2.5 rounded-md ${bgColor} transition-transform duration-300 hover:scale-105`}
+          >
             <div className={`${iconColor} w-5 h-5`}>{icon}</div>
           </div>
         </div>
@@ -43,8 +45,7 @@ const StatCard = ({
         </div>
       </div>
 
-      {/* Subtle indicator line */}
-      <div className={`h-0.5 w-full ${bgColor.replace("50", "100")}`}></div>
+      {/* Removed the colored bottom bar */}
     </div>
   );
 };
