@@ -17,6 +17,7 @@ interface CollapsibleSummaryProps {
 
 /**
  * Client component that handles the collapsible summary functionality
+ * Updated to use the lavender color palette for brand consistency
  */
 export default function CollapsibleSummary({
   summary,
@@ -80,7 +81,7 @@ export default function CollapsibleSummary({
         >
           <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className={`${textPresets.caption} text-blue-600 hover:text-blue-700 flex items-center transition-colors px-3 py-1 bg-white border border-blue-100 rounded-full shadow-sm hover:shadow`}
+            className={`${textPresets.caption} text-lavender-600 hover:text-lavender-700 flex items-center transition-colors px-3 py-1 bg-white border border-gray-200 rounded-full shadow-sm hover:shadow`}
           >
             {isExpanded ? (
               <>
@@ -93,7 +94,7 @@ export default function CollapsibleSummary({
                 >
                   <path
                     fillRule="evenodd"
-                    d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z"
+                    d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a 1 1 0 010 1.414z"
                     clipRule="evenodd"
                   />
                 </svg>
@@ -109,7 +110,7 @@ export default function CollapsibleSummary({
                 >
                   <path
                     fillRule="evenodd"
-                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a 1 1 0 010-1.414z"
                     clipRule="evenodd"
                   />
                 </svg>

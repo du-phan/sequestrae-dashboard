@@ -81,7 +81,7 @@ const TopNavBar = ({ projectId, projectName }: TopNavBarProps) => {
                 priority
               />
             </div>
-            <span className="text-gray-900 font-medium text-lg group-hover:text-blue-600 transition-colors">
+            <span className="text-gray-900 font-medium text-lg group-hover:text-lavender-600 transition-colors">
               Sequestrae
             </span>
           </a>
@@ -91,7 +91,7 @@ const TopNavBar = ({ projectId, projectName }: TopNavBarProps) => {
         <div className="flex items-center text-sm text-gray-600 min-w-0 max-w-[40%]">
           <Link
             href="/dashboard"
-            className="hover:text-blue-600 transition-colors whitespace-nowrap flex-shrink-0"
+            className="hover:text-lavender-600 transition-colors whitespace-nowrap flex-shrink-0"
           >
             Dashboard
           </Link>
@@ -101,7 +101,7 @@ const TopNavBar = ({ projectId, projectName }: TopNavBarProps) => {
           />
           <Link
             href={basePath}
-            className="hover:text-blue-600 transition-colors truncate max-w-[70%] flex-shrink-1 font-medium text-gray-800"
+            className="hover:text-lavender-600 transition-colors truncate max-w-[70%] flex-shrink-1 font-medium text-gray-800"
             title={projectName} // Original name for tooltip
           >
             {displayProjectName}
@@ -122,8 +122,8 @@ const TopNavBar = ({ projectId, projectName }: TopNavBarProps) => {
                       href={href}
                       className={`px-3 py-2 text-sm font-medium rounded-md transition-colors whitespace-nowrap ${
                         isActive
-                          ? "bg-blue-50 text-blue-700"
-                          : "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+                          ? "bg-lavender-100 text-lavender-700"
+                          : "text-gray-700 hover:text-lavender-600 hover:bg-gray-50"
                       }`}
                     >
                       {item.name}

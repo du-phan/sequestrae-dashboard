@@ -34,13 +34,13 @@ export default function TopicIntro({
       <div className="relative">
         {/* Subtle decorative background element */}
         <div className="absolute top-0 left-0 w-full h-full opacity-5 overflow-hidden">
-          <div className="absolute -right-12 -top-16 w-64 h-64 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl animate-slow-pulse"></div>
+          <div className="absolute -right-12 -top-16 w-64 h-64 bg-lavender-500 rounded-full mix-blend-multiply filter blur-3xl animate-slow-pulse"></div>
         </div>
 
         <div className="relative">
           {/* Title with enhanced styling */}
           <div className="flex mb-6">
-            <div className="flex-shrink-0 w-1 bg-blue-600 rounded-full self-stretch mr-4"></div>
+            <div className="flex-shrink-0 w-1 bg-lavender-500 rounded-full self-stretch mr-4"></div>
             <h1
               className={`${textPresets.h3} text-gray-900 mb-0 text-2xl sm:text-3xl font-bold tracking-tight`}
             >
@@ -50,19 +50,19 @@ export default function TopicIntro({
         </div>
       </div>
 
-      {/* Description with improved visual presentation - properly aligned with other components */}
+      {/* Description with improved visual presentation */}
       <div className="ml-5 relative">
         <div className="bg-gray-50 border border-gray-100 rounded-lg p-6 mb-2 shadow-sm">
           <div className="flex">
-            {/* Book icon for educational/reference content */}
-            <div className="flex-shrink-0 mr-4 text-blue-600">
+            {/* Book icon */}
+            <div className="flex-shrink-0 mr-4 text-lavender-600">
               <BookOpenIcon className="h-5 w-5" />
             </div>
 
             {/* Description text with enhanced styling */}
             <div className="flex-grow">
-              {/* Small label using just text (no icon) */}
-              <div className="mb-2 text-xs font-medium uppercase tracking-wide text-blue-700">
+              {/* Small label - updated with more contrast */}
+              <div className="mb-2 text-xs font-medium uppercase tracking-wide text-lavender-800">
                 Topic Introduction
               </div>
 

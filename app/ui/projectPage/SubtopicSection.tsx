@@ -39,6 +39,7 @@ interface SubtopicSectionProps {
 /**
  * SubtopicSection component - Displays a subtopic with its summary and risk factors
  * Improved with clearer visual hierarchy and better labeling while maintaining SSR
+ * Updated to use the lavender color palette for brand consistency
  */
 export default function SubtopicSection({
   id,
@@ -58,9 +59,9 @@ export default function SubtopicSection({
       )}
 
       {/* Subtopic heading with improved visual distinction */}
-      <div className="mb-6 pb-2 border-b border-gray-100">
+      <div className="mb-6 pb-2 border-b border-gray-200">
         <div className="flex items-center mb-1">
-          <span className="text-xs font-medium uppercase tracking-wider text-blue-600 mr-2">
+          <span className="text-xs font-medium uppercase tracking-wider text-lavender-600 mr-2">
             Subtopic
           </span>
         </div>
@@ -74,7 +75,7 @@ export default function SubtopicSection({
         <div className="bg-gray-50 border border-gray-100 rounded-lg p-5 relative">
           <div className="flex items-start">
             <svg
-              className="w-5 h-5 text-blue-500 mt-0.5 mr-2 flex-shrink-0"
+              className="w-5 h-5 text-lavender-600 mt-0.5 mr-2 flex-shrink-0"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"

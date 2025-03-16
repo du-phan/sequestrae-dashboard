@@ -401,8 +401,8 @@ export default function LeftSidebar({
                       ${textPresets.label}
                       ${
                         isActive(subtopic.id)
-                          ? "bg-blue-50 text-blue-700"
-                          : "text-gray-600 hover:bg-gray-50 hover:text-blue-600"
+                          ? "bg-lavender-100 text-lavender-700"
+                          : "text-gray-600 hover:bg-gray-50 hover:text-lavender-600"
                       }`}
                     ref={isActive(subtopic.id) ? setActiveItemRef : null}
                   >
@@ -449,8 +449,8 @@ export default function LeftSidebar({
                           ${textPresets.caption}
                           ${
                             isActive(subtopic.id)
-                              ? "bg-blue-100 text-blue-800"
-                              : "bg-gray-100 text-gray-700 hover:bg-blue-50 hover:text-blue-700"
+                              ? "bg-lavender-100 text-lavender-800"
+                              : "bg-gray-100 text-gray-700 hover:bg-lavender-50 hover:text-lavender-700"
                           }`}
                           ref={isActive(subtopic.id) ? setActiveItemRef : null}
                         >
@@ -490,8 +490,8 @@ export default function LeftSidebar({
                               ${textPresets.caption}
                               ${
                                 isActive(riskFactor.id)
-                                  ? "bg-blue-50 text-blue-700"
-                                  : "text-gray-600 hover:bg-gray-50 hover:text-blue-600"
+                                  ? "bg-lavender-100 text-lavender-800 font-medium border-l-2 border-lavender-500 -ml-[2px] pl-[10px]"
+                                  : "text-gray-600 hover:bg-lavender-50 hover:text-lavender-700"
                               }`}
                               ref={
                                 isActive(riskFactor.id)
