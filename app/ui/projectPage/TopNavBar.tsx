@@ -85,7 +85,21 @@ const TopNavBar = ({ projectId, projectName, projectUrl }: TopNavBarProps) => {
             <ul className="flex items-center space-x-2">
               {navItems.map((item) => {
                 const href = `${basePath}${item.href ? `/${item.href}` : ""}`;
-                const isActive = pathname === href;
+
+                // Improved isActive logic that correctly handles all path variants
+                let isActive = false;
+
+                if (item.href === "") {
+                  // For Overview tab, check all possible path variants
+                  isActive =
+                    pathname === basePath ||
+                    pathname === `${basePath}/` ||
+                    pathname === `${basePath}/overview` ||
+                    pathname === `${basePath}/overview/`;
+                } else {
+                  // For other tabs, check for exact match
+                  isActive = pathname === href || pathname === `${href}/`;
+                }
 
                 return (
                   <li key={item.name}>
