@@ -394,25 +394,26 @@ export default function LeftSidebar({
       {/* Content area with project name replacing "Subtopic Sections" */}
       <div
         ref={sidebarRef}
-        className="flex-1 overflow-y-auto pt-5 pb-4 px-5 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent"
+        className="flex-1 overflow-y-auto pt-5 pb-4 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent"
       >
+        {/* Adjust the header to match list item padding */}
         <h3
-          className="text-xs font-medium uppercase tracking-wider text-gray-500 mb-4 truncate"
+          className="text-xs font-medium uppercase tracking-wider text-gray-500 mb-4 px-5 truncate"
           title={projectName}
         >
           {displayProjectName}
         </h3>
 
         {subtopics.length > 0 ? (
-          <ul className="space-y-2">
+          <ul className="space-y-2 px-5">
             {subtopics.map((subtopic) => (
               <li key={subtopic.id} className="mb-1.5">
                 <div className="flex flex-col">
-                  {/* Subtopic header */}
+                  {/* Subtopic header - removed px-3 as we're using container padding */}
                   <button
                     onClick={(e) => toggleSubtopic(subtopic.id, e)}
                     data-item-id={subtopic.id}
-                    className={`flex items-center justify-between px-3 py-2 rounded-md w-full text-left transition-colors
+                    className={`flex items-center justify-between py-2 rounded-md w-full text-left transition-colors
                       ${textPresets.label}
                       ${
                         isActive(subtopic.id)
@@ -452,15 +453,15 @@ export default function LeftSidebar({
                       )}
                   </button>
 
-                  {/* Risk factors list */}
+                  {/* Risk factors list - adjust padding for proper nesting alignment */}
                   {expandedSubtopics[subtopic.id] && (
                     <ul className="ml-4 mt-2 space-y-2 border-l border-gray-200 pl-2">
-                      {/* Jump to Section link */}
+                      {/* Jump to Section link - removed px-3 since container has padding */}
                       <li>
                         <a
                           href={`#${subtopic.id}`}
                           onClick={(e) => handleSectionJump(subtopic.id, e)}
-                          className={`block px-3 py-2 rounded-md transition-colors sidebar-item-text flex items-center
+                          className={`block py-2 rounded-md transition-colors sidebar-item-text flex items-center
                           ${textPresets.caption}
                           ${
                             isActive(subtopic.id)
@@ -471,7 +472,7 @@ export default function LeftSidebar({
                         >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            className="h-3 w-3 mr-1"
+                            className="h-3 w-3 ml-1 mr-1"
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke="currentColor"
@@ -487,7 +488,7 @@ export default function LeftSidebar({
                         </a>
                       </li>
 
-                      {/* Risk factors */}
+                      {/* Risk factors - removed px-3 since container has padding */}
                       {subtopic.riskFactors &&
                         subtopic.riskFactors.length > 0 &&
                         subtopic.riskFactors.map((riskFactor) => (
@@ -501,12 +502,12 @@ export default function LeftSidebar({
                                   e
                                 )
                               }
-                              className={`block px-3 py-2 rounded-md transition-colors sidebar-item-text
+                              className={`block py-2 rounded-md transition-colors sidebar-item-text
                               ${textPresets.caption}
                               ${
                                 isActive(riskFactor.id)
                                   ? "bg-lavender-100 text-lavender-800 font-medium border-l-2 border-lavender-500 -ml-[2px] pl-[10px]"
-                                  : "text-gray-600 hover:bg-lavender-50 hover:text-lavender-700"
+                                  : "text-gray-600 hover:bg-lavender-50 hover:text-lavender-700 ml-1 pl-[9px]"
                               }`}
                               ref={
                                 isActive(riskFactor.id)
@@ -523,7 +524,7 @@ export default function LeftSidebar({
                       {(!subtopic.riskFactors ||
                         subtopic.riskFactors.length === 0) && (
                         <li
-                          className={`px-3 py-2 italic text-gray-400 ${textPresets.caption}`}
+                          className={`py-2 ml-1 pl-2 italic text-gray-400 ${textPresets.caption}`}
                         >
                           No risk factors in this section
                         </li>
@@ -535,7 +536,9 @@ export default function LeftSidebar({
             ))}
           </ul>
         ) : (
-          <p className={`italic text-gray-500 ${textPresets.paragraphSmall}`}>
+          <p
+            className={`italic text-gray-500 px-5 ${textPresets.paragraphSmall}`}
+          >
             No sections available
           </p>
         )}

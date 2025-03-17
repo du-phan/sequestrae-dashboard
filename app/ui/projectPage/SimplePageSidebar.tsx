@@ -197,10 +197,10 @@ export default function SimplePageSidebar({
       {/* Content area with title - now using exact same styling as LeftSidebar */}
       <div
         ref={sidebarRef}
-        className="flex-1 overflow-y-auto pt-5 pb-4 px-5 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent"
+        className="flex-1 overflow-y-auto pt-5 pb-4 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent"
       >
         <h3
-          className="text-xs font-medium uppercase tracking-wider text-gray-500 mb-4 truncate"
+          className="text-xs font-medium uppercase tracking-wider text-gray-500 mb-4 px-5 truncate"
           title={title}
         >
           {displayTitle}
@@ -208,7 +208,7 @@ export default function SimplePageSidebar({
 
         {/* Simple section navigation list - keeping consistent with LeftSidebar styling */}
         {sections.length > 0 ? (
-          <ul className="space-y-2">
+          <ul className="space-y-2 px-5">
             {sections.map((section) => {
               const isActive = activeSection === section.id;
 
@@ -219,13 +219,11 @@ export default function SimplePageSidebar({
                     onClick={(e) => handleClick(e, section.id)}
                     ref={isActive ? activeItemRef : null}
                     className={`block px-3 py-2 rounded-md transition-colors sidebar-item-text
-                      ${
-                        textPresets.label
-                      } // Using same text preset as LeftSidebar
+                      ${textPresets.label}
                       ${
                         isActive
-                          ? "bg-lavender-100 text-lavender-700" // Matching active state
-                          : "text-gray-600 hover:bg-gray-50 hover:text-lavender-600" // Matching hover state
+                          ? "bg-lavender-100 text-lavender-700 border-l-2 border-lavender-500 pl-[11px]"
+                          : "text-gray-600 hover:bg-gray-50 hover:text-lavender-600"
                       }`}
                   >
                     {section.name}
@@ -235,7 +233,9 @@ export default function SimplePageSidebar({
             })}
           </ul>
         ) : (
-          <p className={`italic text-gray-500 ${textPresets.paragraphSmall}`}>
+          <p
+            className={`italic text-gray-500 px-5 ${textPresets.paragraphSmall}`}
+          >
             No sections available
           </p>
         )}
