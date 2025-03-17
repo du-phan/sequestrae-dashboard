@@ -3,7 +3,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect, useTransition } from "react";
+import SupportButtonSkeleton from "../shared/SupportButtonSkeleton";
 
 interface TopNavBarProps {
   projectId?: string;
@@ -47,6 +48,24 @@ const TopNavBar = ({ projectId, projectName, projectUrl }: TopNavBarProps) => {
   const basePath = projectId ? `/project/${projectId}` : "/project";
   const currentTopicName = getCurrentTopicName(pathname, basePath);
   const [showTooltip, setShowTooltip] = useState(false);
+
+  // Use isPending from useTransition to detect navigation state
+  const [isPending, startTransition] = useTransition();
+  const [isNavigating, setIsNavigating] = useState(false);
+
+  // Combine the actual transition state with our controlled state
+  const isLoading = isPending || isNavigating;
+
+  // Reset loading state when pathname changes
+  useEffect(() => {
+    // When pathname changes, briefly show loading state
+    setIsNavigating(true);
+    const timer = setTimeout(() => {
+      setIsNavigating(false);
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, [pathname]);
 
   return (
     <nav
@@ -101,10 +120,21 @@ const TopNavBar = ({ projectId, projectName, projectUrl }: TopNavBarProps) => {
                   isActive = pathname === href || pathname === `${href}/`;
                 }
 
+                // Wrap navigation in startTransition to enable pending states
+                const handleClick = (e: React.MouseEvent) => {
+                  if (isActive) return; // Don't navigate if already active
+
+                  // Don't prevent navigation, but track the transition
+                  startTransition(() => {
+                    // Navigation will happen naturally through the Link
+                  });
+                };
+
                 return (
                   <li key={item.name}>
                     <Link
                       href={href}
+                      onClick={handleClick}
                       className={`px-3 py-2 text-sm font-medium rounded-t-sm transition-all duration-200 whitespace-nowrap border-b ${
                         isActive
                           ? "text-lavender-700 border-lavender-500 bg-lavender-50/80"
@@ -120,9 +150,12 @@ const TopNavBar = ({ projectId, projectName, projectUrl }: TopNavBarProps) => {
           </div>
         </div>
 
-        {/* Registry CTA button with fixed tooltip */}
+        {/* Registry CTA button with loading skeleton */}
         <div className="flex-shrink-0">
-          {projectUrl ? (
+          {isLoading ? (
+            // Show skeleton during navigation
+            <SupportButtonSkeleton />
+          ) : projectUrl ? (
             <div className="relative group">
               <a
                 href={projectUrl}
