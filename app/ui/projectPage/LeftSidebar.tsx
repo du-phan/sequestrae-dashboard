@@ -5,7 +5,7 @@ import { SubTopic } from "../../../types/ui"; // Removed RiskFactor as it's not 
 import { usePathname } from "next/navigation";
 import { textPresets } from "../theme";
 import Link from "next/link";
-import { ChevronRightIcon, ArrowLeftIcon } from "@heroicons/react/20/solid";
+import { ArrowLeftIcon } from "@heroicons/react/20/solid";
 
 // Add debounce utility function with more specific types
 function debounce<T extends (...args: Parameters<T>) => ReturnType<T>>(

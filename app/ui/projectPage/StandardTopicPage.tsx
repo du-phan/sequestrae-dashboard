@@ -82,10 +82,14 @@ export default async function StandardTopicPage({
   // Use project_name from the Project interface instead of name
   const projectName = projectData.project_name;
 
+  // Get the project URL from the project data for buying carbon credits
+  const projectUrl = projectData.project_url;
+
   return (
     <ProjectLayout
       projectId={projectId}
       projectName={projectName}
+      projectUrl={projectUrl ?? undefined} // Convert null to undefined
       subtopics={sidebarSubtopics}
       currentTopic={topicId}
     >

@@ -1,12 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image"; // Add Next.js Image component
+import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
+import { textPresets } from "@/app/ui/theme";
 
 interface TopNavBarProps {
   projectId?: string;
-  projectName: string; // Changed to required prop (removed ? mark)
+  projectName: string;
+  projectUrl?: string; // URL to the registry page where credits can be purchased
 }
 
 const navItems = [
@@ -40,10 +43,11 @@ const getCurrentTopicName = (
   return matchedNavItem?.name || "Overview";
 };
 
-const TopNavBar = ({ projectId, projectName }: TopNavBarProps) => {
+const TopNavBar = ({ projectId, projectName, projectUrl }: TopNavBarProps) => {
   const pathname = usePathname();
   const basePath = projectId ? `/project/${projectId}` : "/project";
   const currentTopicName = getCurrentTopicName(pathname, basePath);
+  const [showTooltip, setShowTooltip] = useState(false);
 
   return (
     <nav
@@ -103,9 +107,58 @@ const TopNavBar = ({ projectId, projectName }: TopNavBarProps) => {
           </div>
         </div>
 
-        {/* Empty div for layout balance */}
-        <div className="flex-shrink-0 invisible md:visible">
-          <div className="w-8"></div>
+        {/* Registry CTA button with fixed tooltip */}
+        <div className="flex-shrink-0">
+          {projectUrl ? (
+            <div className="relative group">
+              <a
+                href={projectUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center px-4 py-2 border border-transparent
+                          rounded-md shadow-sm text-sm font-medium 
+                          bg-lavender-600 text-white hover:bg-lavender-700
+                          transition-all duration-200
+                          focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lavender-500"
+                aria-label="Support this project by purchasing carbon credits"
+                onMouseEnter={() => setShowTooltip(true)}
+                onMouseLeave={() => setShowTooltip(false)}
+              >
+                <span className="hidden sm:inline text-white">
+                  Support this project
+                </span>
+                <span className="sm:hidden text-white">Support</span>
+
+                {/* External link icon with pure white stroke */}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-4 w-4 ml-1.5 group-hover:translate-x-0.5 transition-transform duration-200 text-white"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                  />
+                </svg>
+              </a>
+
+              {/* Fixed tooltip with minimal padding and no extra space */}
+              {showTooltip && (
+                <div className="absolute right-0 mt-2 w-56 bg-gray-800 rounded shadow-lg z-50 tooltip-animation-enter overflow-hidden">
+                  <span className="block text-white text-xs leading-normal py-1.5 px-2.5">
+                    Go to the registry page to purchase carbon credits from this
+                    biochar project
+                  </span>
+                </div>
+              )}
+            </div>
+          ) : (
+            <div className="w-8" />
+          )}
         </div>
       </div>
     </nav>
