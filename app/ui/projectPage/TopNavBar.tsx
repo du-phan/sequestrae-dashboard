@@ -3,7 +3,6 @@
 import Link from "next/link";
 import Image from "next/image"; // Add Next.js Image component
 import { usePathname } from "next/navigation";
-import { ChevronRightIcon } from "@heroicons/react/20/solid";
 
 interface TopNavBarProps {
   projectId?: string;
@@ -41,29 +40,19 @@ const getCurrentTopicName = (
   return matchedNavItem?.name || "Overview";
 };
 
-/**
- * Format project name by replacing underscores with spaces
- */
-const formatProjectName = (name: string): string => {
-  return name.replace(/_/g, " ");
-};
-
 const TopNavBar = ({ projectId, projectName }: TopNavBarProps) => {
   const pathname = usePathname();
   const basePath = projectId ? `/project/${projectId}` : "/project";
   const currentTopicName = getCurrentTopicName(pathname, basePath);
-
-  // Format the project name for display while keeping original for the title attribute
-  const displayProjectName = formatProjectName(projectName);
 
   return (
     <nav
       className="sticky top-0 z-40 bg-white border-b border-gray-200 h-16 shadow-sm"
       aria-label={`${projectName} - ${currentTopicName}`}
     >
-      <div className="h-full px-4 flex items-center justify-between">
+      <div className="h-full px-4 flex items-center">
         {/* Logo and App Name */}
-        <div className="flex-shrink-0 flex items-center mr-6">
+        <div className="flex-shrink-0 flex items-center">
           <a
             href="https://www.sequestrae.com/"
             target="_blank"
@@ -87,29 +76,8 @@ const TopNavBar = ({ projectId, projectName }: TopNavBarProps) => {
           </a>
         </div>
 
-        {/* Breadcrumb navigation - now comes after logo */}
-        <div className="flex items-center text-sm text-gray-600 min-w-0 max-w-[40%]">
-          <Link
-            href="/dashboard"
-            className="hover:text-lavender-600 transition-colors whitespace-nowrap flex-shrink-0"
-          >
-            Dashboard
-          </Link>
-          <ChevronRightIcon
-            className="h-4 w-4 mx-1 flex-shrink-0 text-gray-400"
-            aria-hidden="true"
-          />
-          <Link
-            href={basePath}
-            className="hover:text-lavender-600 transition-colors truncate max-w-[70%] flex-shrink-1 font-medium text-gray-800"
-            title={projectName} // Original name for tooltip
-          >
-            {displayProjectName}
-          </Link>
-        </div>
-
-        {/* Tabs navigation - contained properly to prevent overflow */}
-        <div className="flex-shrink-0 ml-4">
+        {/* Centered Tabs navigation */}
+        <div className="flex-1 flex justify-center">
           <div className="flex items-center overflow-x-auto no-scrollbar">
             <ul className="flex items-center space-x-2">
               {navItems.map((item) => {
@@ -133,6 +101,11 @@ const TopNavBar = ({ projectId, projectName }: TopNavBarProps) => {
               })}
             </ul>
           </div>
+        </div>
+
+        {/* Empty div for layout balance */}
+        <div className="flex-shrink-0 invisible md:visible">
+          <div className="w-8"></div>
         </div>
       </div>
     </nav>

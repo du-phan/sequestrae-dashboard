@@ -69,7 +69,9 @@ export default async function ProjectOverviewPage({
       customSidebar={
         <SimplePageSidebar
           sections={overviewSections}
-          title="Project Overview"
+          title={projectName} // Use project name instead of hardcoded "Project Overview"
+          returnUrl="/dashboard"
+          returnText="Back to Dashboard"
         />
       }
       currentTopic="overview"

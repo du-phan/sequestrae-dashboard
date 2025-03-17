@@ -41,8 +41,13 @@ export default function ProjectLayout({
             // Render custom sidebar if provided
             customSidebar
           ) : (
-            // Otherwise render the standard subtopics sidebar
-            <LeftSidebar subtopics={subtopics} currentTopic={currentTopic} />
+            // Otherwise render the standard subtopics sidebar with project info
+            <LeftSidebar
+              subtopics={subtopics}
+              currentTopic={currentTopic}
+              projectId={projectId}
+              projectName={projectName}
+            />
           )}
         </div>
 

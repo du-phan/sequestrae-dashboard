@@ -4,6 +4,8 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import { SubTopic } from "../../../types/ui"; // Removed RiskFactor as it's not used
 import { usePathname } from "next/navigation";
 import { textPresets } from "../theme";
+import Link from "next/link";
+import { ChevronRightIcon, ArrowLeftIcon } from "@heroicons/react/20/solid";
 
 // Add debounce utility function with more specific types
 function debounce<T extends (...args: Parameters<T>) => ReturnType<T>>(
@@ -18,15 +20,25 @@ function debounce<T extends (...args: Parameters<T>) => ReturnType<T>>(
   };
 }
 
+/**
+ * Format project name by replacing underscores with spaces
+ */
+const formatProjectName = (name: string): string => {
+  return name.replace(/_/g, " ");
+};
+
 interface LeftSidebarProps {
   subtopics: SubTopic[];
   currentTopic: string;
-  // Removing unused currentPath prop
+  projectId?: string;
+  projectName: string; // Added project name prop
 }
 
 export default function LeftSidebar({
   subtopics,
   currentTopic,
+  projectId,
+  projectName,
 }: LeftSidebarProps) {
   const pathname = usePathname();
   const [expandedSubtopics, setExpandedSubtopics] = useState<
@@ -45,6 +57,9 @@ export default function LeftSidebar({
   const isManualScrollingRef = useRef(false);
   const scrollLockTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const visibleElementsRef = useRef<Map<string, number>>(new Map());
+
+  // Format the project name for display
+  const displayProjectName = formatProjectName(projectName);
 
   // Replace direct ref with ref callback function - keep minimal
   const setActiveItemRef = useCallback((element: HTMLElement | null) => {
@@ -374,24 +389,26 @@ export default function LeftSidebar({
     };
   }, []);
 
+  const basePath = projectId ? `/project/${projectId}` : "/project";
+
   return (
     <aside className="sticky top-16 h-[calc(100vh-4rem)] bg-white border-r border-gray-200 flex flex-col">
+      {/* Content area with project name replacing "Subtopic Sections" */}
       <div
         ref={sidebarRef}
-        className="flex-1 overflow-y-auto p-6 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent"
+        className="flex-1 overflow-y-auto pt-5 pb-4 px-5 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent"
       >
         <h3
-          className={`uppercase tracking-wider text-gray-500 font-semibold mb-4 ${textPresets.caption}`}
+          className="text-xs font-medium uppercase tracking-wider text-gray-500 mb-4 truncate"
+          title={projectName}
         >
-          {currentTopic === "overview"
-            ? "Project Overview"
-            : "Subtopic Sections"}
+          {displayProjectName}
         </h3>
 
         {subtopics.length > 0 ? (
           <ul className="space-y-2">
             {subtopics.map((subtopic) => (
-              <li key={subtopic.id} className="mb-2">
+              <li key={subtopic.id} className="mb-1.5">
                 <div className="flex flex-col">
                   {/* Subtopic header */}
                   <button
@@ -526,13 +543,17 @@ export default function LeftSidebar({
         )}
       </div>
 
-      {/* Footer area */}
-      <div className="p-4 border-t border-gray-200 bg-gray-50">
-        <p className={`text-center text-gray-500 ${textPresets.caption}`}>
-          {subtopics.length} section{subtopics.length !== 1 ? "s" : ""}{" "}
-          available
-        </p>
-      </div>
+      {/* Footer with dashboard link */}
+      <Link
+        href="/dashboard"
+        className="p-3 flex items-center justify-center text-sm font-medium text-gray-600 hover:text-lavender-700 bg-white border-t border-gray-200 transition-colors group"
+      >
+        <ArrowLeftIcon
+          className="h-4 w-4 mr-2 group-hover:text-lavender-700 transition-colors"
+          aria-hidden="true"
+        />
+        Back to Dashboard
+      </Link>
     </aside>
   );
 }
