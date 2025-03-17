@@ -74,7 +74,6 @@ export default async function ProjectOverviewPage({
           returnText="Back to Dashboard"
         />
       }
-      currentTopic="overview"
       subtopics={[]} // No subtopics for the overview page
     >
       <div className="max-w-4xl mx-auto space-y-8">

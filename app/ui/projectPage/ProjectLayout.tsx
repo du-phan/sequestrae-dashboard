@@ -11,7 +11,7 @@ interface ProjectLayoutProps {
   projectName: string;
   projectUrl?: string; // Registry URL where carbon credits can be purchased
   subtopics: SubTopic[];
-  currentTopic: string;
+  // Removed currentTopic as it's not used
 
   /**
    * Optional custom sidebar content - used when the standard subtopics sidebar isn't appropriate
@@ -29,7 +29,6 @@ export default function ProjectLayout({
   projectName,
   projectUrl, // Added projectUrl
   subtopics,
-  currentTopic,
   customSidebar,
 }: ProjectLayoutProps) {
   return (
@@ -48,12 +47,7 @@ export default function ProjectLayout({
             customSidebar
           ) : (
             // Otherwise render the standard subtopics sidebar with project info
-            <LeftSidebar
-              subtopics={subtopics}
-              currentTopic={currentTopic}
-              projectId={projectId}
-              projectName={projectName}
-            />
+            <LeftSidebar subtopics={subtopics} projectName={projectName} />
           )}
         </div>
 

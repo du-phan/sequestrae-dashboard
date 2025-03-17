@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { textPresets } from "../theme";
 import Link from "next/link";
 import { ArrowLeftIcon } from "@heroicons/react/20/solid";
+// Removed ChevronRightIcon import as it's not used
 
 // Add debounce utility function with more specific types
 function debounce<T extends (...args: Parameters<T>) => ReturnType<T>>(
@@ -29,15 +30,14 @@ const formatProjectName = (name: string): string => {
 
 interface LeftSidebarProps {
   subtopics: SubTopic[];
-  currentTopic: string;
-  projectId?: string;
+  // Removed currentTopic as it's not used
+  // Removed projectId as it's not used
   projectName: string; // Added project name prop
 }
 
 export default function LeftSidebar({
   subtopics,
-  currentTopic,
-  projectId,
+  // Removed projectId parameter
   projectName,
 }: LeftSidebarProps) {
   const pathname = usePathname();
@@ -388,8 +388,6 @@ export default function LeftSidebar({
       window.removeEventListener("scroll", handleUserScroll);
     };
   }, []);
-
-  const basePath = projectId ? `/project/${projectId}` : "/project";
 
   return (
     <aside className="sticky top-16 h-[calc(100vh-4rem)] bg-white border-r border-gray-200 flex flex-col">

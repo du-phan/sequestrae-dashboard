@@ -91,7 +91,6 @@ export default async function StandardTopicPage({
       projectName={projectName}
       projectUrl={projectUrl ?? undefined} // Convert null to undefined
       subtopics={sidebarSubtopics}
-      currentTopic={topicId}
     >
       <ErrorBoundary
         fallback={<ErrorDisplay message={`Failed to load ${topicId} data`} />}
