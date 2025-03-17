@@ -121,7 +121,7 @@ const TopNavBar = ({ projectId, projectName, projectUrl }: TopNavBarProps) => {
                 }
 
                 // Wrap navigation in startTransition to enable pending states
-                const handleClick = (e: React.MouseEvent) => {
+                const handleClick = () => {
                   if (isActive) return; // Don't navigate if already active
 
                   // Don't prevent navigation, but track the transition
