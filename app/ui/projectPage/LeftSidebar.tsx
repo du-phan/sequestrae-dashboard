@@ -174,6 +174,10 @@ export default function LeftSidebar({
           const id = entry.target.id;
           if (!id) return; // Skip elements without IDs
 
+          // IMPORTANT: Skip subtopic elements - only track risk factors
+          const isSubtopic = subtopics.some((subtopic) => subtopic.id === id);
+          if (isSubtopic) return;
+
           if (entry.isIntersecting) {
             visibleElementsRef.current.set(id, entry.intersectionRatio);
           } else {
@@ -216,10 +220,11 @@ export default function LeftSidebar({
     const riskFactorElements = document.querySelectorAll(
       "[data-risk-factor-id]"
     );
-    const subtopicElements = document.querySelectorAll("[data-subtopic-id]");
+    // IMPORTANT: Don't observe subtopic elements anymore
+    // const subtopicElements = document.querySelectorAll("[data-subtopic-id]");
 
     // If no elements found, try again after a delay
-    if (riskFactorElements.length === 0 && subtopicElements.length === 0) {
+    if (riskFactorElements.length === 0) {
       setTimeout(() => {
         if (!isInitializedRef.current) setupIntersectionObserver();
       }, 500);
@@ -229,15 +234,13 @@ export default function LeftSidebar({
     // Mark as initialized
     isInitializedRef.current = true;
 
-    // Observe all elements
+    // Observe only risk factor elements
     riskFactorElements.forEach((element) => {
       if (observerRef.current) observerRef.current.observe(element);
     });
 
-    subtopicElements.forEach((element) => {
-      if (observerRef.current) observerRef.current.observe(element);
-    });
-  }, [activeItem, debouncedSetActiveItem]);
+    // REMOVED: Don't observe subtopic elements
+  }, [activeItem, debouncedSetActiveItem, subtopics]);
 
   // Initialize intersection observer when the component mounts
   useEffect(() => {
@@ -366,9 +369,11 @@ export default function LeftSidebar({
     }
   };
 
-  // Check if link is active
+  // Check if link is active - add a filter to prevent highlighting subtopics
   const isActive = (id: string) => {
-    return activeItem === id;
+    // Only allow highlighting risk factors, not main subtopics
+    const isSubtopic = subtopics.some((subtopic) => subtopic.id === id);
+    return activeItem === id && !isSubtopic;
   };
 
   // Add global scroll handler to detect user scrolling
