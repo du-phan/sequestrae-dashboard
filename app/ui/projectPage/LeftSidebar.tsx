@@ -4,6 +4,9 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import { SubTopic } from "../../../types/ui"; // Removed RiskFactor as it's not used
 import { usePathname } from "next/navigation";
 import { textPresets } from "../theme";
+import Link from "next/link";
+import { ArrowLeftIcon } from "@heroicons/react/20/solid";
+// Removed ChevronRightIcon import as it's not used
 
 // Add debounce utility function with more specific types
 function debounce<T extends (...args: Parameters<T>) => ReturnType<T>>(
@@ -18,15 +21,24 @@ function debounce<T extends (...args: Parameters<T>) => ReturnType<T>>(
   };
 }
 
+/**
+ * Format project name by replacing underscores with spaces
+ */
+const formatProjectName = (name: string): string => {
+  return name.replace(/_/g, " ");
+};
+
 interface LeftSidebarProps {
   subtopics: SubTopic[];
-  currentTopic: string;
-  // Removing unused currentPath prop
+  // Removed currentTopic as it's not used
+  // Removed projectId as it's not used
+  projectName: string; // Added project name prop
 }
 
 export default function LeftSidebar({
   subtopics,
-  currentTopic,
+  // Removed projectId parameter
+  projectName,
 }: LeftSidebarProps) {
   const pathname = usePathname();
   const [expandedSubtopics, setExpandedSubtopics] = useState<
@@ -45,6 +57,9 @@ export default function LeftSidebar({
   const isManualScrollingRef = useRef(false);
   const scrollLockTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const visibleElementsRef = useRef<Map<string, number>>(new Map());
+
+  // Format the project name for display
+  const displayProjectName = formatProjectName(projectName);
 
   // Replace direct ref with ref callback function - keep minimal
   const setActiveItemRef = useCallback((element: HTMLElement | null) => {
@@ -159,6 +174,10 @@ export default function LeftSidebar({
           const id = entry.target.id;
           if (!id) return; // Skip elements without IDs
 
+          // IMPORTANT: Skip subtopic elements - only track risk factors
+          const isSubtopic = subtopics.some((subtopic) => subtopic.id === id);
+          if (isSubtopic) return;
+
           if (entry.isIntersecting) {
             visibleElementsRef.current.set(id, entry.intersectionRatio);
           } else {
@@ -201,10 +220,11 @@ export default function LeftSidebar({
     const riskFactorElements = document.querySelectorAll(
       "[data-risk-factor-id]"
     );
-    const subtopicElements = document.querySelectorAll("[data-subtopic-id]");
+    // IMPORTANT: Don't observe subtopic elements anymore
+    // const subtopicElements = document.querySelectorAll("[data-subtopic-id]");
 
     // If no elements found, try again after a delay
-    if (riskFactorElements.length === 0 && subtopicElements.length === 0) {
+    if (riskFactorElements.length === 0) {
       setTimeout(() => {
         if (!isInitializedRef.current) setupIntersectionObserver();
       }, 500);
@@ -214,15 +234,13 @@ export default function LeftSidebar({
     // Mark as initialized
     isInitializedRef.current = true;
 
-    // Observe all elements
+    // Observe only risk factor elements
     riskFactorElements.forEach((element) => {
       if (observerRef.current) observerRef.current.observe(element);
     });
 
-    subtopicElements.forEach((element) => {
-      if (observerRef.current) observerRef.current.observe(element);
-    });
-  }, [activeItem, debouncedSetActiveItem]);
+    // REMOVED: Don't observe subtopic elements
+  }, [activeItem, debouncedSetActiveItem, subtopics]);
 
   // Initialize intersection observer when the component mounts
   useEffect(() => {
@@ -351,9 +369,11 @@ export default function LeftSidebar({
     }
   };
 
-  // Check if link is active
+  // Check if link is active - add a filter to prevent highlighting subtopics
   const isActive = (id: string) => {
-    return activeItem === id;
+    // Only allow highlighting risk factors, not main subtopics
+    const isSubtopic = subtopics.some((subtopic) => subtopic.id === id);
+    return activeItem === id && !isSubtopic;
   };
 
   // Add global scroll handler to detect user scrolling
@@ -376,28 +396,29 @@ export default function LeftSidebar({
 
   return (
     <aside className="sticky top-16 h-[calc(100vh-4rem)] bg-white border-r border-gray-200 flex flex-col">
+      {/* Content area with project name replacing "Subtopic Sections" */}
       <div
         ref={sidebarRef}
-        className="flex-1 overflow-y-auto p-6 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent"
+        className="flex-1 overflow-y-auto pt-5 pb-4 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent"
       >
+        {/* Adjust the header to match list item padding */}
         <h3
-          className={`uppercase tracking-wider text-gray-500 font-semibold mb-4 ${textPresets.caption}`}
+          className="text-xs font-medium uppercase tracking-wider text-gray-500 mb-4 px-5 truncate"
+          title={projectName}
         >
-          {currentTopic === "overview"
-            ? "Project Overview"
-            : "Subtopic Sections"}
+          {displayProjectName}
         </h3>
 
         {subtopics.length > 0 ? (
-          <ul className="space-y-2">
+          <ul className="space-y-2 px-5">
             {subtopics.map((subtopic) => (
-              <li key={subtopic.id} className="mb-2">
+              <li key={subtopic.id} className="mb-1.5">
                 <div className="flex flex-col">
-                  {/* Subtopic header */}
+                  {/* Subtopic header - removed px-3 as we're using container padding */}
                   <button
                     onClick={(e) => toggleSubtopic(subtopic.id, e)}
                     data-item-id={subtopic.id}
-                    className={`flex items-center justify-between px-3 py-2 rounded-md w-full text-left transition-colors
+                    className={`flex items-center justify-between py-2 rounded-md w-full text-left transition-colors
                       ${textPresets.label}
                       ${
                         isActive(subtopic.id)
@@ -437,15 +458,15 @@ export default function LeftSidebar({
                       )}
                   </button>
 
-                  {/* Risk factors list */}
+                  {/* Risk factors list - adjust padding for proper nesting alignment */}
                   {expandedSubtopics[subtopic.id] && (
                     <ul className="ml-4 mt-2 space-y-2 border-l border-gray-200 pl-2">
-                      {/* Jump to Section link */}
+                      {/* Jump to Section link - removed px-3 since container has padding */}
                       <li>
                         <a
                           href={`#${subtopic.id}`}
                           onClick={(e) => handleSectionJump(subtopic.id, e)}
-                          className={`block px-3 py-2 rounded-md transition-colors sidebar-item-text flex items-center
+                          className={`block py-2 rounded-md transition-colors sidebar-item-text flex items-center
                           ${textPresets.caption}
                           ${
                             isActive(subtopic.id)
@@ -456,7 +477,7 @@ export default function LeftSidebar({
                         >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            className="h-3 w-3 mr-1"
+                            className="h-3 w-3 ml-1 mr-1"
                             fill="none"
                             viewBox="0 0 24 24"
                             stroke="currentColor"
@@ -472,7 +493,7 @@ export default function LeftSidebar({
                         </a>
                       </li>
 
-                      {/* Risk factors */}
+                      {/* Risk factors - removed px-3 since container has padding */}
                       {subtopic.riskFactors &&
                         subtopic.riskFactors.length > 0 &&
                         subtopic.riskFactors.map((riskFactor) => (
@@ -486,12 +507,12 @@ export default function LeftSidebar({
                                   e
                                 )
                               }
-                              className={`block px-3 py-2 rounded-md transition-colors sidebar-item-text
+                              className={`block py-2 rounded-md transition-colors sidebar-item-text
                               ${textPresets.caption}
                               ${
                                 isActive(riskFactor.id)
                                   ? "bg-lavender-100 text-lavender-800 font-medium border-l-2 border-lavender-500 -ml-[2px] pl-[10px]"
-                                  : "text-gray-600 hover:bg-lavender-50 hover:text-lavender-700"
+                                  : "text-gray-600 hover:bg-lavender-50 hover:text-lavender-700 ml-1 pl-[9px]"
                               }`}
                               ref={
                                 isActive(riskFactor.id)
@@ -508,7 +529,7 @@ export default function LeftSidebar({
                       {(!subtopic.riskFactors ||
                         subtopic.riskFactors.length === 0) && (
                         <li
-                          className={`px-3 py-2 italic text-gray-400 ${textPresets.caption}`}
+                          className={`py-2 ml-1 pl-2 italic text-gray-400 ${textPresets.caption}`}
                         >
                           No risk factors in this section
                         </li>
@@ -520,19 +541,25 @@ export default function LeftSidebar({
             ))}
           </ul>
         ) : (
-          <p className={`italic text-gray-500 ${textPresets.paragraphSmall}`}>
+          <p
+            className={`italic text-gray-500 px-5 ${textPresets.paragraphSmall}`}
+          >
             No sections available
           </p>
         )}
       </div>
 
-      {/* Footer area */}
-      <div className="p-4 border-t border-gray-200 bg-gray-50">
-        <p className={`text-center text-gray-500 ${textPresets.caption}`}>
-          {subtopics.length} section{subtopics.length !== 1 ? "s" : ""}{" "}
-          available
-        </p>
-      </div>
+      {/* Footer with dashboard link */}
+      <Link
+        href="/dashboard"
+        className="p-3 flex items-center justify-center text-sm font-medium text-gray-600 hover:text-lavender-700 bg-white border-t border-gray-200 transition-colors group"
+      >
+        <ArrowLeftIcon
+          className="h-4 w-4 mr-2 group-hover:text-lavender-700 transition-colors"
+          aria-hidden="true"
+        />
+        Back to Dashboard
+      </Link>
     </aside>
   );
 }

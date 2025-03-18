@@ -9,8 +9,9 @@ interface ProjectLayoutProps {
   children: React.ReactNode;
   projectId?: string;
   projectName: string;
+  projectUrl?: string; // Registry URL where carbon credits can be purchased
   subtopics: SubTopic[];
-  currentTopic: string;
+  // Removed currentTopic as it's not used
 
   /**
    * Optional custom sidebar content - used when the standard subtopics sidebar isn't appropriate
@@ -26,13 +27,17 @@ export default function ProjectLayout({
   children,
   projectId,
   projectName,
+  projectUrl, // Added projectUrl
   subtopics,
-  currentTopic,
   customSidebar,
 }: ProjectLayoutProps) {
   return (
     <div className="flex flex-col min-h-screen">
-      <TopNavBar projectId={projectId} projectName={projectName} />
+      <TopNavBar
+        projectId={projectId}
+        projectName={projectName}
+        projectUrl={projectUrl} // Pass projectUrl to TopNavBar
+      />
 
       <div className="flex flex-1">
         {/* Fixed sidebar width for consistency */}
@@ -41,8 +46,8 @@ export default function ProjectLayout({
             // Render custom sidebar if provided
             customSidebar
           ) : (
-            // Otherwise render the standard subtopics sidebar
-            <LeftSidebar subtopics={subtopics} currentTopic={currentTopic} />
+            // Otherwise render the standard subtopics sidebar with project info
+            <LeftSidebar subtopics={subtopics} projectName={projectName} />
           )}
         </div>
 

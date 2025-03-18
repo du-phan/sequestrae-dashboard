@@ -7,6 +7,7 @@ import {
   DocumentTextIcon,
   BeakerIcon,
 } from "@heroicons/react/24/outline";
+import CollapsibleSummary from "./CollapsibleSummary";
 
 // Interface for project background data
 export interface ProjectBackgroundData {
@@ -67,11 +68,13 @@ export default function ProjectBackgroundSection({
     label,
     value,
     className = "",
+    collapsible = false,
   }: {
     icon: React.ReactNode;
     label: string;
     value: string | string[] | undefined;
     className?: string;
+    collapsible?: boolean;
   }) => {
     if (!value || (Array.isArray(value) && value.length === 0)) return null;
 
@@ -80,7 +83,7 @@ export default function ProjectBackgroundSection({
         <div className="flex-shrink-0 w-5 h-5 mt-1 mr-3 text-lavender-500">
           {icon}
         </div>
-        <div>
+        <div className={`flex-grow ${collapsible ? "relative" : ""}`}>
           <p className={`${textPresets.label} text-gray-500 mb-1`}>{label}</p>
           {Array.isArray(value) ? (
             <ul className="space-y-1">
@@ -93,6 +96,10 @@ export default function ProjectBackgroundSection({
                 </li>
               ))}
             </ul>
+          ) : collapsible ? (
+            <div className="pb-2">
+              <CollapsibleSummary summary={value} />
+            </div>
           ) : (
             <p className={`${textPresets.paragraph} text-gray-800`}>{value}</p>
           )}
@@ -150,13 +157,14 @@ export default function ProjectBackgroundSection({
             />
           </div>
 
-          {/* Project description section */}
+          {/* Project description section with collapsible functionality */}
           <div className="border-t border-gray-100 pt-6">
             <DetailItem
               icon={<DocumentTextIcon />}
               label="Description"
               value={data.description}
               className="col-span-2"
+              collapsible={true}
             />
           </div>
         </div>

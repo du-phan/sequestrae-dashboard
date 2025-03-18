@@ -1,7 +1,6 @@
 import React from "react";
 import { textPresets } from "../theme";
 import {
-  BookOpenIcon,
   ArrowSmallRightIcon,
   ClipboardDocumentCheckIcon,
   ShieldExclamationIcon,
@@ -24,13 +23,13 @@ interface TopicNavigationGuideSectionProps {
 }
 
 /**
- * Explains the structure of the analysis and guides users through the site
+ * Navigation component for project analysis topics
  */
 export default function TopicNavigationGuideSection({
   projectId,
   className = "",
 }: TopicNavigationGuideSectionProps) {
-  // Topics with their descriptions and hrefs - updated with unique icons
+  // Topics with their descriptions and hrefs
   const topics = [
     {
       name: "Carbon Accounting & Integrity",
@@ -46,10 +45,10 @@ export default function TopicNavigationGuideSection({
       icon: <ShieldExclamationIcon className="h-5 w-5" />,
     },
     {
-      name: "Environmental Factor",
+      name: "Environmental Impact",
       description: "Ecological impacts and sustainability measures",
       href: `/project/${projectId}/environment`,
-      icon: <GlobeAmericasIcon className="h-5 w-5" />, // Changed to GlobeAmericasIcon
+      icon: <GlobeAmericasIcon className="h-5 w-5" />,
     },
     {
       name: "Policy Landscape",
@@ -109,162 +108,6 @@ export default function TopicNavigationGuideSection({
     );
   };
 
-  // Enhanced component for the analysis structure explanation with improved visual design
-  const AnalysisStructureCard = () => {
-    return (
-      <div className="rounded-lg border border-gray-200 bg-white shadow-sm overflow-hidden">
-        {/* Streamlined header with improved vertical alignment */}
-        <div className="p-4 border-b border-gray-100 bg-gray-50">
-          <div className="flex items-center">
-            <div className="flex-shrink-0 mr-2.5 text-lavender-600 bg-lavender-50 p-1 rounded-md">
-              <BookOpenIcon className="h-4 w-4" />
-            </div>
-            <h4 className={`${textPresets.h4} text-gray-800 m-0`}>
-              How Each Topic is Analyzed
-            </h4>
-          </div>
-        </div>
-
-        {/* Card body with consistent padding */}
-        <div className="p-5">
-          <p className={`${textPresets.paragraph} text-gray-600 mb-5`}>
-            Our step-by-step framework provides clear, practical insights—giving
-            you a comprehensive understanding of the project:
-          </p>
-
-          {/* Visual process flow with connected cards - improved spacing */}
-          <div className="relative space-y-6 pb-1">
-            {/* Connector line for visual flow (hidden on mobile) */}
-            <div className="absolute left-4 top-10 bottom-12 w-0.5 bg-lavender-100 hidden md:block"></div>
-
-            {/* Step 1: Subtopics - with enhanced styling */}
-            <div className="flex flex-col md:flex-row md:items-center gap-3 relative">
-              <div className="flex-shrink-0 bg-lavender-50 rounded-full w-8 h-8 flex items-center justify-center shadow-sm border border-lavender-200 text-lavender-700 z-10">
-                <span className="inline-flex items-center justify-center text-sm font-semibold leading-none">
-                  1
-                </span>
-              </div>
-              <div className="flex-1 bg-white p-4 rounded-lg border border-gray-200 shadow-sm hover:shadow hover:border-lavender-200 transition-all duration-300">
-                <h5
-                  className={`${textPresets.label} text-gray-900 font-medium mb-1.5`}
-                >
-                  Subtopics
-                </h5>
-                <p
-                  className={`${textPresets.paragraph} text-gray-600 max-w-prose mb-0`}
-                >
-                  Each topic is divided into clear subtopics covering key areas
-                  of analysis.
-                </p>
-              </div>
-            </div>
-
-            {/* Step 2: Factors - with enhanced styling */}
-            <div className="flex flex-col md:flex-row md:items-center gap-3 relative">
-              <div className="flex-shrink-0 bg-lavender-50 rounded-full w-8 h-8 flex items-center justify-center shadow-sm border border-lavender-200 text-lavender-700 z-10">
-                <span className="inline-flex items-center justify-center text-sm font-semibold leading-none">
-                  2
-                </span>
-              </div>
-              <div className="flex-1 bg-white p-4 rounded-lg border border-gray-200 shadow-sm hover:shadow hover:border-lavender-200 transition-all duration-300">
-                <h5
-                  className={`${textPresets.label} text-gray-900 font-medium mb-1.5`}
-                >
-                  Factors
-                </h5>
-                <p
-                  className={`${textPresets.paragraph} text-gray-600 max-w-prose mb-0`}
-                >
-                  Within each subtopic, we highlight specific factors that
-                  directly influence project performance.
-                </p>
-              </div>
-            </div>
-
-            {/* Step 3: Assessment Framework - with enhanced styling */}
-            <div className="flex flex-col md:flex-row md:items-center gap-3 relative">
-              <div className="flex-shrink-0 bg-lavender-50 rounded-full w-8 h-8 flex items-center justify-center shadow-sm border border-lavender-200 text-lavender-700 z-10">
-                <span className="inline-flex items-center justify-center text-sm font-semibold leading-none">
-                  3
-                </span>
-              </div>
-              <div className="flex-1 bg-white p-4 rounded-lg border border-gray-200 shadow-sm hover:shadow hover:border-lavender-200 transition-all duration-300">
-                <h5
-                  className={`${textPresets.label} text-gray-900 font-medium mb-2`}
-                >
-                  Assessment Framework
-                </h5>
-                <p
-                  className={`${textPresets.paragraph} text-gray-600 max-w-prose mb-4`}
-                >
-                  Each factor is assessed clearly in three categories:
-                </p>
-
-                {/* Clean visual cards without icons - using our custom color palette */}
-                <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-                  {/* Strengths card - no icon */}
-                  <div className="bg-white rounded-lg border border-gray-200 shadow-sm transition-all duration-200 hover:shadow hover:border-greenCustom-200">
-                    <div className="py-2.5 border-b border-gray-100 bg-greenCustom-50">
-                      <p
-                        className={`${textPresets.label} text-greenCustom-700 font-medium text-center`}
-                      >
-                        Strengths
-                      </p>
-                    </div>
-                    <div className="p-3">
-                      <p
-                        className={`${textPresets.caption} text-gray-600 text-center`}
-                      >
-                        Positive aspects supporting project quality
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Considerations card - no icon */}
-                  <div className="bg-white rounded-lg border border-gray-200 shadow-sm transition-all duration-200 hover:shadow hover:border-roseCustom-200">
-                    <div className="py-2.5 border-b border-gray-100 bg-roseCustom-50">
-                      <p
-                        className={`${textPresets.label} text-roseCustom-700 font-medium text-center`}
-                      >
-                        Considerations
-                      </p>
-                    </div>
-                    <div className="p-3">
-                      <p
-                        className={`${textPresets.caption} text-gray-600 text-center`}
-                      >
-                        Issues or areas needing attention
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Recommended Actions card - no icon */}
-                  <div className="bg-white rounded-lg border border-gray-200 shadow-sm transition-all duration-200 hover:shadow hover:border-blueCustom-200">
-                    <div className="py-2.5 border-b border-gray-100 bg-blueCustom-50">
-                      <p
-                        className={`${textPresets.label} text-blueCustom-700 font-medium text-center`}
-                      >
-                        Recommended Actions
-                      </p>
-                    </div>
-                    <div className="p-3">
-                      <p
-                        className={`${textPresets.caption} text-gray-600 text-center`}
-                      >
-                        Clear next steps to resolve uncertainties or improve
-                        outcomes
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
   return (
     <div className={`bg-white rounded-lg shadow-sm ${className}`}>
       {/* Section header with standard styling */}
@@ -272,23 +115,21 @@ export default function TopicNavigationGuideSection({
         <div className="flex mb-4">
           <div className="flex-shrink-0 w-1 bg-lavender-600 rounded-full self-stretch"></div>
           <h2 className={`${textPresets.h3} text-gray-800 ml-4 py-0 mb-0`}>
-            How to Navigate This Analysis
+            Navigate This Project&#39;s Analysis
           </h2>
         </div>
       </div>
 
-      {/* Content area - reduced unnecessary margins */}
+      {/* Content area */}
       <div className="px-6 pb-6">
         <div className="ml-5">
           <p className={`${textPresets.paragraph} text-gray-600 mb-5`}>
-            We have structured our analysis into five key topics to help you
-            easily explore and understand all aspects of a biochar project.
-            Click any topic below for detailed insights and practical
-            recommendations:
+            Explore this project through five key analysis topics. Click any
+            topic below to go to the detailed insights:
           </p>
 
           {/* Topics grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {topics.map((topic) => (
               <TopicCard
                 key={topic.name}
@@ -299,12 +140,6 @@ export default function TopicNavigationGuideSection({
               />
             ))}
           </div>
-
-          {/* Simple divider without star icon */}
-          <div className="h-px bg-gray-100 mb-6"></div>
-
-          {/* Analysis structure explanation - with background color styling */}
-          <AnalysisStructureCard />
         </div>
       </div>
     </div>

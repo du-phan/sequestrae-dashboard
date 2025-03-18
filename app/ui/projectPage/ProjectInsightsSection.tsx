@@ -2,13 +2,7 @@
 
 import React, { useState } from "react";
 import { textPresets } from "../theme";
-import {
-  CheckCircleIcon,
-  ExclamationCircleIcon,
-  ArrowRightCircleIcon,
-  ChevronDownIcon,
-  ChevronUpIcon,
-} from "@heroicons/react/24/outline";
+import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/outline";
 
 // Interfaces for project insights data
 export interface InsightItem {
@@ -96,11 +90,25 @@ export default function ProjectInsightsSection({
     switch (category) {
       case "strengths":
         return {
-          icon: <CheckCircleIcon className="w-full h-full" />,
+          icon: (
+            <svg
+              className="w-full h-full"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fillRule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                clipRule="evenodd"
+              />
+            </svg>
+          ),
           iconColor: "text-greenCustom-500",
           bgColor: "bg-greenCustom-50",
           borderColor: "border-greenCustom-100",
           textColor: "text-greenCustom-700",
+          textHover: "text-greenCustom-800", // Add missing textHover property
           title: "Key Strengths",
           badge: "bg-greenCustom-100 text-greenCustom-800",
           hoverBorder: "hover:border-greenCustom-200",
@@ -108,11 +116,25 @@ export default function ProjectInsightsSection({
         };
       case "considerations":
         return {
-          icon: <ExclamationCircleIcon className="w-full h-full" />,
+          icon: (
+            <svg
+              className="w-full h-full"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fillRule="evenodd"
+                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                clipRule="evenodd"
+              />
+            </svg>
+          ),
           iconColor: "text-roseCustom-500",
           bgColor: "bg-roseCustom-50",
           borderColor: "border-roseCustom-100",
           textColor: "text-roseCustom-700",
+          textHover: "text-roseCustom-800", // Add missing textHover property
           title: "Key Considerations",
           badge: "bg-roseCustom-100 text-roseCustom-800",
           hoverBorder: "hover:border-roseCustom-200",
@@ -120,11 +142,25 @@ export default function ProjectInsightsSection({
         };
       case "recommendedActions":
         return {
-          icon: <ArrowRightCircleIcon className="w-full h-full" />,
+          icon: (
+            <svg
+              className="w-full h-full"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fillRule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z"
+                clipRule="evenodd"
+              />
+            </svg>
+          ),
           iconColor: "text-blueCustom-500",
           bgColor: "bg-blueCustom-50",
           borderColor: "border-blueCustom-100",
           textColor: "text-blueCustom-700",
+          textHover: "text-blueCustom-800", // Add missing textHover property
           title: "Recommended Actions",
           badge: "bg-blueCustom-100 text-blueCustom-800",
           hoverBorder: "hover:border-blueCustom-200",
@@ -132,11 +168,25 @@ export default function ProjectInsightsSection({
         };
       default:
         return {
-          icon: <CheckCircleIcon className="w-full h-full" />,
+          icon: (
+            <svg
+              className="w-full h-full"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fillRule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                clipRule="evenodd"
+              />
+            </svg>
+          ),
           iconColor: "text-gray-500",
           bgColor: "bg-gray-50",
           borderColor: "border-gray-100",
           textColor: "text-gray-700",
+          textHover: "text-gray-800", // Add missing textHover property
           title: "Category",
           badge: "bg-gray-100 text-gray-800",
           hoverBorder: "hover:border-gray-200",
@@ -166,26 +216,26 @@ export default function ProjectInsightsSection({
           isExpanded ? "shadow-md" : "hover:shadow-md"
         }`}
       >
-        {/* Card header with enhanced styling */}
-        <div className="flex justify-between items-center p-5 border-b border-gray-100">
+        {/* Card header with enhanced styling - using colored background */}
+        <div
+          className={`flex justify-between items-center p-5 ${styles.bgColor} border-b ${styles.borderColor} rounded-t-lg`}
+        >
           <div className="flex items-center">
-            {/* Category icon */}
-            <div className={`mr-3 ${styles.iconColor}`}>
-              <div className="w-5 h-5">{styles.icon}</div>
+            {/* Category icon - simplified without white circular background */}
+            <div className={`flex-shrink-0 w-5 h-5 mr-3 ${styles.iconColor}`}>
+              {styles.icon}
             </div>
 
-            {/* Title with enhanced typography */}
-            <span
-              className={`${textPresets.h5} text-gray-800 flex items-center`}
-            >
+            {/* Title with enhanced typography and color matching category */}
+            <span className={`${textPresets.h5} ${styles.textColor}`}>
               {styles.title}
             </span>
           </div>
 
-          {/* Toggle button with neutral color */}
+          {/* Toggle button with background matching the category theme */}
           <button
             onClick={() => toggleCategory(category)}
-            className="flex items-center justify-center h-8 w-8 rounded-full bg-gray-50 text-gray-500 hover:bg-gray-100 hover:text-gray-700 transition-colors"
+            className={`flex items-center justify-center h-8 w-8 rounded-full bg-white/60 ${styles.textColor} hover:bg-white hover:${styles.textHover} transition-colors`}
             aria-label={isExpanded ? "Collapse section" : "Expand section"}
           >
             {isExpanded ? (
@@ -318,7 +368,7 @@ export default function ProjectInsightsSection({
       <div className="px-8 pb-8">
         <div className="ml-5 space-y-6">
           <p className={`${textPresets.paragraph} text-gray-600 mb-6`}>
-            This section highlights the most important findings from our
+            This section highlights some important findings from our
             comprehensive project analysis.
           </p>
 

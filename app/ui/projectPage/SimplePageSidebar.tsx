@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { textPresets } from "../theme";
+import Link from "next/link";
+import { ArrowLeftIcon } from "@heroicons/react/20/solid";
 
 interface SimplePageSidebarProps {
   /**
@@ -14,14 +16,24 @@ interface SimplePageSidebarProps {
   }[];
 
   /**
-   * Optional title for the sidebar
+   * Title for the sidebar - this will now typically be the project name
    */
-  title?: string;
+  title: string; // Changed from optional to required
 
   /**
    * Optional CSS class name for additional styling
    */
   className?: string;
+
+  /**
+   * Optional return link URL - defaults to dashboard
+   */
+  returnUrl?: string;
+
+  /**
+   * Optional return link text - defaults to "Back to Dashboard"
+   */
+  returnText?: string;
 }
 
 /**
@@ -30,9 +42,14 @@ interface SimplePageSidebarProps {
  */
 export default function SimplePageSidebar({
   sections,
-  title = "On this page",
+  title,
   className = "",
+  returnUrl = "/dashboard",
+  returnText = "Back to Dashboard",
 }: SimplePageSidebarProps) {
+  // Format project name by replacing underscores with spaces (same as in LeftSidebar)
+  const displayTitle = title.replace(/_/g, " ");
+
   const [activeSection, setActiveSection] = useState<string>(
     sections[0]?.id || ""
   );
@@ -177,55 +194,64 @@ export default function SimplePageSidebar({
     <aside
       className={`sticky top-16 h-[calc(100vh-4rem)] bg-white border-r border-gray-200 flex flex-col ${className}`}
     >
+      {/* Content area with title - now using exact same styling as LeftSidebar */}
       <div
         ref={sidebarRef}
-        className="flex-1 overflow-y-auto p-6 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent"
+        className="flex-1 overflow-y-auto pt-5 pb-4 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent"
       >
-        {/* Title with same styling as main sidebar */}
         <h3
-          className={`uppercase tracking-wider text-gray-500 font-semibold mb-4 ${textPresets.caption}`}
+          className="text-xs font-medium uppercase tracking-wider text-gray-500 mb-4 px-5 truncate"
+          title={title}
         >
-          {title}
+          {displayTitle}
         </h3>
 
-        {/* Simple section navigation list */}
-        <ul className="space-y-2">
-          {sections.map((section) => {
-            const isActive = activeSection === section.id;
+        {/* Simple section navigation list - keeping consistent with LeftSidebar styling */}
+        {sections.length > 0 ? (
+          <ul className="space-y-2 px-5">
+            {sections.map((section) => {
+              const isActive = activeSection === section.id;
 
-            return (
-              <li key={section.id}>
-                <a
-                  href={`#${section.anchor}`}
-                  onClick={(e) => handleClick(e, section.id)}
-                  ref={isActive ? activeItemRef : null}
-                  className={`block px-3 py-2 rounded-md text-sm transition-colors 
-                    ${
-                      isActive
-                        ? "bg-lavender-100 text-lavender-800 font-medium border-l-4 border-lavender-500 pl-2"
-                        : "text-gray-600 hover:bg-gray-50 hover:text-lavender-600"
-                    }`}
-                >
-                  {section.name}
-                </a>
-              </li>
-            );
-          })}
-        </ul>
-
-        {sections.length === 0 && (
-          <p className={`italic text-gray-500 ${textPresets.paragraphSmall}`}>
+              return (
+                <li key={section.id} className="mb-1.5">
+                  <a
+                    href={`#${section.anchor}`}
+                    onClick={(e) => handleClick(e, section.id)}
+                    ref={isActive ? activeItemRef : null}
+                    className={`block px-3 py-2 rounded-md transition-colors sidebar-item-text
+                      ${textPresets.label}
+                      ${
+                        isActive
+                          ? "bg-lavender-100 text-lavender-700 border-l-2 border-lavender-500 pl-[11px]"
+                          : "text-gray-600 hover:bg-gray-50 hover:text-lavender-600"
+                      }`}
+                  >
+                    {section.name}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        ) : (
+          <p
+            className={`italic text-gray-500 px-5 ${textPresets.paragraphSmall}`}
+          >
             No sections available
           </p>
         )}
       </div>
 
-      {/* Footer area - same styling as main sidebar */}
-      <div className="p-4 border-t border-gray-200 bg-gray-50">
-        <p className={`text-center text-gray-500 ${textPresets.caption}`}>
-          {sections.length} section{sections.length !== 1 ? "s" : ""} available
-        </p>
-      </div>
+      {/* Footer with return link - matching LeftSidebar style */}
+      <Link
+        href={returnUrl}
+        className="p-3 flex items-center justify-center text-sm font-medium text-gray-600 hover:text-lavender-700 bg-white border-t border-gray-200 transition-colors group"
+      >
+        <ArrowLeftIcon
+          className="h-4 w-4 mr-2 group-hover:text-lavender-700 transition-colors"
+          aria-hidden="true"
+        />
+        {returnText}
+      </Link>
     </aside>
   );
 }

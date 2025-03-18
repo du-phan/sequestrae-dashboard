@@ -56,6 +56,9 @@ export default async function ProjectOverviewPage({
   // Get project name from the project data
   const projectName = projectData.project_name;
 
+  // Extract project URL for the "Support this project" button
+  const projectUrl = projectData.project_url;
+
   // Map project data to background format, with fallback to default if needed
   const projectBackground = mapProjectToBackgroundData(projectData);
 
@@ -66,13 +69,15 @@ export default async function ProjectOverviewPage({
     <ProjectLayout
       projectId={projectId}
       projectName={projectName}
+      projectUrl={projectUrl || undefined} // Pass the project URL to enable the Support button
       customSidebar={
         <SimplePageSidebar
           sections={overviewSections}
-          title="Project Overview"
+          title={projectName} // Use project name instead of hardcoded "Project Overview"
+          returnUrl="/dashboard"
+          returnText="Back to Dashboard"
         />
       }
-      currentTopic="overview"
       subtopics={[]} // No subtopics for the overview page
     >
       <div className="max-w-4xl mx-auto space-y-8">
