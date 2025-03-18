@@ -115,16 +115,18 @@ export default function ProjectBackgroundSection({
     >
       {/* Section header with standard styling */}
       <div className="p-8 pb-0">
-        <div className="flex mb-8">
-          <div className="flex-shrink-0 w-1 bg-lavender-600 rounded-full self-stretch"></div>
-          <h2 className={`${textPresets.h3} text-gray-800 ml-4 py-0 mb-0`}>
+        <div className="flex mb-6">
+          <div className="flex-shrink-0 w-1 bg-lavender-500 rounded-full self-stretch mr-4"></div>
+          <h2
+            className={`${textPresets.h3} text-gray-900 mb-0 text-2xl sm:text-3xl font-bold tracking-tight`}
+          >
             Project Background
           </h2>
         </div>
       </div>
 
       {/* Content with improved spacing */}
-      <div className="px-8 pb-8">
+      <div className="px-8 pb-8 pt-6">
         <div className="ml-5">
           {/* Key project information in a responsive grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 mb-8">
