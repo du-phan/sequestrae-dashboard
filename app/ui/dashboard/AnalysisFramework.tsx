@@ -256,22 +256,22 @@ export default function AnalysisFramework() {
         >
           <div className="rounded-lg p-5 border border-gray-200 bg-white shadow-sm">
             <p className="text-sm text-gray-600 mb-4">
-              Our methodology breaks down each topic using a consistent
-              structure:
+              Our methodology follows a structured approach to ensure clarity
+              and consistency in topic analysis:
             </p>
 
             <div className="space-y-2.5">
               <AnalysisStep
                 number="1"
                 title="Subtopics"
-                description="Each topic is divided into clear subtopics covering key areas of analysis."
+                description="Each topic is broken down into key subtopics, covering distinct areas of analysis."
                 reducedPadding={true}
               />
 
               <AnalysisStep
                 number="2"
                 title="Factors"
-                description="Within each subtopic, we highlight specific factors that directly influence project performance."
+                description="Within each subtopic, we identify specific factors that directly impact project performance."
                 reducedPadding={true}
               />
 
@@ -284,21 +284,21 @@ export default function AnalysisFramework() {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-3">
                   <AssessmentCategory
                     title="Strengths"
-                    description="Positive aspects supporting project quality"
+                    description="Positive aspects that support project quality"
                     bgColor="bg-greenCustom-50"
                     textColor="text-greenCustom-700"
                   />
 
                   <AssessmentCategory
                     title="Considerations"
-                    description="Issues or areas needing attention"
+                    description="Challenges or areas requiring attention"
                     bgColor="bg-roseCustom-50"
                     textColor="text-roseCustom-700"
                   />
 
                   <AssessmentCategory
                     title="Recommended Actions"
-                    description="Clear next steps to improve outcomes"
+                    description="Practical steps to address challenges and improve project success"
                     bgColor="bg-blueCustom-50"
                     textColor="text-blueCustom-700"
                   />
