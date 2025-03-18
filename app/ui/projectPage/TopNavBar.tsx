@@ -16,7 +16,7 @@ const navItems = [
   { name: "Overview", href: "" },
   { name: "Carbon Accounting & Integrity", href: "integrity" },
   { name: "Delivery Risk", href: "delivery" },
-  { name: "Environmental Factor", href: "environment" },
+  { name: "Environmental Factors", href: "environment" },
   { name: "Policy Landscape", href: "policy" },
   { name: "Social Impact", href: "social" },
 ];
