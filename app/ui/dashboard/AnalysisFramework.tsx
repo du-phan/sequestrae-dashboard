@@ -17,16 +17,12 @@ type TopicProps = {
   name: string;
   color: string;
   bgColor: string;
-  href?: string;
 };
 
-const Topic = ({ icon, name, color, bgColor, href }: TopicProps) => {
-  const Component = href ? "a" : "div";
-
+const Topic = ({ icon, name, color, bgColor }: TopicProps) => {
   return (
-    <Component
-      href={href}
-      className={`flex items-center gap-3 py-2 px-3 rounded-lg ${bgColor} hover:shadow-md transition-all duration-300 group cursor-pointer`}
+    <div
+      className={`flex items-center gap-3 py-2 px-3 rounded-lg ${bgColor} hover:shadow-md transition-all duration-300 group`}
     >
       <div
         className={`${color} transition-transform duration-300 group-hover:scale-110`}
@@ -36,7 +32,7 @@ const Topic = ({ icon, name, color, bgColor, href }: TopicProps) => {
       <span className="text-xs font-medium text-gray-700 group-hover:text-gray-900 transition-colors duration-300">
         {name}
       </span>
-    </Component>
+    </div>
   );
 };
 
@@ -174,35 +170,30 @@ export default function AnalysisFramework() {
       name: "Carbon Accounting & Integrity",
       color: "text-blueCustom-400",
       bgColor: "bg-blueCustom-50",
-      href: "#integrity",
     },
     {
       icon: <ExclamationTriangleIcon className="w-5 h-5" />,
       name: "Delivery Risk",
       color: "text-amberCustom-400",
       bgColor: "bg-amberCustom-50",
-      href: "#delivery",
     },
     {
       icon: <GlobeAmericasIcon className="w-5 h-5" />,
       name: "Environmental Impact",
       color: "text-greenCustom-400",
       bgColor: "bg-greenCustom-50",
-      href: "#environment",
     },
     {
       icon: <ScaleIcon className="w-5 h-5" />,
       name: "Policy Landscape",
       color: "text-lavender-500",
       bgColor: "bg-lavender-50",
-      href: "#policy",
     },
     {
       icon: <UserGroupIcon className="w-5 h-5" />,
       name: "Social Impact",
       color: "text-roseCustom-400",
       bgColor: "bg-roseCustom-50",
-      href: "#social",
     },
   ];
 
@@ -225,7 +216,6 @@ export default function AnalysisFramework() {
             name={topic.name}
             color={topic.color}
             bgColor={topic.bgColor}
-            href={topic.href}
           />
         ))}
       </div>
