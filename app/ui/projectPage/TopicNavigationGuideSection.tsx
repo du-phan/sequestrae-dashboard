@@ -34,31 +34,35 @@ export default function TopicNavigationGuideSection({
     {
       name: "Carbon Accounting & Integrity",
       description:
-        "Carbon credit generation, validation, and verification procedures",
+        "Ensuring accurate, verifiable, and permanent carbon credits",
       href: `/project/${projectId}/integrity`,
       icon: <ClipboardDocumentCheckIcon className="h-5 w-5" />,
     },
     {
       name: "Delivery Risk",
-      description: "Factors affecting carbon sequestration delivery",
+      description:
+        "Managing risks that impact the execution of biochar projects",
       href: `/project/${projectId}/delivery`,
       icon: <ShieldExclamationIcon className="h-5 w-5" />,
     },
     {
       name: "Environmental Impact",
-      description: "Ecological impacts and sustainability measures",
+      description:
+        "Evaluating sustainability, ecological benefits, and potential risks",
       href: `/project/${projectId}/environment`,
       icon: <GlobeAmericasIcon className="h-5 w-5" />,
     },
     {
       name: "Policy Landscape",
-      description: "Regulatory frameworks and compliance requirements",
+      description:
+        "Understanding regulatory frameworks and compliance requirements",
       href: `/project/${projectId}/policy`,
       icon: <DocumentTextIcon className="h-5 w-5" />,
     },
     {
       name: "Social Impact",
-      description: "Community relationships and benefit distribution",
+      description:
+        "Fostering community well-being and fair benefit distribution",
       href: `/project/${projectId}/social`,
       icon: <UserGroupIcon className="h-5 w-5" />,
     },
@@ -79,15 +83,15 @@ export default function TopicNavigationGuideSection({
     return (
       <Link
         href={href}
-        className="flex items-start p-5 rounded-lg border border-gray-200 hover:border-lavender-200 bg-white hover:bg-lavender-50 transition-all duration-200 shadow-sm hover:shadow group relative"
+        className="flex items-start p-4 rounded-lg border border-gray-200 hover:border-lavender-200 bg-white hover:bg-lavender-50 transition-all duration-200 shadow-sm hover:shadow group relative"
       >
         {/* Icon with enhanced styling */}
-        <div className="flex-shrink-0 mr-4 text-lavender-600 bg-lavender-50 p-2 rounded-lg group-hover:bg-lavender-100 transition-colors">
+        <div className="flex-shrink-0 mr-3 text-lavender-600 bg-lavender-50 p-2 rounded-lg group-hover:bg-lavender-100 transition-colors">
           {icon}
         </div>
 
         {/* Content container with improved spacing */}
-        <div className="flex-grow pr-6">
+        <div className="flex-grow pr-4">
           <h4
             className={`${textPresets.label} text-gray-900 font-medium mb-1.5 group-hover:text-lavender-700 transition-colors`}
           >
@@ -101,7 +105,7 @@ export default function TopicNavigationGuideSection({
         </div>
 
         {/* Always visible arrow that enhances on hover */}
-        <div className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center justify-center">
+        <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center justify-center">
           <ArrowSmallRightIcon className="h-5 w-5 text-gray-400 group-hover:text-lavender-600 group-hover:translate-x-0.5 transition-all duration-200" />
         </div>
       </Link>
