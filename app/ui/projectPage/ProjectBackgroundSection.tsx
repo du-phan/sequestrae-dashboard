@@ -6,6 +6,7 @@ import {
   UserGroupIcon,
   DocumentTextIcon,
   BeakerIcon,
+  BuildingLibraryIcon,
 } from "@heroicons/react/24/outline";
 import CollapsibleSummary from "./CollapsibleSummary";
 
@@ -39,7 +40,17 @@ export interface ProjectBackgroundData {
   /**
    * Type of feedstock used in the project
    */
-  feedstockType?: string;
+  feedstockType?: string[];
+
+  /**
+   * Carbon registry where the project is listed
+   */
+  registry?: string;
+
+  /**
+   * URL to the project on the registry website
+   */
+  registryUrl?: string;
 }
 
 interface ProjectBackgroundSectionProps {
@@ -128,35 +139,40 @@ export default function ProjectBackgroundSection({
       {/* Content with improved spacing */}
       <div className="px-8 pb-8 pt-6">
         <div className="ml-5">
-          {/* Key project information in a responsive grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 mb-8">
-            <DetailItem
-              icon={<CalendarIcon />}
-              label="Project Start"
-              value={data.startDate}
-              className="col-span-1"
-            />
+          {/* Key project information in an explicit two-column layout */}
+          <div className="flex flex-col md:flex-row gap-8 mb-8">
+            {/* Left column */}
+            <div className="flex-1 flex flex-col space-y-6">
+              <DetailItem
+                icon={<CalendarIcon />}
+                label="Project Start"
+                value={data.startDate}
+              />
+              <DetailItem
+                icon={<MapPinIcon />}
+                label="Location"
+                value={data.location}
+              />
+              <DetailItem
+                icon={<BuildingLibraryIcon />}
+                label="Registry"
+                value={data.registry}
+              />
+            </div>
 
-            <DetailItem
-              icon={<MapPinIcon />}
-              label="Location"
-              value={data.location}
-              className="col-span-1"
-            />
-
-            <DetailItem
-              icon={<BeakerIcon />}
-              label="Feedstock Type"
-              value={data.feedstockType}
-              className="col-span-1"
-            />
-
-            <DetailItem
-              icon={<UserGroupIcon />}
-              label="Key Stakeholders"
-              value={data.stakeholders}
-              className="col-span-1"
-            />
+            {/* Right column */}
+            <div className="flex-1 flex flex-col space-y-6">
+              <DetailItem
+                icon={<BeakerIcon />}
+                label="Feedstock Type"
+                value={data.feedstockType}
+              />
+              <DetailItem
+                icon={<UserGroupIcon />}
+                label="Key Stakeholders"
+                value={data.stakeholders}
+              />
+            </div>
           </div>
 
           {/* Project description section with collapsible functionality */}

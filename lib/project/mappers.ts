@@ -235,13 +235,18 @@ export function mapProjectToBackgroundData(project: Project) {
       project.project_start_period ||
       "Date not specified",
     feedstockType: Array.isArray(project.feedstock_type)
-      ? project.feedstock_type.map(capitalizeFirstLetter).join(", ")
-      : capitalizeFirstLetter(project.feedstock_type || "Not specified"),
+      ? project.feedstock_type.map(capitalizeFirstLetter)
+      : project.feedstock_type
+      ? [capitalizeFirstLetter(project.feedstock_type)]
+      : ["Not specified"],
     stakeholders: Array.isArray(project.key_stakeholders)
       ? project.key_stakeholders
       : project.key_stakeholders
       ? [project.key_stakeholders]
       : ["No stakeholders specified"],
+    registry: project.registry
+      ? capitalizeFirstLetter(project.registry)
+      : "Registry not specified",
   };
 }
 
