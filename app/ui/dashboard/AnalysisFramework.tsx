@@ -54,7 +54,7 @@ const AnalysisStep = ({
     <div
       className={`flex items-start gap-3 relative bg-white rounded-lg shadow-sm ${
         reducedPadding ? "pt-3.5 px-3.5 pb-2" : "p-3.5"
-      }`}
+      } hover:bg-lavender-50 hover:shadow transition-all duration-300`}
     >
       <div className="flex-shrink-0 bg-lavender-50 rounded-full w-6 h-6 flex items-center justify-center border border-lavender-200 text-lavender-600 z-10">
         <span className="inline-flex items-center justify-center text-xs font-semibold leading-none">
