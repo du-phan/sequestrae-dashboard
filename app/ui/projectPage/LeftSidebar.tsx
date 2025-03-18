@@ -4,9 +4,7 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import { SubTopic } from "../../../types/ui"; // Removed RiskFactor as it's not used
 import { usePathname } from "next/navigation";
 import { textPresets } from "../theme";
-import Link from "next/link";
-import { ArrowLeftIcon } from "@heroicons/react/20/solid";
-// Removed ChevronRightIcon import as it's not used
+// Removed unused imports: Link and ArrowLeftIcon
 
 // Add debounce utility function with more specific types
 function debounce<T extends (...args: Parameters<T>) => ReturnType<T>>(
@@ -399,7 +397,7 @@ export default function LeftSidebar({
       {/* Content area with project name replacing "Subtopic Sections" */}
       <div
         ref={sidebarRef}
-        className="flex-1 overflow-y-auto pt-5 pb-4 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent"
+        className="flex-1 overflow-y-auto pt-5 pb-5 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent"
       >
         {/* Adjust the header to match list item padding */}
         <h3
@@ -548,18 +546,6 @@ export default function LeftSidebar({
           </p>
         )}
       </div>
-
-      {/* Footer with dashboard link */}
-      <Link
-        href="/dashboard"
-        className="p-3 flex items-center justify-center text-sm font-medium text-gray-600 hover:text-lavender-700 bg-white border-t border-gray-200 transition-colors group"
-      >
-        <ArrowLeftIcon
-          className="h-4 w-4 mr-2 group-hover:text-lavender-700 transition-colors"
-          aria-hidden="true"
-        />
-        Back to Dashboard
-      </Link>
     </aside>
   );
 }

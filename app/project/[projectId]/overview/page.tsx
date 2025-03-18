@@ -74,8 +74,6 @@ export default async function ProjectOverviewPage({
         <SimplePageSidebar
           sections={overviewSections}
           title={projectName} // Use project name instead of hardcoded "Project Overview"
-          returnUrl="/dashboard"
-          returnText="Back to Dashboard"
         />
       }
       subtopics={[]} // No subtopics for the overview page

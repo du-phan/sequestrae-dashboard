@@ -2,8 +2,6 @@
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { textPresets } from "../theme";
-import Link from "next/link";
-import { ArrowLeftIcon } from "@heroicons/react/20/solid";
 
 interface SimplePageSidebarProps {
   /**
@@ -24,16 +22,6 @@ interface SimplePageSidebarProps {
    * Optional CSS class name for additional styling
    */
   className?: string;
-
-  /**
-   * Optional return link URL - defaults to dashboard
-   */
-  returnUrl?: string;
-
-  /**
-   * Optional return link text - defaults to "Back to Dashboard"
-   */
-  returnText?: string;
 }
 
 /**
@@ -44,8 +32,6 @@ export default function SimplePageSidebar({
   sections,
   title,
   className = "",
-  returnUrl = "/dashboard",
-  returnText = "Back to Dashboard",
 }: SimplePageSidebarProps) {
   // Format project name by replacing underscores with spaces (same as in LeftSidebar)
   const displayTitle = title.replace(/_/g, " ");
@@ -197,7 +183,7 @@ export default function SimplePageSidebar({
       {/* Content area with title - now using exact same styling as LeftSidebar */}
       <div
         ref={sidebarRef}
-        className="flex-1 overflow-y-auto pt-5 pb-4 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent"
+        className="flex-1 overflow-y-auto pt-5 pb-5 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent"
       >
         <h3
           className="text-xs font-medium uppercase tracking-wider text-gray-500 mb-4 px-5 truncate"
@@ -240,18 +226,6 @@ export default function SimplePageSidebar({
           </p>
         )}
       </div>
-
-      {/* Footer with return link - matching LeftSidebar style */}
-      <Link
-        href={returnUrl}
-        className="p-3 flex items-center justify-center text-sm font-medium text-gray-600 hover:text-lavender-700 bg-white border-t border-gray-200 transition-colors group"
-      >
-        <ArrowLeftIcon
-          className="h-4 w-4 mr-2 group-hover:text-lavender-700 transition-colors"
-          aria-hidden="true"
-        />
-        {returnText}
-      </Link>
     </aside>
   );
 }

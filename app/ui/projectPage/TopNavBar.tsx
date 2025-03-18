@@ -75,12 +75,10 @@ const TopNavBar = ({ projectId, projectName, projectUrl }: TopNavBarProps) => {
       <div className="h-full px-4 flex items-center">
         {/* Logo and App Name */}
         <div className="flex-shrink-0 flex items-center">
-          <a
-            href="https://www.sequestrae.com/"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/"
             className="flex items-center group"
-            aria-label="Sequestrae homepage"
+            aria-label="Return to dashboard"
           >
             <div className="relative h-8 w-8 mr-2">
               <Image
@@ -95,7 +93,7 @@ const TopNavBar = ({ projectId, projectName, projectUrl }: TopNavBarProps) => {
             <span className="text-gray-900 font-medium text-lg group-hover:text-lavender-600 transition-colors">
               Sequestrae
             </span>
-          </a>
+          </Link>
         </div>
 
         {/* Centered Tabs navigation */}
