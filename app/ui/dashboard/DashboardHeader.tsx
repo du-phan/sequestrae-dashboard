@@ -23,11 +23,12 @@ export default function DashboardHeader() {
 
             {/* Main paragraph */}
             <p className={`${textPresets.paragraph} max-w-2xl mb-6`}>
-              We gather public documents of biochar projects from the leading
-              registries (Puro.earth, Verra, Riverse) into one streamlined
-              platform. Every project is carefully analyzed using our
-              transparent, standardized evaluation framework, making it easier
-              for you to quickly compare and understand biochar project quality.
+              We simplify biochar project evaluation by turning complex public
+              documents into clear, comparable insights. Using data from top
+              registries (Puro.earth, Verra, Riverse) and a transparent,
+              standardized framework, our analysis helps you quickly assess
+              project quality, spot risks, and make informed decisions with
+              confidence.
             </p>
 
             {/* Enhanced button with properly colored icon */}
@@ -50,9 +51,9 @@ export default function DashboardHeader() {
               </h3>
               <ul className="space-y-4">
                 {[
-                  "Accelerate your due diligence and simplify project analysis",
-                  "Select high-quality projects aligned with your ESG goals",
-                  "Get clear recommendations on what to do next",
+                  "Speed up due diligence with structured, transparent project insights",
+                  "Identify credible biochar projects that align with your ESG strategy",
+                  "Get actionable recommendations to address project risks and challenges",
                 ].map((item, index) => (
                   <li key={index} className="flex gap-3 items-start">
                     <div className="flex-shrink-0 w-5 h-5 text-[#A38DB7] flex items-center justify-center mt-0.5">
