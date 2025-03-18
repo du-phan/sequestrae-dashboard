@@ -3,6 +3,7 @@ import { ComponentRiskFactor } from "../../../types/ui";
 import RiskFactorCard from "./RiskFactorCard";
 import { textPresets } from "../theme";
 import CollapsibleSummary from "./CollapsibleSummary";
+import { getComponentColors } from "../theme/colorUtils";
 
 interface SubtopicSectionProps {
   /**
@@ -61,7 +62,11 @@ export default function SubtopicSection({
       {/* Subtopic heading with improved visual distinction */}
       <div className="mb-6 pb-2 border-b border-gray-200">
         <div className="flex items-center mb-1">
-          <span className="text-xs font-medium uppercase tracking-wider text-lavender-600 mr-2">
+          <span
+            className={`text-xs font-medium uppercase tracking-wider ${
+              getComponentColors("primary").text
+            } mr-2`}
+          >
             Subtopic
           </span>
         </div>
@@ -75,7 +80,9 @@ export default function SubtopicSection({
         <div className="bg-gray-50 border border-gray-100 rounded-lg p-5 relative">
           <div className="flex items-start">
             <svg
-              className="w-5 h-5 text-lavender-600 mr-2 flex-shrink-0 mt-0"
+              className={`w-5 h-5 ${
+                getComponentColors("primary").text
+              } mr-2 flex-shrink-0 mt-0`}
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -90,7 +97,11 @@ export default function SubtopicSection({
             </svg>
             <div className="flex-1">
               {/* Updated summary heading to match TopicIntro and TopicSummaryCard */}
-              <div className="text-xs font-semibold uppercase tracking-wide text-lavender-700">
+              <div
+                className={`text-xs font-semibold uppercase tracking-wide ${
+                  getComponentColors("primary").text
+                }`}
+              >
                 Summary
               </div>
 

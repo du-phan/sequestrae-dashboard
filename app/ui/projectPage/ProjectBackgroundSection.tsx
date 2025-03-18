@@ -80,7 +80,7 @@ export default function ProjectBackgroundSection({
 
     return (
       <div className={`flex items-start group ${className}`}>
-        <div className="flex-shrink-0 w-5 h-5 mt-1 mr-3 text-lavender-500">
+        <div className="flex-shrink-0 w-5 h-5 mt-0.5 mr-3 text-lavender-500 mb-1">
           {icon}
         </div>
         <div className={`flex-grow ${collapsible ? "relative" : ""}`}>

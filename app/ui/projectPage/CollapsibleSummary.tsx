@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { textPresets } from "../theme";
+import { getComponentColors } from "../theme/colorUtils";
 
 interface CollapsibleSummaryProps {
   /**
@@ -81,7 +82,11 @@ export default function CollapsibleSummary({
         >
           <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className={`${textPresets.caption} text-lavender-600 hover:text-lavender-700 flex items-center transition-colors px-3 py-1 bg-white border border-gray-200 rounded-full shadow-sm hover:shadow`}
+            className={`${textPresets.caption} ${
+              getComponentColors("primary").text
+            } ${
+              getComponentColors("primary").textHover
+            } flex items-center transition-colors px-3 py-1 bg-white border border-gray-200 rounded-full shadow-sm hover:shadow`}
           >
             {isExpanded ? (
               <>

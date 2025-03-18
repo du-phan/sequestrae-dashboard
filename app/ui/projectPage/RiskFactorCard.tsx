@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { RiskFactorPoint } from "../../../types/ui";
 import { textPresets } from "../theme";
+import { getComponentColors } from "../theme/colorUtils";
 
 // Tab options for the expanded card view
 type TabType = "strengths" | "considerations" | "actions";
@@ -283,7 +284,11 @@ export default function RiskFactorCard({
       {/* Enhanced header with factor label and clearer hierarchy */}
       <div className="border-b border-gray-100 py-4 px-6">
         {factorLabel && (
-          <span className="inline-block text-xs font-medium uppercase tracking-wider text-lavender-600 mb-1">
+          <span
+            className={`inline-block text-xs font-medium uppercase tracking-wider ${
+              getComponentColors("primary").text
+            } mb-1`}
+          >
             {factorLabel}
           </span>
         )}
@@ -326,7 +331,9 @@ export default function RiskFactorCard({
 
             {/* Expand button with improved styling */}
             <button
-              className={`text-lavender-600 hover:text-lavender-700 ${textPresets.label} flex items-center transition-colors`}
+              className={`${getComponentColors("primary").text} ${
+                getComponentColors("primary").textHover
+              } ${textPresets.label} flex items-center transition-colors`}
               onClick={handleExpand}
               aria-expanded="false"
             >
@@ -387,7 +394,9 @@ export default function RiskFactorCard({
 
             {/* Collapse button with improved styling */}
             <button
-              className={`text-lavender-600 hover:text-lavender-700 ${textPresets.label} flex items-center transition-colors`}
+              className={`${getComponentColors("primary").text} ${
+                getComponentColors("primary").textHover
+              } ${textPresets.label} flex items-center transition-colors`}
               onClick={() => setIsExpanded(false)}
               aria-expanded="true"
             >
