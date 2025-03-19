@@ -5,8 +5,8 @@ import { getProjectAggregated } from "@/lib/project/api";
 import { mapProjectToTopicData } from "@/lib/project/mappers";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorDisplay from "@/app/ui/common/ErrorDisplay";
-import LoadingState from "@/app/ui/common/LoadingState";
 import { TopicData, SubTopic, RiskFactor } from "../../../types/ui"; // Updated import
+import MainContentAreaSkeleton from "./skeletons/MainContentAreaSkeleton";
 
 interface StandardTopicPageProps {
   projectId: string;
@@ -95,9 +95,7 @@ export default async function StandardTopicPage({
       <ErrorBoundary
         fallback={<ErrorDisplay message={`Failed to load ${topicId} data`} />}
       >
-        <Suspense
-          fallback={<LoadingState message={`Loading ${topicId} data...`} />}
-        >
+        <Suspense fallback={<MainContentAreaSkeleton />}>
           <TopicContent projectId={projectId} topicId={topicId} />
         </Suspense>
       </ErrorBoundary>
