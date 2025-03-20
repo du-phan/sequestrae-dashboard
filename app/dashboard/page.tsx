@@ -6,9 +6,34 @@ import StatCards from "@/app/ui/dashboard/StatCards";
 import AnalysisFramework from "@/app/ui/dashboard/AnalysisFramework";
 import { getProjects, getProjectsStats } from "@/lib/project/api";
 
+// Define base URL for absolute URLs in metadata
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://sequestrae.com";
+
 export const metadata: Metadata = {
   title: "Biochar CDR Intelligence Platform | Sequestrae",
   description: "Analyze biochar projects with AI-powered insights.",
+  openGraph: {
+    title: "Sequestrae - Biochar CDR Intelligence Platform",
+    description:
+      "Analyze biochar carbon removal projects with transparent insights and evaluations",
+    type: "website",
+    url: `${baseUrl}/dashboard`,
+    images: [
+      {
+        url: `${baseUrl}/og-image.png`,
+        width: 1200,
+        height: 630,
+        alt: "Sequestrae Dashboard Preview",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sequestrae - Biochar CDR Intelligence Platform",
+    description:
+      "Analyze biochar carbon removal projects with transparent insights and evaluations",
+    images: [`${baseUrl}/og-image.png`],
+  },
 };
 
 type DashboardPageProps = {
