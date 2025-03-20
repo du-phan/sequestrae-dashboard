@@ -24,7 +24,7 @@ export const metadata: Metadata = {
       "Analyze biochar carbon removal projects with transparent insights and evaluations",
     images: [
       {
-        url: "/og-image.png", // This image should exist in your public directory
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "Sequestrae Dashboard Preview",
