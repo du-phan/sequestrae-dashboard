@@ -1,6 +1,6 @@
 import "@/app/ui/global.css";
-
 import type { Metadata } from "next";
+import LinkedInHead from "./components/LinkedInHead";
 
 // Define base URL for absolute URLs in metadata
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://sequestrae.com";
@@ -53,6 +53,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <LinkedInHead />
+      </head>
       <body>{children}</body>
     </html>
   );
