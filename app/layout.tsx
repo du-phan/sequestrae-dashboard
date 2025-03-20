@@ -24,7 +24,7 @@ export const metadata: Metadata = {
       "Analyze biochar carbon removal projects with transparent insights and evaluations",
     images: [
       {
-        url: "/og-image.png",
+        url: `${baseUrl}/og-image.png`,
         width: 1200,
         height: 630,
         alt: "Sequestrae Dashboard Preview",
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     title: "Sequestrae - Biochar CDR Intelligence Platform",
     description:
       "Analyze biochar carbon removal projects with transparent insights and evaluations",
-    images: ["/og-image.png"],
+    images: [`${baseUrl}/og-image.png`],
     creator: "@sequestrae",
   },
   // Add canonical URL
