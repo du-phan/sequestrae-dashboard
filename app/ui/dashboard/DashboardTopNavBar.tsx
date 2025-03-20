@@ -37,7 +37,7 @@ export default function DashboardTopNavBar() {
           {/* Dashboard title with true center alignment */}
           <div className="absolute left-1/2 transform -translate-x-1/2 flex items-center h-full">
             <h1 className="text-lg font-semibold text-gray-800 tracking-tight leading-none m-0">
-              Biochar CDR Intelligence Hub
+              Biochar CDR Intelligence Platform
             </h1>
           </div>
 
